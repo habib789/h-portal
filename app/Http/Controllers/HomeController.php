@@ -10,4 +10,9 @@ class HomeController extends Controller
     {
         return view('frontend.home');
     }
+
+    public function showDepartments()
+    {
+        return view('frontend.departments');
+    }
 }

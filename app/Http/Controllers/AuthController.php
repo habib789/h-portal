@@ -138,4 +138,12 @@ class AuthController extends Controller
         session()->flash('message','Invalid Credentials');
         return redirect()->back();
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        session()->flash('type','info');
+        session()->flash('message','You have been logged out');
+        return redirect()->route('auth.login');
+    }
 }

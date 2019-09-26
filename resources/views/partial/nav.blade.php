@@ -12,13 +12,21 @@
                 <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Departments</a>
+                <a class="nav-link" href="{{ route('department') }}">Departments</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">Blog</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('products.index') }}">Pharmacy</a>
+            <li class="nav-item dropdown dmenu">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Shop
+                </a>
+                <div class="dropdown-menu sm-menu bg-info p-2">
+                    <small class="font-weight-bold"><a class="dropdown-item nav-link"
+                                                       href="{{ route('products.index') }}">Medicine Section</a></small>
+                    <small class="font-weight-bold"><a class="dropdown-item nav-link" href="#">Medical
+                            Equipments</a></small>
+                </div>
             </li>
             <li>
                 <a class="nav-link" href="#contact">Contact</a>
@@ -28,9 +36,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('auth.login') }}">LOGIN</a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link"  href="{{ route('patient.register') }}">REGISTRATION</a>
+                <a class="nav-link" href="{{ route('patient.register') }}">REGISTRATION</a>
             </li>
         </ul>
     </div>

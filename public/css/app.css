@@ -9777,12 +9777,9 @@ nav.black {
 }
 
 .context {
-  background: #136a8a;
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #267871, #136a8a);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #0cb8b6;
   font-family: "Francois One", sans-serif;
-  margin-top: 100px;
+  margin-top: 95px;
   color: whitesmoke;
   height: 150px;
   padding: 50px;
@@ -9827,7 +9824,7 @@ nav.black {
 }
 
 .section-title p {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 600;
   text-transform: capitalize;
   position: relative;
@@ -9963,11 +9960,11 @@ select.form-control {
 }
 
 .card img {
-  height: 200px;
+  max-height: 200px;
 }
 
 .card img:hover {
-  transform: scale(1.2);
+  opacity: 0.7;
   transition: 0.5s;
 }
 
@@ -10017,6 +10014,23 @@ select.form-control {
   color: whitesmoke;
 }
 
+.btn-info {
+  text-transform: uppercase;
+  box-shadow: none;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 0;
+  background-color: #0cb8b6;
+  color: white;
+  font-weight: bold;
+}
+
+.info button.btn-info:hover {
+  background-color: #0f6674;
+  color: white;
+  transition: 0.6s;
+}
+
 .form-group textarea {
   border: 1px solid black;
 }
@@ -10036,7 +10050,6 @@ footer {
   /* fallback for old browsers */
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #267871, #136a8a);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: auto;
 }
 
@@ -10061,19 +10074,28 @@ footer .form-control:focus {
   color: #38A1F3;
 }
 
-/*admin*/
-.list-group a:hover {
-  text-decoration: none;
-}
-
-td img {
-  border-radius: 50%;
+.cart td img {
+  max-height: 80px;
+  max-width: 80px;
 }
 
 .ed {
   margin-top: 100px;
 }
 
-.cart {
-  margin-top: 100px;
+a .dept {
+  color: #444444;
+  font-family: "Francois One", sans-serif;
+  padding: 10px 10px 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+a .dept:hover {
+  padding: 10px 10px 10px 0;
+  border-bottom: 1px solid #0cb8b6;
+  transition: 0.5s;
+}
+
+.divider {
+  border-bottom: 2px solid #0cb8b6;
 }

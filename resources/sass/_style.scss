@@ -57,17 +57,16 @@ nav.black {
 }
 
 .context {
-    background: #136a8a;
-    background: -webkit-linear-gradient(to right, #267871, #136a8a);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #267871, #136a8a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #0cb8b6;
     font-family: 'Francois One', sans-serif;
-    margin-top: 100px;
+    margin-top: 95px;
     color: whitesmoke;
     height: 150px;
     padding: 50px;
     font-size: 80px;
     text-transform: uppercase;
 }
+
 .head1 {
     color: #0cb8b6;
     font-family: 'Francois One', sans-serif;
@@ -105,7 +104,7 @@ nav.black {
 }
 
 .section-title p {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 600;
     text-transform: capitalize;
     position: relative;
@@ -129,7 +128,6 @@ nav.black {
     content: "";
     width: 50px;
     height: 2px;
-    //background-color: #38A1F3;
     background: #136a8a;
     background: -webkit-linear-gradient(to right, #267871, #136a8a);
     background: linear-gradient(to right, #267871, #136a8a);
@@ -159,12 +157,14 @@ input.form-control {
     box-shadow: none;
     background: transparent;
 }
-select.form-control{
+
+select.form-control {
     border: 1px solid #0cb8b6;
     box-shadow: none;
     outline: none;
     text-align: center;
 }
+
 .bg {
     position: relative;
     background: url(../img/cover.PNG) no-repeat fixed center;
@@ -194,6 +194,7 @@ select.form-control{
     color: #c8d6e5;
 
 }
+
 /*Button*/
 .bg-content a {
     text-decoration: none;
@@ -209,6 +210,7 @@ select.form-control{
     transition: .7s;
     border: 2px solid #38A1F3;
 }
+
 /*Catagory*/
 .catg-container {
     width: 90%;
@@ -237,16 +239,16 @@ select.form-control{
     text-align: center;
 }
 
-.card{
+.card {
     overflow: hidden;
 }
 
 .card img {
-    height: 200px;
+    max-height: 200px;
 }
 
 .card img:hover {
-    transform: scale(1.2);
+    opacity: .7;
     transition: .5s;
 }
 
@@ -269,26 +271,48 @@ select.form-control{
 .send {
     letter-spacing: 3px;
 }
-.pname a{
+
+.pname a {
     letter-spacing: 1px;
     font-weight: 500;
 }
-.pname a:hover{
+
+.pname a:hover {
     color: #0cb8b6;
 }
-.star{
+
+.star {
     font-size: 20px;
     color: #0cb8b6;
 }
-.card button{
+
+.card button {
     box-shadow: none;
     text-transform: uppercase;
     border: 2px solid #0cb8b6;
     color: black;
 }
-.card button:hover{
+
+.card button:hover {
     background-color: #0cb8b6;
     color: whitesmoke;
+}
+
+.btn-info {
+    text-transform: uppercase;
+    box-shadow: none;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 0;
+    background-color: #0cb8b6;
+    color: white;
+    font-weight: bold;
+}
+
+.info button.btn-info:hover {
+    background-color: #0f6674;
+    color: white;
+    transition: .6s;
 }
 
 .form-group textarea {
@@ -302,14 +326,13 @@ select.form-control{
 .quote {
     line-height: 2;
     font-family: 'Great Vibes', cursive;
-
 }
+
 /*Footer*/
 footer {
-    background: #136a8a;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #267871, #136a8a);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #267871, #136a8a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background: #136a8a; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #267871, #136a8a); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #267871, #136a8a);
     height: auto;
 }
 
@@ -334,19 +357,40 @@ footer .form-control:focus {
     color: #38A1F3;
 }
 
-/*admin*/
-.list-group a:hover {
-    text-decoration: none;
-}
-
-td img {
-    border-radius: 50%;
+.cart td img {
+    max-height: 80px;
+    max-width: 80px;
 }
 
 .ed {
     margin-top: 100px;
 }
 
-.cart {
-    margin-top: 100px;
+
+a .dept {
+    color: #444444;
+    font-family: 'Francois One', sans-serif;
+    padding: 10px 10px 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .07);
 }
+
+a .dept:hover {
+    padding: 10px 10px 10px 0;
+    border-bottom: 1px solid #0cb8b6;
+    transition: .5s;
+}
+
+.divider {
+    border-bottom: 2px solid #0cb8b6;
+}
+
+// .btnn{
+//     background-color: #0cb8b6;
+//     font-size: 14px;
+//     padding: 5px 10px;
+// }
+//.btnn:hover{
+//     background: #0f6674;
+//     color: white;
+//     transition: .6s;
+// }

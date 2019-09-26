@@ -16,90 +16,92 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text"
-                                           class="form-control @error('first_name') is-invalid @enderror"
-                                           name="first_name" placeholder="First Name *"
-                                           value="{{ old('first_name') }}"/>
-                                    @error('first_name')
-                                    <span class="invalid-feedback" role="alert">
+                            <div class="form-group">
+                                <input type="text"
+                                       class="form-control @error('first_name') is-invalid @enderror"
+                                       name="first_name" placeholder="First Name *"
+                                       value="{{ old('first_name') }}"/>
+                                @error('first_name')
+                                <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control @error('last_name') is-invalid @enderror"
-                                           name="last_name" placeholder="Last Name *"
-                                           value="{{ old('last_name') }}"/>
-                                    @error('last_name')
-                                    <span class="invalid-feedback" role="alert">
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                       name="last_name" placeholder="Last Name *"
+                                       value="{{ old('last_name') }}"/>
+                                @error('last_name')
+                                <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                    @enderror
-                                </div>
+                                @enderror
+                            </div>
 
-                                <div class="form-group">
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                           name="email" placeholder="Your Email *"
-                                           value="{{ old('email') }}"/>
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                            <div class="form-group">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                       name="email" placeholder="Your Email *"
+                                       value="{{ old('email') }}"/>
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                    @enderror
-                                </div>
+                                @enderror
+                            </div>
 
-                                <div class="form-group">
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                           name="password" placeholder="Password *"/>
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                            <div class="form-group">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                       name="password" placeholder="Password *"/>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
-                                           name="password_confirmation"
-                                           placeholder="Confirm Password *"
-                                           value=""/>
-                                    @error('password_confirmation')
-                                    <span class="invalid-feedback" role="alert">
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="password"
+                                       class="form-control @error('password_confirmation') is-invalid @enderror"
+                                       name="password_confirmation"
+                                       placeholder="Confirm Password *"
+                                       value=""/>
+                                @error('password_confirmation')
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                @enderror
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">+880</span>
                                 </div>
-                                <div class="input-group form-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">+880</span>
-                                    </div>
-                                    <input type="text" name="phone"
-                                           class="form-control @error('phone') is-invalid @enderror"
-                                           value="{{ old('phone') }}"
-                                           placeholder="Your Phone">
-                                    @error('phone')
-                                    <span class="invalid-feedback" role="alert">
+                                <input type="text" name="phone"
+                                       class="form-control @error('phone') is-invalid @enderror"
+                                       value="{{ old('phone') }}"
+                                       placeholder="Your Phone">
+                                @error('phone')
+                                <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                    @enderror
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <label class="radio inline">
+                                        <input type="radio" name="gender" value="male" checked>
+                                        <span> Male </span>
+                                    </label>
+                                    <label class="radio inline">
+                                        <input type="radio" name="gender" value="female">
+                                        <span>Female </span>
+                                    </label>
                                 </div>
-                                <div class="form-group">
-                                    <div>
-                                        <label class="radio inline">
-                                            <input type="radio" name="gender" value="male" checked>
-                                            <span> Male </span>
-                                        </label>
-                                        <label class="radio inline">
-                                            <input type="radio" name="gender" value="female">
-                                            <span>Female </span>
-                                        </label>
-                                    </div>
-                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" name="graduate" class="form-control @error('graduate') is-invalid @enderror"
+                                <input type="text" name="graduate"
+                                       class="form-control @error('graduate') is-invalid @enderror"
                                        placeholder="Graduated from*"
                                        value="{{ old('graduate') }}"/>
                                 @error('graduate')
@@ -109,10 +111,13 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <select name="department" class="form-control @error('department') is-invalid @enderror">
+                                <select name="department"
+                                        class="form-control @error('department') is-invalid @enderror">
                                     <option class="hidden" selected disabled>Select department
                                     </option>
-                                    <option value="Ortho">Orthopedics</option>
+                                    @foreach($departments as $department)
+                                        <option class="text-capitalize" value="{{ $department->id }}">{{ $department->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('department')
                                 <span class="invalid-feedback" role="alert">
@@ -121,7 +126,8 @@
                                 @enderror
                             </div>
                             <div class="form-group text-center">
-                                <select name="experience" class="form-control @error('experience') is-invalid @enderror">
+                                <select name="experience"
+                                        class="form-control @error('experience') is-invalid @enderror">
                                     <option class="hidden" selected disabled>Your experience level
                                     </option>
                                     <option value="2">More than 2 years</option>
@@ -135,7 +141,8 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <input type="text" name="degrees" class="form-control @error('degrees') is-invalid @enderror"
+                                <input type="text" name="degrees"
+                                       class="form-control @error('degrees') is-invalid @enderror"
                                        placeholder="Enter degrees you have achieved*"
                                        value="{{ old('degrees') }}"/>
                                 @error('degrees')

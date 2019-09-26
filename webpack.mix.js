@@ -16,5 +16,5 @@ mix.js('resources/js/app.js', 'public/js')
     .options({
         processCssUrls: false
     })
-    .sass('resources/sass/dashboard.scss', 'public/css')
+    // .sass('resources/sass/dashboard.scss', 'public/css')
     .version();

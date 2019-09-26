@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify'=> true]);
 
 Route::get('/','HomeController@index')->name('home');
+Route::get('/departments','HomeController@showDepartments')->name('department');
 Route::resource('/products','ProductsController');
 
 Route::get('/login','AuthController@loginForm')->name('auth.login');
 Route::post('/login','AuthController@LoginProcess');
+Route::get('/logout','AuthController@logout')->name('logout');
 
 Route::get('/register','AuthController@RegisterForm')->name('patient.register');
 Route::post('/register','AuthController@RegisterProcess');

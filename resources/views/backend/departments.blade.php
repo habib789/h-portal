@@ -58,9 +58,9 @@
                         <tr>
                             @php
                                 $i=1;
-                                @endphp
+                            @endphp
                             @foreach($departments as $department)
-                                <td>1.</td>
+                                <td>{{$i++}}</td>
                                 <td>{{ $department->name }}</td>
                                 <td>
                                     {{ $department->slug }}
