@@ -17,17 +17,20 @@
             <li class="nav-item">
                 <a class="nav-link" href="">Blog</a>
             </li>
-            <li class="nav-item dropdown dmenu">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Shop
-                </a>
-                <div class="dropdown-menu sm-menu bg-info p-2">
-                    <small class="font-weight-bold"><a class="dropdown-item nav-link"
-                                                       href="{{ route('products.index') }}">Medicine Section</a></small>
-                    <small class="font-weight-bold"><a class="dropdown-item nav-link" href="#">Medical
-                            Equipments</a></small>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('products.index') }}">Shop</a>
             </li>
+{{--            <li class="nav-item dropdown dmenu">--}}
+{{--                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">--}}
+{{--                    Shop--}}
+{{--                </a>--}}
+{{--                <div class="dropdown-menu sm-menu bg-info p-2">--}}
+{{--                    <small class="font-weight-bold"><a class="dropdown-item nav-link"--}}
+{{--                                                       href="{{ route('products.index') }}">Medicine Section</a></small>--}}
+{{--                    <small class="font-weight-bold"><a class="dropdown-item nav-link" href="#">Medical--}}
+{{--                            Equipments</a></small>--}}
+{{--                </div>--}}
+{{--            </li>--}}
             <li>
                 <a class="nav-link" href="#contact">Contact</a>
             </li>

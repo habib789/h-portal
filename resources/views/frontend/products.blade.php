@@ -6,13 +6,49 @@
     </div>
 @stop
 
+
 @section('content')
-    <div class="col-md-8 col-sm-12">
+    <div class="col-md-2 mt-5">
+        <div class='categories'>
+            <p class="font-weight-bold text-uppercase">Browse Categories</p>
+            <a class="" href="">
+                <div class="">
+                    <i class="fa fa-chevron-right"></i> &nbsp; Medicine
+                </div>
+            </a>
+            <a class="" href="">
+                <div class="">
+                    <i class="fa fa-chevron-right"></i> &nbsp; Baby Care
+                </div>
+            </a>
+            <a class="" href="">
+                <div class="">
+                    <i class="fa fa-chevron-right"></i> &nbsp; Feminine Hygiene
+                </div>
+            </a>
+            <a class="" href="">
+                <div class="">
+                    <i class="fa fa-chevron-right"></i> &nbsp; Sexual Wellbeing
+                </div>
+            </a>
+            <a class="" href="">
+                <div class="">
+                    <i class="fa fa-chevron-right"></i> &nbsp; Health and Beauty
+                </div>
+            </a>
+            <a class="" href="">
+                <div class="">
+                    <i class="fa fa-chevron-right"></i> &nbsp; Other
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-12">
         <p class="text-muted mt-5">Showing 1-12 of 30 Products</p>
         <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card">
-                    <a href="#"><img src="img/pressure.JPG" class="img-fluid" alt=""></a>
+                    <div class="mx-auto"><a href="#"><img src="img/pressure.JPG" class="img-fluid" alt=""></a></div>
                     <div class="card-body pname">
                         <a href="#" class="text-decoration-none font-weight-bold text-dark">
                             Special Stethoscope
@@ -24,9 +60,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card h-100">
-                    <a href="#"><img src="img/stethescope.JPG" class="img-fluid" alt=""></a>
+                   <div class="mx-auto"><a href="#"><img src="img/stethescope.JPG" class="img-fluid" alt=""></a></div>
                     <div class="card-body pname">
                         <a href="#" class="text-decoration-none font-weight-bold text-dark">
                             Special Stethoscope
@@ -38,9 +74,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card h-100">
-                    <a href="#"><img src="img/bci.JPG" class="img-fluid" alt=""></a>
+                    <div class="mx-auto"><a href="#"><img src="img/bci.JPG" class="img-fluid" alt=""></a></div>
                     <div class="card-body pname">
                         <a href="#" class="text-decoration-none font-weight-bold text-dark">
                             Special Stethoscope
@@ -52,9 +88,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 mb-4">
+            <div class="col-lg-3 col-md-4 mb-4">
                 <div class="card h-100">
-                    <a href="#"><img src="img/pressure.JPG" class="img-fluid" alt=""></a>
+                    <div class="mx-auto"><a href="#"><img src="img/pressure.JPG" class="img-fluid" alt=""></a></div>
                     <div class="card-body pname">
                         <a href="#" class="text-decoration-none font-weight-bold text-dark">
                             Special Stethoscope
@@ -68,13 +104,13 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-3 col-sm-12">
         <div class="text-center">
             <div class="section-title">
                 <p class="text-capitalize head mt-4"><span class="head1 text-capitalize">cart</span></p>
             </div>
         </div>
-        <div class="card p-2">
+        <div class="card p-2 border border-info">
             <table class="table cart">
                 <tbody>
                 <tr>

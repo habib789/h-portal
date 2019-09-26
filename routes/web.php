@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth' ], function (){
     Route::group(['middleware' => 'admin' ], function (){
         Route::get('/dashboard','DashboardController@showDashboard')->name('dashboard');
         Route::resource('/dashboard/departments','departmentsController');
+        Route::resource('/dashboard/categories','categoriesController');
     });
 });
 

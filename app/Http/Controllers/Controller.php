@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Department;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -18,7 +19,11 @@ class Controller extends BaseController
     {
         $departments = Department::select(['id', 'name', 'slug', 'active'])->get();
         View::share('departments', $departments);
+
+        $categories = Category::select(['id', 'name', 'slug', 'active'])->get();
+        View::share('categories', $categories);
     }
+
 }
 
 

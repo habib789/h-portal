@@ -27,7 +27,7 @@ body {
 }
 
 .navbar-toggler-icon {
-    color: #38A1F3;
+    color: #0cb8b6;
 }
 
 nav .nav-link {
@@ -97,7 +97,7 @@ nav.black {
     content: "";
     width: 50px;
     height: 2px;
-    background-color: #38A1F3;
+    background-color: #0cb8b6;
     bottom: 0;
     left: 50%;
     margin-left: -25px;
@@ -128,9 +128,7 @@ nav.black {
     content: "";
     width: 50px;
     height: 2px;
-    background: #136a8a;
-    background: -webkit-linear-gradient(to right, #267871, #136a8a);
-    background: linear-gradient(to right, #267871, #136a8a);
+    background: #0cb8b6;
     bottom: 0;
     left: 50%;
     margin-left: -25px;
@@ -384,13 +382,17 @@ a .dept:hover {
     border-bottom: 2px solid #0cb8b6;
 }
 
-// .btnn{
-//     background-color: #0cb8b6;
-//     font-size: 14px;
-//     padding: 5px 10px;
-// }
-//.btnn:hover{
-//     background: #0f6674;
-//     color: white;
-//     transition: .6s;
-// }
+.categories p{
+    color: #0cb8b6;
+}
+.categories a{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 5px;
+}
+
+.categories a:hover{
+    color: #0cb8b6;
+    transition: .5s ;
+}
