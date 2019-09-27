@@ -55,11 +55,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            @php
-                                $i=1;
-                            @endphp
-                            @foreach($categories as $category)
+
+                        @php
+                            $i=1;
+                        @endphp
+                        @foreach($categories as $category)
+                            <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>
@@ -82,7 +83,7 @@
                                     </a>
                                 </td>
 
-                        </tr>
+                            </tr>
                         @endforeach
                         </tbody>
                     </table>

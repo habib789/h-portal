@@ -19,14 +19,11 @@ class CreateDoctorsTable extends Migration
             $table->unsignedBigInteger('department_id');
             $table->string('first_name',191);
             $table->string('last_name',191);
-            $table->string('email',191)->unique();
-            $table->string('password',191);
             $table->string('phone',15)->unique();
             $table->text('address')->nullable();
             $table->string('license',191)->nullable();
             $table->string('gender',191);
             $table->string('graduate',191);
-            $table->string('department',191);
             $table->string('experience',191);
             $table->string('degrees',191);
             $table->string('age',191);

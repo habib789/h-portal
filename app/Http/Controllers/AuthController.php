@@ -38,8 +38,8 @@ class AuthController extends Controller
             $user->role     = $request->role;
             $user->save();
 
-            $patient              = new Patient();
-            $request->phone = '+880'. $request->phone;
+            $patient        = new Patient();
+            $request->phone = '+880' . $request->phone;
 //            dd($request->phone );
             $patient->user_id     = $user->id;
             $patient->first_name  = $request->first_name;
@@ -79,7 +79,6 @@ class AuthController extends Controller
             'gender'                => 'required',
             'graduate'              => 'required',
             'experience'            => 'required',
-            'department'            => 'required',
             'degrees'               => 'required',
             'age'                   => 'required|string|min:1|max:3',
         ]);
@@ -91,19 +90,19 @@ class AuthController extends Controller
             $user->role     = $request->role;
             $user->save();
 
-            $doctor             = new Doctor();
-            $request->phone = '+880'. $request->phone;
+            $doctor         = new Doctor();
+            $request->phone = '+880' . $request->phone;
 //            dd($request->phone);
-            $doctor->user_id    = $user->id;
-            $doctor->first_name = $request->first_name;
-            $doctor->last_name  = $request->last_name;
-            $doctor->gender     = $request->gender;
-            $doctor->phone      = $request->phone;
-            $doctor->graduate   = $request->graduate;
-            $doctor->department = $request->department;
-            $doctor->experience = $request->experience;
-            $doctor->degrees    = $request->degrees;
-            $doctor->age        = $request->age;
+            $doctor->user_id       = $user->id;
+            $doctor->department_id = $request->department;
+            $doctor->first_name    = $request->first_name;
+            $doctor->last_name     = $request->last_name;
+            $doctor->gender        = $request->gender;
+            $doctor->phone         = $request->phone;
+            $doctor->graduate      = $request->graduate;
+            $doctor->experience    = $request->experience;
+            $doctor->degrees       = $request->degrees;
+            $doctor->age           = $request->age;
             $doctor->save();
 
             session()->flash('type', 'success');
@@ -112,7 +111,7 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());
-            return redirect()->route('doctor.register');
+            return redirect()->back();
         }
     }
 
@@ -124,8 +123,8 @@ class AuthController extends Controller
     public function LoginProcess(Request $request)
     {
         $request->validate([
-           'email' => 'required|email',
-           'password' => 'required|min:6',
+            'email'    => 'required|email',
+            'password' => 'required|min:6',
         ]);
 
         $credentials = $request->only(['email', 'password']);
@@ -134,16 +133,16 @@ class AuthController extends Controller
             return redirect()->intended('/');
 
         }
-        session()->flash('type','danger');
-        session()->flash('message','Invalid Credentials');
+        session()->flash('type', 'danger');
+        session()->flash('message', 'Invalid Credentials');
         return redirect()->back();
     }
 
     public function logout()
     {
         Auth::logout();
-        session()->flash('type','info');
-        session()->flash('message','You have been logged out');
+        session()->flash('type', 'info');
+        session()->flash('message', 'You have been logged out');
         return redirect()->route('auth.login');
     }
 }

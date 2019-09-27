@@ -11,36 +11,13 @@
     <div class="col-md-2 mt-5">
         <div class='categories'>
             <p class="font-weight-bold text-uppercase">Browse Categories</p>
-            <a class="" href="">
-                <div class="">
-                    <i class="fa fa-chevron-right"></i> &nbsp; Medicine
-                </div>
-            </a>
-            <a class="" href="">
-                <div class="">
-                    <i class="fa fa-chevron-right"></i> &nbsp; Baby Care
-                </div>
-            </a>
-            <a class="" href="">
-                <div class="">
-                    <i class="fa fa-chevron-right"></i> &nbsp; Feminine Hygiene
-                </div>
-            </a>
-            <a class="" href="">
-                <div class="">
-                    <i class="fa fa-chevron-right"></i> &nbsp; Sexual Wellbeing
-                </div>
-            </a>
-            <a class="" href="">
-                <div class="">
-                    <i class="fa fa-chevron-right"></i> &nbsp; Health and Beauty
-                </div>
-            </a>
-            <a class="" href="">
-                <div class="">
-                    <i class="fa fa-chevron-right"></i> &nbsp; Other
-                </div>
-            </a>
+            @foreach($categories as $category)
+                <a class="" href="">
+                    <div class="text-capitalize">
+                        <i class="fa fa-chevron-right"></i> &nbsp;{{ $category->name }}
+                    </div>
+                </a>
+            @endforeach
         </div>
     </div>
     <div class="col-md-7 col-sm-12">
@@ -62,7 +39,7 @@
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card h-100">
-                   <div class="mx-auto"><a href="#"><img src="img/stethescope.JPG" class="img-fluid" alt=""></a></div>
+                    <div class="mx-auto"><a href="#"><img src="img/stethescope.JPG" class="img-fluid" alt=""></a></div>
                     <div class="card-body pname">
                         <a href="#" class="text-decoration-none font-weight-bold text-dark">
                             Special Stethoscope
@@ -129,7 +106,7 @@
                     <td>
                         <div class="text-left">
                             <p class="font-weight-bold">Name</p>
-                           <small> <p class="text-muted"><span>2</span> × <span>$56</span></p></small>
+                            <small><p class="text-muted"><span>2</span> × <span>$56</span></p></small>
                         </div>
                     </td>
                 </tr>

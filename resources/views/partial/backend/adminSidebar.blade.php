@@ -45,6 +45,12 @@
                                 <p>Products Category</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('products.index') }}" class="nav-link">
+                                <i class="nav-icon far fa-circle text-info"></i>
+                                <p>Products List</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">

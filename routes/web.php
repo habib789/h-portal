@@ -18,7 +18,8 @@ Auth::routes(['verify'=> true]);
 
 Route::get('/','HomeController@index')->name('home');
 Route::get('/departments','HomeController@showDepartments')->name('department');
-Route::resource('/products','ProductsController');
+Route::get('/shop','HomeController@showShop')->name('shop');
+
 
 Route::get('/login','AuthController@loginForm')->name('auth.login');
 Route::post('/login','AuthController@LoginProcess');
@@ -34,6 +35,6 @@ Route::group(['middleware' => 'auth' ], function (){
         Route::get('/dashboard','DashboardController@showDashboard')->name('dashboard');
         Route::resource('/dashboard/departments','departmentsController');
         Route::resource('/dashboard/categories','categoriesController');
+        Route::resource('/dashboard/products','ProductsController');
     });
 });
-

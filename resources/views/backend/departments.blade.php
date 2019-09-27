@@ -55,11 +55,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            @php
-                                $i=1;
-                            @endphp
-                            @foreach($departments as $department)
+
+                        @php
+                            $i=1;
+                        @endphp
+                        @foreach($departments as $department)
+                            <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{ $department->name }}</td>
                                 <td>
@@ -81,7 +82,7 @@
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>
-                        </tr>
+                            </tr>
                         @endforeach
                         </tbody>
                     </table>
