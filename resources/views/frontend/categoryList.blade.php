@@ -35,7 +35,6 @@
                 </div>
             @endforeach
         </div>
-        {{ $products->links() }}
     </div>
 
     <div class="col-md-3 col-sm-12">

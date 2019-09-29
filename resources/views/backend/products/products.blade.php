@@ -17,21 +17,22 @@
                                 {{ session('message') }}
                             </div>
                         @endif
-                            <div class="form-group">
-                                <label for="cat">Select product category</label>
-                                <select name="category_id" id="cat"
-                                        class="form-control @error('category_id') is-invalid @enderror">
-                                    <option class="hidden" selected disabled>Select category</option>
-                                    @foreach($categories as $category)
-                                        <option class="text-capitalize" value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('category_id')
-                                <span class="invalid-feedback" role="alert">
+                        <div class="form-group">
+                            <label for="cat">Select product category</label>
+                            <select name="category_id" id="cat"
+                                    class="form-control @error('category_id') is-invalid @enderror">
+                                <option class="hidden" selected disabled>Select category</option>
+                                @foreach($categories as $category)
+                                    <option class="text-capitalize"
+                                            value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                            <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                @enderror
-                            </div>
+                            @enderror
+                        </div>
                         <div class="form-group">
                             <label for="Product">Product Name</label>
                             <input type="text" name="name"
@@ -135,15 +136,17 @@
                                 <td>{{ $product->type }}</td>
                                 <td>{{ $product->slug }}</td>
                                 <td>
-                                    {{ $product->slug }}
+                                    <img src="{{ asset('uploads/images/'.$product->photo) }}" height="30px" width="30px" alt="">
                                     {{--                                <div class="progress progress-xs">--}}
                                     {{--                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>--}}
                                     {{--                                </div>--}}
                                 </td>
                                 <td>
-                                <span class="badge bg-success">
-                                    {{ $product->active == 1 ? 'Active' : 'Inactive' }}
-                                </span>
+                                    @if($product->active == 1)
+                                        <span class="badge bg-success">Active</span>
+                                    @elseif($product->active == 0)
+                                        <span class="badge bg-warning">Inactive</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <a class="text-info" href="{{ route('products.update', $product->id) }}">

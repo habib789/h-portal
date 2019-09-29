@@ -1,15 +1,26 @@
 @extends('masterpage.frontend')
-
+@section('title')
+    Product Details
+@stop
 @section('cover')
     <div class="context">
-        <h1 class="font-weight-bold">Products</h1>
+        <h1 class="font-weight-bold">Product Details</h1>
     </div>
 @stop
 
 
 @section('content')
     <div class="col-md-2 mt-5">
-        @include('partial.category')
+        <div class='categories'>
+            <p class="font-weight-bold text-uppercase">Browse Categories</p>
+            @foreach($categories as $category)
+                <a class="" href="">
+                    <div class="text-capitalize">
+                        <i class="fa fa-chevron-right"></i> &nbsp;{{ $category->name }}
+                    </div>
+                </a>
+            @endforeach
+        </div>
     </div>
     <div class="col-md-7 col-sm-12">
         <p class="text-muted mt-5">Showing 1-12 of 30 Products</p>

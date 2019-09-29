@@ -285,14 +285,14 @@ select.form-control {
 }
 
 .card button {
+    background-color: #0cb8b6;
     box-shadow: none;
     text-transform: uppercase;
-    border: 2px solid #0cb8b6;
-    color: black;
+    color: whitesmoke;
 }
 
 .card button:hover {
-    background-color: #0cb8b6;
+    background-color: #1ba87e;
     color: whitesmoke;
 }
 
@@ -395,4 +395,10 @@ a .dept:hover {
 .categories a:hover{
     color: #0cb8b6;
     transition: .5s ;
+}
+
+
+.card-fig:hover{
+    box-shadow: 5px 10px 20px #888888;
+    transition: .4s;
 }

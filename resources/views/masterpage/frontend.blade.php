@@ -2,26 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PORTAL</title>
-{{--    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,700" rel="stylesheet">--}}
-{{--    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">--}}
-{{--    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">--}}
-{{--    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">--}}
-{{--    <link href="https://fonts.googleapis.com/css?family=KoHo" rel="stylesheet">--}}
-{{--    <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">--}}
-{{--    <link href="https://fonts.googleapis.com/css?family=Kite+One|Parisienne&display=swap" rel="stylesheet">--}}
+    <title>@yield('title', 'Health Portal')</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
 </head>
 <body>
 
 @include('partial.nav')
-
 <!--Cover-->
 @yield('cover')
-
-
 {{--main-container--}}
 <div class="container-fluid">
     @yield('heading')

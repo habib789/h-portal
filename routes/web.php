@@ -19,6 +19,7 @@ Auth::routes(['verify'=> true]);
 Route::get('/','HomeController@index')->name('home');
 Route::get('/departments','HomeController@showDepartments')->name('department');
 Route::get('/shop','HomeController@showShop')->name('shop');
+Route::get('/category/{slug}','HomeController@catList')->name('catList');
 
 
 Route::get('/login','AuthController@loginForm')->name('auth.login');

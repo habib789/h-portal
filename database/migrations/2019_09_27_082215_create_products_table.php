@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('slug',191)->unique();
             $table->decimal('price', 11);
             $table->unsignedInteger('quantity');
-            $table->string('type');
+            $table->string('type',191)->nullable();
             $table->text('photo');
             $table->tinyInteger('active')->default(1);
             $table->timestamps();

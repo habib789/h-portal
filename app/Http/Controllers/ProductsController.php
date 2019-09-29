@@ -16,7 +16,9 @@ class ProductsController extends Controller
     public function index()
     {
         $data             = [];
-        $data['products'] = Product::with('category')->select(['id', 'name', 'price', 'quantity', 'type','active', 'photo'])->get();
+        $data['products'] = Product::with('category')
+            ->select(['id', 'category_id', 'name', 'price', 'quantity', 'type', 'slug', 'active', 'photo'])
+            ->get();
 //        dd($data['products']);
         return view('backend.products.products', $data);
     }
@@ -48,9 +50,9 @@ class ProductsController extends Controller
         ]);
 
         $image      = $request->file('photo');
-        $image_file = uniqid('image', true) . Str::random(10) . '.' . $image->clientExtension();
+        $image_file = uniqid('image_', true) . Str::random(10) . '.' . $image->getClientOriginalExtension();
         if ($image->isValid()) {
-            $image->storeAs('images_', $image_file);
+            $image->storeAs('images', $image_file);
         }
         $inputs_products = [
             'name'        => trim($request->input('name')),
@@ -61,7 +63,7 @@ class ProductsController extends Controller
             'type'        => trim($request->input('type')),
             'photo'       => $image_file,
         ];
-
+//dd($inputs_products);
         try {
             Product::create($inputs_products);
             session()->flash('type', 'success');
