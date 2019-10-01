@@ -8,78 +8,104 @@
 
 
 @section('content')
-    <div class="col-md-2 mt-5">
-        @include('partial.category')
-    </div>
-    <div class="col-md-7 col-sm-12">
-        <p class="text-muted mt-5">Showing 1-12 of 30 Products</p>
+    <div class="container">
         <div class="row">
-            @foreach($products as $product)
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100 card-fig">
-                        <figure class="figure">
-                            <div class="fig-img">
-                                <img src="{{ asset('uploads/images/'.$product->photo) }}"
-                                     class="figure-img img-fluid rounded" alt="...">
+
+
+            <div class="col-md-4 mt-5">
+                @include('partial.category')
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <p class="text-muted mt-5">Showing 1-12 of 30 Products</p>
+                <div class="row">
+                    @foreach($products as $product)
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card h-100 card-fig">
+                                <figure class="figure">
+                                    <div class="fig-img mx-auto">
+                                        <img src="{{ asset('uploads/images/'.$product->photo) }}"
+                                             class="figure-img img-fluid rounded" alt="...">
+                                    </div>
+                                    <figcaption class="figure-caption text-capitalize font-weight-bold text-center">
+                                        <a href="">
+                                            {{ $product->name }}
+                                        </a>
+                                        <small>{{ $product->type }}</small>
+                                        <p> BDT {{ number_format($product->price,2) }}</p>
+                                    </figcaption>
+                                    <form action="{{ route('cart') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <button class="button btn btn-sm btn-block">add to cart</button>
+                                    </form>
+                                </figure>
                             </div>
-                            <figcaption class="figure-caption text-capitalize font-weight-bold text-center">
-                                <a href="">
-                                    {{ $product->name }}
-                                </a>
-                                <small>{{ $product->type }}</small>
-                                <p> BDT {{ number_format($product->price,2) }}</p>
-                            </figcaption>
-                            <button class="btn btn-sm btn-block">add to cart</button>
-                        </figure>
+                        </div>
+                    @endforeach
+                </div>
+                {{ $products->links() }}
+            </div>
+
+
+            <div class="modal" id="cart_modal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="text-uppercase">CART</h5>
+                            <button class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        @if(!empty($cart))
+                        <div class="modal-body">
+                            <div class="form mx-auto">
+                                <div class="">
+                                    <table class="table table-sm cart">
+                                        <tbody>
+                                        @foreach($cart as $productId => $product)
+                                            <tr>
+                                                <td width="100px">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('uploads/images/'.$product['photo']) }}"
+                                                         height="100%" width="100%" alt="">
+                                                </td>
+                                                <td>
+                                                    <p>{{ $product['name'] }}</p>
+                                                    <p class="text-muted"><span>{{ $product['quantity'] }}</span> ×
+                                                        <span>{{ $product['price'] }}</span></p>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                    <div class="divider"></div>
+                                    <div class="clearfix">
+                                        <p class="font-weight-bold float-left">Subtotal</p>
+                                        <p class="font-weight-bold float-right">BDT {{ number_format($subtotal,2) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="info clearfix">
+                                <a href="{{ route('cart') }}" class="btn btn-info text-white float-left">View Cart</a>
+                                <a href="{{ route('checkout') }}" class="btn btn-info text-white float-left ml-2">Checkout</a>
+                            </div>
+                        </div>
+                            @else
+                            <div class="alert alert-info">
+                                Your cart is empty! <br>
+                                You need to add some products First.
+                            </div>
+                            @endif
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
-        {{ $products->links() }}
     </div>
 
-    <div class="col-md-3 col-sm-12">
-        <div class="text-center">
-            <div class="section-title">
-                <p class="text-capitalize head mt-4"><span class="head1 text-capitalize">cart</span></p>
-            </div>
-        </div>
-        <div class="card p-2 border border-info">
-            <table class="table cart">
-                <tbody>
-                <tr>
-                    <td width="100px">
-                        <img class="img-fluid" src="img/avatar3.png" height="100%" width="100%" alt="">
-                    </td>
-                    <td>
-                        <p>Name</p>
-                        <p class="text-muted"><span>2</span> × <span>$56</span></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img class="img-fluid" src="img/cover.png" height="100%" width="100%" alt="">
-                    </td>
-                    <td>
-                        <div class="text-left">
-                            <p class="font-weight-bold">Name</p>
-                            <small><p class="text-muted"><span>2</span> × <span>$56</span></p></small>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="divider"></div>
-            <div class="clearfix">
-                <p class="font-weight-bold float-left">Subtotal</p>
-                <p class="text-muted float-right">BDT 200.00</p>
-            </div>
-            <div class="info clearfix">
-                <button type="submit" class="btn btn-info text-white float-left">View Cart</button>
-                <button type="submit" class="btn btn-info text-white float-left ml-2">Checkout</button>
-            </div>
-        </div>
-    </div>
+    <a href="#cart_modal" data-toggle="modal" class="to_top">
+        <span class="badge badge-dark shopping">{{ $count }}</span>
+        <i class="fas fa-shopping-cart fa-2x"></i>
+    </a>
 @stop
 
 

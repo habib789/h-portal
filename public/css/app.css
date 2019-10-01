@@ -9882,6 +9882,13 @@ select.form-control {
   text-align: center;
 }
 
+textarea.form-control {
+  border: 1px solid #0cb8b6;
+  box-shadow: none;
+  outline: none;
+  text-align: center;
+}
+
 .bg {
   position: relative;
   background: url(../img/cover.PNG) no-repeat fixed center;
@@ -10001,14 +10008,15 @@ select.form-control {
   color: #0cb8b6;
 }
 
-.card button {
+.card .button {
   background-color: #0cb8b6;
   box-shadow: none;
   text-transform: uppercase;
   color: whitesmoke;
+  border-radius: 0;
 }
 
-.card button:hover {
+.card .button:hover {
   background-color: #1ba87e;
   color: whitesmoke;
 }
@@ -10074,8 +10082,8 @@ footer .form-control:focus {
 }
 
 .cart td img {
-  max-height: 80px;
-  max-width: 80px;
+  max-height: 50px;
+  max-width: 50px;
 }
 
 .ed {
@@ -10118,4 +10126,23 @@ a .dept:hover {
 .card-fig:hover {
   box-shadow: 5px 10px 20px #888888;
   transition: 0.4s;
+}
+
+.to_top {
+  position: fixed;
+  bottom: 50%;
+  right: 0;
+  background-color: whitesmoke;
+  color: #0cb8b6;
+  cursor: pointer;
+  padding: 8px 13px;
+}
+
+.shopping {
+  position: fixed;
+  bottom: 55%;
+  right: 18px;
+  background-color: whitesmoke;
+  color: black;
+  cursor: pointer;
 }

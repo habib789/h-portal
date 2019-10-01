@@ -37,7 +37,7 @@
 
                     <div class="form-group log">
                         <button type="submit" name="login"
-                                class="btn btn-success text-light send px-5">
+                                class="button btn btn-info text-light send px-5">
                             <i class="fas fa-sign-in-alt mr-2 fa-2x"></i>
                             LOGIN
                         </button>

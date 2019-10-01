@@ -29,7 +29,11 @@
                                 <small>{{ $product->type }}</small>
                                 <p> BDT {{ number_format($product->price,2) }}</p>
                             </figcaption>
-                            <button class="btn btn-sm btn-block">add to cart</button>
+                            <form action="{{ route('cart') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <button class="button btn btn-sm btn-block">add to cart</button>
+                            </form>
                         </figure>
                     </div>
                 </div>
@@ -37,48 +41,65 @@
         </div>
     </div>
 
-    <div class="col-md-3 col-sm-12">
-        <div class="text-center">
-            <div class="section-title">
-                <p class="text-capitalize head mt-4"><span class="head1 text-capitalize">cart</span></p>
-            </div>
-        </div>
-        <div class="card p-2 border border-info">
-            <table class="table cart">
-                <tbody>
-                <tr>
-                    <td width="100px">
-                        <img class="img-fluid" src="img/avatar3.png" height="100%" width="100%" alt="">
-                    </td>
-                    <td>
-                        <p>Name</p>
-                        <p class="text-muted"><span>2</span> × <span>$56</span></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img class="img-fluid" src="img/cover.png" height="100%" width="100%" alt="">
-                    </td>
-                    <td>
-                        <div class="text-left">
-                            <p class="font-weight-bold">Name</p>
-                            <small><p class="text-muted"><span>2</span> × <span>$56</span></p></small>
+    <div class="modal" id="cart_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="text-uppercase">CART</h5>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                @if(!empty($cart))
+                    <div class="modal-body">
+                        <div class="form mx-auto">
+                            <div class="">
+                                <table class="table table-sm cart">
+                                    <tbody>
+                                    @foreach($cart as $productId => $product)
+                                        <tr>
+                                            <td width="100px">
+                                                <img class="img-fluid"
+                                                     src="{{ asset('uploads/images/'.$product['photo']) }}"
+                                                     height="100%" width="100%" alt="">
+                                            </td>
+                                            <td>
+                                                <p>{{ $product['name'] }}</p>
+                                                <p class="text-muted"><span>{{ $product['quantity'] }}</span> ×
+                                                    <span>{{ $product['price'] }}</span></p>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="divider"></div>
+                                <div class="clearfix">
+                                    <p class="font-weight-bold float-left">Subtotal</p>
+                                    <p class="font-weight-bold float-right">BDT {{ number_format($subtotal,2) }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="divider"></div>
-            <div class="clearfix">
-                <p class="font-weight-bold float-left">Subtotal</p>
-                <p class="text-muted float-right">BDT 200.00</p>
-            </div>
-            <div class="info clearfix">
-                <button type="submit" class="btn btn-info text-white float-left">View Cart</button>
-                <button type="submit" class="btn btn-info text-white float-left ml-2">Checkout</button>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="info clearfix">
+                            <a href="{{ route('cart') }}" class="btn btn-info text-white float-left">View Cart</a>
+                            <button type="submit" class="btn btn-info text-white float-left ml-2">Checkout</button>
+                        </div>
+                    </div>
+                @else
+                    <div class="alert alert-info">
+                        Your cart is empty! <br>
+                        You need to add some products First.
+                    </div>
+                @endif
             </div>
         </div>
     </div>
+    </div>
+    </div>
+
+    <a href="#cart_modal" data-toggle="modal" class="to_top">
+        <span class="badge badge-dark shopping">{{ $count }}</span>
+        <i class="fas fa-shopping-cart fa-2x"></i>
+    </a>
 @stop
 
 

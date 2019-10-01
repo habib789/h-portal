@@ -162,6 +162,12 @@ select.form-control {
     outline: none;
     text-align: center;
 }
+textarea.form-control {
+    border: 1px solid #0cb8b6;
+    box-shadow: none;
+    outline: none;
+    text-align: center;
+}
 
 .bg {
     position: relative;
@@ -284,14 +290,15 @@ select.form-control {
     color: #0cb8b6;
 }
 
-.card button {
+.card .button {
     background-color: #0cb8b6;
     box-shadow: none;
     text-transform: uppercase;
     color: whitesmoke;
+    border-radius: 0;
 }
 
-.card button:hover {
+.card .button:hover {
     background-color: #1ba87e;
     color: whitesmoke;
 }
@@ -356,14 +363,13 @@ footer .form-control:focus {
 }
 
 .cart td img {
-    max-height: 80px;
-    max-width: 80px;
+    max-height: 50px;
+    max-width: 50px;
 }
 
 .ed {
     margin-top: 100px;
 }
-
 
 a .dept {
     color: #444444;
@@ -382,23 +388,44 @@ a .dept:hover {
     border-bottom: 2px solid #0cb8b6;
 }
 
-.categories p{
+.categories p {
     color: #0cb8b6;
 }
-.categories a{
+
+.categories a {
     color: black;
     font-weight: bold;
     text-decoration: none;
     padding: 10px 5px;
 }
 
-.categories a:hover{
+.categories a:hover {
     color: #0cb8b6;
-    transition: .5s ;
+    transition: .5s;
 }
 
 
-.card-fig:hover{
+.card-fig:hover {
     box-shadow: 5px 10px 20px #888888;
     transition: .4s;
 }
+
+.to_top {
+    position: fixed;
+    bottom: 50%;
+    right: 0;
+    background-color: whitesmoke;
+    color: #0cb8b6;
+    cursor: pointer;
+    padding: 8px 13px;
+}
+
+.shopping {
+    position: fixed;
+    bottom: 55%;
+    right: 18px;
+    background-color: whitesmoke;
+    color: black;
+    cursor: pointer;
+}
+
