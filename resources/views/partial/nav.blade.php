@@ -1,5 +1,5 @@
 <!-- navbar -->
-<nav class="navbar navbar-expand-lg mx-auto fixed-top">
+<nav class="navbar navbar-expand-lg mx-auto sticky-top">
 {{--    <a class="navbar-brand" href="{{ route('home') }}"></a>--}}
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,33 +34,12 @@
                 </li>
             @endguest
             @auth
-                <li class="nav-item dropdown dmenu">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        <img class="img-fluid" src="img/avatar2.png" height="50px" width="50px" alt="">
-                        @if( auth()->user()->role == 'patient') {
-                        <small>{{ auth()->user()->patient->first_name }}</small>
-                        }
-                        @elseif(auth()->user()->role == 'doctor'){
-                        <small>{{ auth()->user()->doctor->first_name }}</small>
-                        }
-                        @elseif(auth()->user()->role == 'admin'){
-                        <small>{{ auth()->user()->email }}</small>
-                        }
-                        @endif
-                    </a>
-                    <div class="dropdown-menu sm-menu bg-info p-2">
-                        <small class="font-weight-bold">
-                            <a class="dropdown-item nav-link" href="">
-                                Profile
-                            </a>
-                        </small>
-                        <small class="font-weight-bold">
-                            <a class="dropdown-item nav-link" href="{{ route('logout') }}">
-                                Log Out
-                            </a>
-                        </small>
-                    </div>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('myProfile') }}">My account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                    </li>
             @endauth
         </ul>
     </div>

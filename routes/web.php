@@ -36,15 +36,19 @@ Route::post('/cart/decrease','CartController@DecreaseFromCart')->name('decrease.
 Route::post('/cart/remove','CartController@RemoveFromCart')->name('remove.cart');
 Route::get('/cart/clear','CartController@ClearFromCart')->name('clear.cart');
 
-//Checkout
-Route::get('/checkout','CheckoutController@index')->name('checkout');
-Route::post('/checkout','CheckoutController@CheckoutProcess');
-
 Route::group(['middleware' => 'auth' ], function (){
     Route::get('/logout','AuthController@logout')->name('logout');
+    Route::get('/account','AccountController@index')->name('myProfile');
+    //Checkout
+    Route::get('/checkout','CheckoutController@index')->name('checkout');
+    Route::post('/checkout','CheckoutController@CheckoutProcess');
+//    order
+    Route::get('/account/myOrder','AccountController@showOrder')->name('myOrder');
+    Route::get('/account/OrderDetails/{id}','AccountController@OrderDetails')->name('orderDetails');
+
     Route::group(['middleware' => 'admin' ], function (){
-        Route::get('/dashboard','DashboardController@showDashboard')->name('dashboard');
         Route::resource('/dashboard/departments','departmentsController');
+        Route::resource('/dashboard/orders','OrdersController');
         Route::resource('/dashboard/categories','categoriesController');
         Route::resource('/dashboard/products','ProductsController');
     });

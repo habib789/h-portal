@@ -12,7 +12,10 @@ body {
 }
 
 .navbar {
-    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+    background-color: whitesmoke;
+    font-size: 12px;
 }
 
 .navbar-brand {
@@ -31,19 +34,26 @@ body {
 }
 
 nav .nav-link {
-    color: white;
+    color: black;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
 
-nav .navbar-brand {
-    color: #38A1F3;
-    font-size: 30px;
+nav ul li.active > a {
+    color: #0cb8b6;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 3px solid #0cb8b6;
 }
 
-nav.black {
-    background-color: rgba(0, 0, 0, 0.4);
+
+nav .navbar-brand {
+    font-size: 20px;
 }
+
+//nav.black {
+//    background-color: rgba(0, 0, 0, 0.4);
+//}
 
 .txt {
     color: #56CCF2;
