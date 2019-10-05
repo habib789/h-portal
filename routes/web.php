@@ -45,8 +45,10 @@ Route::group(['middleware' => 'auth' ], function (){
 //    order
     Route::get('/account/myOrder','AccountController@showOrder')->name('myOrder');
     Route::get('/account/OrderDetails/{id}','AccountController@OrderDetails')->name('orderDetails');
+    Route::get('/account/OrderDetails/{id}/invoice','AccountController@generatePdf')->name('order.pdf');
 
     Route::group(['middleware' => 'admin' ], function (){
+        Route::get('/dashboard','DashboardController@showDashboard')->name('dashboard');
         Route::resource('/dashboard/departments','departmentsController');
         Route::resource('/dashboard/orders','OrdersController');
         Route::resource('/dashboard/categories','categoriesController');

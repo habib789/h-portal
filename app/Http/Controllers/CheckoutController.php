@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\OrderCreate;
 use App\Models\Order;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -57,6 +58,5 @@ class CheckoutController extends Controller
         session()->flash('message', 'Order has been placed');
         return redirect()->route('cart');
     }
-
 
 }

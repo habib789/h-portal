@@ -1,6 +1,7 @@
 @extends('masterpage.backend')
 @section('title') Orders @stop
 @section('header')  Customer Orders @stop
+@section('bcumb')  Customer Orders @stop
 @section('content')
     <div class="row">
         <div class="col-lg-12 col-md-12">
@@ -24,8 +25,9 @@
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
+{{--                                diffForHumans() 1 day ago function--}}
                                 <td>{{ $order->id }}</td>
-                                <td>{{ $order->updated_at }}</td>
+                                <td>{{ $order->created_at->format('F, d Y - h:s A') }}</td>
                                 <td>{{ $order->customer_name }}</td>
                                 <td class="text-info font-weight-bold">
                                     {{ $order->total_amount }} TK
@@ -33,7 +35,9 @@
                                 <td>{{ $order->payment_status }}</td>
                                 <td>{{ $order->op_status }}</td>
                                 <td>
-                                    <a href="">View</a>
+                                    <span class="badge bg-info">
+                                        <a href="{{ route('orders.show', $order->id)}}">View</a>
+                                    </span>
                                 </td>
                             </tr>
                         @endforeach
@@ -41,6 +45,7 @@
                     </table>
                 </div>
             </div>
+            {{ $orders->links() }}
         </div>
     </div>
 

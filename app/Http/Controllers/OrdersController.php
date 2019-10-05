@@ -7,23 +7,17 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data = [];
-        $data['orders'] = Order::with('user')->get();
-        return  view('backend.orders',$data);
+        $data['orders'] = Order::with('user')
+            ->orderByDesc('created_at')
+            ->paginate(10);
+        return  view('backend.orders.order',$data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
@@ -48,7 +42,10 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = [];
+        $data['order'] = Order::findOrFail($id);
+        $data['products'] = $data['order']->products;
+        return view('backend.orders.details', $data);
     }
 
     /**

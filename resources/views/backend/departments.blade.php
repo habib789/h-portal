@@ -1,6 +1,7 @@
 @extends('masterpage.backend')
 @section('title') Departments @stop
 @section('header') Departments @stop
+@section('bcumb') Departments @stop
 @section('content')
     <div class="row">
         <div class="col-md-5">

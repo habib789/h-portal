@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+
 
 class AccountController extends Controller
 {
@@ -14,7 +17,7 @@ class AccountController extends Controller
     public function showOrder()
     {
         $data = [];
-        $data['orders'] = Order::with('user')->where('user_id',auth()->user()->id)->get();
+        $data['orders'] = Order::with('user')->where('user_id',auth()->user()->id)->paginate(8);
         return view('frontend.dashboard.customerOrders', $data);
     }
 
@@ -24,5 +27,14 @@ class AccountController extends Controller
         $data['order'] = Order::findOrFail($id);
         $data['products'] = $data['order']->products;
         return view('frontend.dashboard.orderDetails', $data);
+    }
+    public function generatePdf($id)
+    {
+        $data = [];
+        $data['order'] = Order::findOrFail($id);
+        $data['products'] = $data['order']->products;
+        $pdf = PDF::loadView('frontend.dashboard.pdf.orderdetails', $data);
+        return $pdf->download('invoice.pdf');
+//        return view('frontend.dashboard.pdf.orderdetails',$data);
     }
 }

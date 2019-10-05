@@ -1,4 +1,7 @@
 @extends('masterpage.backend')
+@section('title') Dashboard @stop
+@section('bcumb')  Dashboard @stop
+
 @section('content')
     <div class="row">
         <div class="col-12 col-sm-6 col-md-3">

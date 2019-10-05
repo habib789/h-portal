@@ -1,7 +1,7 @@
-@extends('masterpage.account')
-@section('title') My Order @stop
-@section('page')<h5 class="text-info font-weight-bold text-uppercase">ORDER DETAILS</h5>@stop
-@section('bcumb') Order Details @stop
+@extends('masterpage.backend')
+@section('title') Orders Details @stop
+@section('header')  Orders Details @stop
+@section('bcumb')  Orders Details @stop
 
 @section('content')
     <section class="content card">
@@ -86,7 +86,7 @@
                             <div class="col-12">
                                 <a href="" target="" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                                 <a href="{{ route('order.pdf', $order->id) }}" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-download"></i> Download PDF
+                                    <i class="fas fa-download"></i> Generate PDF
                                 </a>
                             </div>
                         </div>

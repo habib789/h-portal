@@ -1,6 +1,6 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg mx-auto sticky-top">
-{{--    <a class="navbar-brand" href="{{ route('home') }}"></a>--}}
+    {{--    <a class="navbar-brand" href="{{ route('home') }}"></a>--}}
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-align-right navbar-toggler-icon"></i>
@@ -34,9 +34,15 @@
                 </li>
             @endguest
             @auth
+                @if(auth()->user()->role == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                    </li>
+                @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('myProfile') }}">My account</a>
                     </li>
+                @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                     </li>
