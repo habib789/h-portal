@@ -1,6 +1,6 @@
 @extends('masterpage.frontend')
 @section('content')
-    <div class="col-md-12 mx-auto pt-5">
+    <div class="col-md-12 mx-auto">
         <div class="card col-lg-10 col-md-10 col-sm-12 mx-auto my-5">
             <div class="card-header text-right text-uppercase">
                 register as <a href="{{ route('doctor.register') }}">doctor</a>

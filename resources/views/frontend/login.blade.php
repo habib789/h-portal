@@ -1,6 +1,6 @@
 @extends('masterpage.frontend')
 @section('content')
-<div class="mx-auto col-lg-6 col-md-6 col-sm-12 my-5 pt-5">
+<div class="mx-auto col-lg-6 col-md-6 col-sm-12 my-5">
     <div class="card">
         <div class="card-header">
             <h5>LOGIN TO YOUR PROFILE</h5>
@@ -46,7 +46,13 @@
             </form>
         </div>
         <div class="card-footer text-right">
-            <p>Dont have an account?<a class="reg"  href="{{ route('patient.register') }}">Register</a>
+            <p>Dont have an account?
+                <a class="reg"  href="{{ route('patient.register') }}">Register</a>
+            </p>
+            <p>
+                <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                </a>
             </p>
         </div>
     </div>

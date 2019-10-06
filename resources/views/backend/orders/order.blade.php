@@ -48,5 +48,4 @@
             {{ $orders->links() }}
         </div>
     </div>
-
 @stop

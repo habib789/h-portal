@@ -131,7 +131,6 @@ class AuthController extends Controller
         if (auth()->attempt($credentials)) {
 //            dd(Auth::user()->doctor);
             return redirect()->intended('/');
-
         }
         session()->flash('type', 'danger');
         session()->flash('message', 'Invalid Credentials');
