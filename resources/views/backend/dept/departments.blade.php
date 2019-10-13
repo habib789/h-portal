@@ -3,6 +3,11 @@
 @section('header') Departments @stop
 @section('bcumb') Departments @stop
 @section('content')
+    @if(session()->has('message'))
+        <div class="text-center alert alert-{{ session('type') }}">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-5">
             <div class="card card-info">
@@ -13,17 +18,12 @@
                 <form role="form" action="{{ route('departments.store') }}" method="post">
                     @csrf
                     <div class="card-body">
-                        @if(session()->has('message'))
-                            <div class="alert alert-{{ session('type') }}">
-                                {{ session('message') }}
-                            </div>
-                        @endif
                         <div class="form-group">
                             <label for="department">Department Name</label>
                             <input type="text" name="name"
                                    class="form-control @error('name') is-invalid @enderror"
-                                   id="department"
-                                   placeholder="Enter department">
+                                   id="department" value="{{ old('name') }}"
+                                   placeholder="Enter department name">
                             @error('name')
                             <span class="invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -71,17 +71,29 @@
                                     {{--                                </div>--}}
                                 </td>
                                 <td>
-                                <span class="badge bg-success">
-                                    {{ $department->active == 1 ? 'Active' : 'Inactive' }}
-                                </span>
+                                    @if($department->active == 1)
+                                        <span class="badge bg-success">
+                                        Active
+                                    </span>
+                                    @else
+                                        <span class="badge bg-warning">
+                                       Inactive
+                                                @endif
+                                    </span>
                                 </td>
                                 <td>
-                                    <a class="text-info" href="{{ route('departments.update', $department->id) }}">
+                                    <a class="text-info" href="{{ route('departments.edit', $department->id) }}">
                                         <i class="nav-icon fas fa-edit"></i>
                                     </a>
-                                    <a class="text-danger" href="{{ route('departments.destroy', $department->id) }}">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('departments.destroy', $department->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn text-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

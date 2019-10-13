@@ -9733,7 +9733,6 @@ body {
 
 .navbar {
   border: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: 100px;
   background-color: whitesmoke;
   font-size: 12px;
 }
@@ -9783,8 +9782,7 @@ nav .navbar-brand {
 
 .context {
   background: #0cb8b6;
-  font-family: "Francois One", sans-serif;
-  margin-top: 95px;
+  margin-top: 20px;
   color: whitesmoke;
   height: 150px;
   padding: 50px;
@@ -9792,9 +9790,34 @@ nav .navbar-brand {
   text-transform: uppercase;
 }
 
+.dashboard-context {
+  position: relative;
+  background: #2980b9;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #2c3e50, #2980b9);
+  height: 100px;
+}
+
+.d-context {
+  position: relative;
+  top: 10%;
+  left: 0;
+}
+
+.d-context h3 {
+  font-size: 22px;
+  color: powderblue;
+}
+
+.d-context span {
+  color: #8ac1ef;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .head1 {
   color: #0cb8b6;
-  font-family: "Francois One", sans-serif;
 }
 
 .section-title h4 {
@@ -10053,7 +10076,6 @@ textarea.form-control {
 
 .quote {
   line-height: 2;
-  font-family: "Great Vibes", cursive;
 }
 
 /*Footer*/
@@ -10078,6 +10100,15 @@ footer .form-control:focus {
   color: #38A1F3;
 }
 
+.card-header {
+  position: relative;
+  background: #2980b9;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #2c3e50, #2980b9);
+  color: whitesmoke;
+}
+
 .contact li {
   line-height: 2;
 }
@@ -10097,7 +10128,6 @@ footer .form-control:focus {
 
 a .dept {
   color: #444444;
-  font-family: "Francois One", sans-serif;
   padding: 10px 10px 10px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }

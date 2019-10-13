@@ -1,6 +1,19 @@
 @extends('masterpage.frontend')
 @section('content')
-    <div class="col-md-12 mx-auto pt-5">
+    <div class="card col-md-4 my-5">
+        <div class="card-header bg-info">
+            <h4>Terms and Condition</h4>
+        </div>
+        <div class="card-body">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
+                alias asperiores autem consequuntur deleniti dolor est illo labore
+                laborum libero magni molestias placeat possimus quia quibusdam ratione
+                recusandae unde, veniam!
+            </p>
+        </div>
+    </div>
+    <div class="col-md-8">
         <div class="card col-lg-10 col-md-10 col-sm-12 mx-auto my-5">
             <div class="card-header text-right text-uppercase">
                 register as <a href="{{ route('patient.register') }}">patient</a>
@@ -156,6 +169,16 @@
                                        placeholder="Age*"
                                        value="{{ old('age') }}"/>
                                 @error('age')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="file" name="photo" class="form-control @error('photo') is-invalid @enderror"
+                                       placeholder="photo*"
+                                       value="{{ old('photo') }}"/>
+                                @error('photo')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

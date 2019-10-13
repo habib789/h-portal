@@ -15,7 +15,7 @@ class departmentsController extends Controller
      */
     public function index()
     {
-        return view('backend.departments');
+        return view('backend.dept.departments');
     }
 
     /**
@@ -31,7 +31,7 @@ class departmentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -40,20 +40,20 @@ class departmentsController extends Controller
             'name' => 'required',
         ],
             [
-            'name.required' => 'Department name cannot be empty!',
-        ]
+                'name.required' => 'Department name cannot be empty!',
+            ]
 
-    );
+        );
         $inputs = [
             'name' => trim($request->input('name')),
             'slug' => Str::slug(trim($request->input('name'))),
         ];
-        try{
+        try {
             Department::create($inputs);
             session()->flash('type', 'success');
             session()->flash('message', 'successfully created a new department');
             return redirect()->route('departments.index');
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());
             return redirect()->back();
@@ -63,7 +63,7 @@ class departmentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,34 +74,52 @@ class departmentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $data         = [];
+        $data['dept'] = Department::find($id);
+        return view('backend.dept.deptEdit', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:departments,name,' . $id,
+        ]);
+
+        $inputs = Department::find($id);
+        try {
+            $inputs->update([
+                'name'   => trim($request->input('name')),
+                'slug'   => Str::slug(trim($request->input('name'))),
+                'active' => $request->input('status'),
+            ]);
+            session()->flash('type', 'success');
+            session()->flash('message', 'successfully Updated');
+            return redirect()->route('departments.index');
+        } catch (\Exception $e) {
+            session()->flash('type', 'danger');
+            session()->flash('message', $e->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $dept = Department::find($id);
+        $dept->delete();
+        session()->flash('type', 'danger');
+        session()->flash('message', 'successfully Deleted');
+        return redirect()->route('departments.index');
     }
 }

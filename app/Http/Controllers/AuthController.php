@@ -25,7 +25,7 @@ class AuthController extends Controller
             'email'                 => 'required|email|unique:users',
             'password'              => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
-            'phone'                 => 'required|string|min:6|max:10|unique:patients,phone',
+            'phone'                 => 'required|string|min:6|max:11|unique:patients,phone',
             'gender'                => 'required',
             'blood_group'           => 'required',
             'age'                   => 'required|string|min:1|max:3',
@@ -39,7 +39,7 @@ class AuthController extends Controller
             $user->save();
 
             $patient        = new Patient();
-            $request->phone = '+880' . $request->phone;
+            $request->phone = '+88' . $request->phone;
 //            dd($request->phone );
             $patient->user_id     = $user->id;
             $patient->first_name  = $request->first_name;
@@ -75,12 +75,13 @@ class AuthController extends Controller
             'email'                 => 'required|email|unique:users',
             'password'              => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
-            'phone'                 => 'required|string|min:6|max:10|unique:doctors,phone',
+            'phone'                 => 'required|string|min:6|max:11|unique:doctors,phone',
             'gender'                => 'required',
             'graduate'              => 'required',
             'experience'            => 'required',
             'degrees'               => 'required',
             'age'                   => 'required|string|min:1|max:3',
+            'photo'                 => 'required|image|max:1024',
         ]);
 
         try {
@@ -91,7 +92,7 @@ class AuthController extends Controller
             $user->save();
 
             $doctor         = new Doctor();
-            $request->phone = '+880' . $request->phone;
+            $request->phone = '+88' . $request->phone;
 //            dd($request->phone);
             $doctor->user_id       = $user->id;
             $doctor->department_id = $request->department;

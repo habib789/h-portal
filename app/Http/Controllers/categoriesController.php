@@ -15,7 +15,7 @@ class categoriesController extends Controller
      */
     public function index()
     {
-        return view('backend.categories');
+        return view('backend.category.categories');
     }
 
     /**
@@ -79,7 +79,9 @@ class categoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data         = [];
+        $data['cat'] = Category::find($id);
+        return view('backend.category.catEdit', $data);
     }
 
     /**
@@ -91,7 +93,25 @@ class categoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:categories,name,' . $id,
+        ]);
+
+        $inputs = Category::find($id);
+        try {
+            $inputs->update([
+                'name'   => trim($request->input('name')),
+                'slug'   => Str::slug(trim($request->input('name'))),
+                'active' => $request->input('status'),
+            ]);
+            session()->flash('type', 'success');
+            session()->flash('message', 'successfully Updated');
+            return redirect()->route('categories.index');
+        } catch (\Exception $e) {
+            session()->flash('type', 'danger');
+            session()->flash('message', $e->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**
@@ -102,6 +122,10 @@ class categoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cat = Category::find($id);
+        $cat->delete();
+        session()->flash('type', 'success');
+        session()->flash('message', 'successfully Deleted');
+        return redirect()->route('categories.index');
     }
 }

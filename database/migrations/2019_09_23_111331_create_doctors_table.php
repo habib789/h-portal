@@ -27,6 +27,7 @@ class CreateDoctorsTable extends Migration
             $table->string('experience',191);
             $table->string('degrees',191);
             $table->string('age',191);
+            $table->text('image');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments')->onUpdate('cascade')->onDelete('cascade');
