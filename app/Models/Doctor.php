@@ -13,4 +13,9 @@ class Doctor extends Model
     {
         return $this->belongsTo(Department::class);
     }
+
+    public function license()
+    {
+        return $this->hasOne(doclicense::class);
+    }
 }

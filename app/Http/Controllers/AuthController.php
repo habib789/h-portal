@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -81,7 +82,7 @@ class AuthController extends Controller
             'experience'            => 'required',
             'degrees'               => 'required',
             'age'                   => 'required|string|min:1|max:3',
-            'photo'                 => 'required|image|max:1024',
+            'photo'                 => 'required|max:10240',
         ]);
 
         try {
@@ -91,7 +92,13 @@ class AuthController extends Controller
             $user->role     = $request->role;
             $user->save();
 
-            $doctor         = new Doctor();
+            $doctor     = new Doctor();
+            $image      = $request->file('photo');
+            $image_file = uniqid('doc_', true) . Str::random(10) . '.' . $image->getClientOriginalExtension();
+//           dd($image_file);
+            if ($image->isValid()) {
+                $image->storeAs('images', $image_file);
+            }
             $request->phone = '+88' . $request->phone;
 //            dd($request->phone);
             $doctor->user_id       = $user->id;
@@ -104,6 +111,7 @@ class AuthController extends Controller
             $doctor->experience    = $request->experience;
             $doctor->degrees       = $request->degrees;
             $doctor->age           = $request->age;
+            $doctor->image         = $image_file;
             $doctor->save();
 
             session()->flash('type', 'success');

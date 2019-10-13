@@ -46,7 +46,7 @@ class ProductsController extends Controller
             'price'    => 'required',
             'quantity' => 'required',
             'type'     => 'required',
-            'photo'    => 'required|max:1024',
+            'photo'    => 'required|max:10240',
         ]);
 
         $image      = $request->file('photo');

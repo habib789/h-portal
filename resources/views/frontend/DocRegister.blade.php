@@ -25,7 +25,7 @@
                         {{ session('message') }}
                     </div>
                 @endif
-                <form action="{{ route('doctor.register') }}" method="post">
+                <form action="{{ route('doctor.register') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
