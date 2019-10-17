@@ -38,14 +38,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                     </li>
+                @elseif(auth()->user()->role == 'doctor')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('license.verify') }}">Doc Account</a>
+                    </li>
                 @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('myProfile') }}">My account</a>
                     </li>
                 @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                </li>
             @endauth
         </ul>
     </div>

@@ -39,16 +39,22 @@ Route::get('/cart/clear', 'CartController@ClearFromCart')->name('clear.cart');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', 'AuthController@logout')->name('logout');
 
+    Route::group(['middleware' => 'doctor'], function () {
+        Route::get('/doctor/verify/license', 'doctorsController@verify')->name('license.verify');
+        Route::put('/doctor/verify/{id}/license', 'doctorsController@verifyKey')->name('license.update');
+    });
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/account', 'AccountController@index')->name('myProfile');
+
         //Checkout
         Route::get('/checkout', 'CheckoutController@index')->name('checkout');
         Route::post('/checkout', 'CheckoutController@CheckoutProcess');
-//    order
+        //order
         Route::get('/account/myOrder', 'AccountController@showOrder')->name('myOrder');
         Route::get('/account/OrderDetails/{id}', 'AccountController@OrderDetails')->name('orderDetails');
         Route::get('/account/OrderDetails/{id}/invoice', 'AccountController@generatePdf')->name('order.pdf');
     });
+
     Route::group(['middleware' => 'admin'], function () {
         Route::get('/dashboard', 'DashboardController@showDashboard')->name('dashboard');
         Route::get('/dashboard/orderDetails/{id}/invoice', 'DashboardController@createPdf')->name('pdf.create');
@@ -56,5 +62,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/dashboard/orders', 'OrdersController');
         Route::resource('/dashboard/categories', 'categoriesController');
         Route::resource('/dashboard/products', 'ProductsController');
+        Route::resource('/dashboard/doctors', 'adminDoctorsController');
     });
 });

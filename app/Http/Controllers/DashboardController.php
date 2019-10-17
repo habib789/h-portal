@@ -6,6 +6,7 @@ use App\Models\Order;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
+
 class DashboardController extends Controller
 {
     public function showDashboard()
@@ -18,7 +19,7 @@ class DashboardController extends Controller
         $data             = [];
         $data['order']    = Order::findOrFail($id);
         $data['products'] = $data['order']->products;
-        $pdf = PDF::loadView('frontend.dashboard.pdf.orderdetails', $data);
+        $pdf = PDF::loadView('backend.orders.orDetails', $data);
         return $pdf->download('invoice.pdf');
 //        return view('backend.orders.orDetails', $data);
     }

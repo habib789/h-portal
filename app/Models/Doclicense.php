@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class doclicense extends Model
+class Doclicense extends Model
 {
     protected $guarded=[''];
     public $timestamps =false;

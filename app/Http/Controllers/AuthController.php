@@ -79,10 +79,11 @@ class AuthController extends Controller
             'phone'                 => 'required|string|min:6|max:11|unique:doctors,phone',
             'gender'                => 'required',
             'graduate'              => 'required',
+            'department'            => 'required',
             'experience'            => 'required',
             'degrees'               => 'required',
             'age'                   => 'required|string|min:1|max:3',
-            'photo'                 => 'required|max:10240',
+            'paper'                 => 'required|mimes:doc,docx,pdf|max:5129',
         ]);
 
         try {
@@ -93,11 +94,11 @@ class AuthController extends Controller
             $user->save();
 
             $doctor     = new Doctor();
-            $image      = $request->file('photo');
-            $image_file = uniqid('doc_', true) . Str::random(10) . '.' . $image->getClientOriginalExtension();
+            $paper      = $request->file('paper');
+            $paper_file = uniqid('doc_', true) . Str::random(10) . '.' . $paper->getClientOriginalExtension();
 //           dd($image_file);
-            if ($image->isValid()) {
-                $image->storeAs('images', $image_file);
+            if ($paper->isValid()) {
+                $paper->storeAs('docx', $paper_file);
             }
             $request->phone = '+88' . $request->phone;
 //            dd($request->phone);
@@ -111,7 +112,7 @@ class AuthController extends Controller
             $doctor->experience    = $request->experience;
             $doctor->degrees       = $request->degrees;
             $doctor->age           = $request->age;
-            $doctor->image         = $image_file;
+            $doctor->document      = $paper_file;
             $doctor->save();
 
             session()->flash('type', 'success');

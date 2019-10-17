@@ -18,4 +18,8 @@ class Doctor extends Model
     {
         return $this->hasOne(doclicense::class);
     }
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

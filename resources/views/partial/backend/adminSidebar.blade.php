@@ -37,11 +37,17 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
-                                ADD
+                                Lists View
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('doctors.index') }}" class="nav-link">
+                                    <i class="nav-icon far fa-circle text-info"></i>
+                                    <p>Doctors List</p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ route('departments.index') }}" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>

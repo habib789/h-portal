@@ -22,12 +22,14 @@ class CreateDoctorsTable extends Migration
             $table->string('phone',15)->unique();
             $table->text('address')->nullable();
             $table->string('license',191)->nullable();
+            $table->string('verify',191)->default('not-verified');
             $table->string('gender',191);
             $table->string('graduate',191);
             $table->string('experience',191);
             $table->string('degrees',191);
             $table->string('age',191);
-            $table->text('image');
+            $table->text('document');
+            $table->text('image')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments')->onUpdate('cascade')->onDelete('cascade');

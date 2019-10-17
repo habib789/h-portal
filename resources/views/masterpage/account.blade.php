@@ -28,7 +28,7 @@
     </section>
     <div class="row mt-3">
         <div class="col-md-3">
-            @include('partial.accountSidebar')
+            @includeWhen($sidebar,'partial.accountSidebar')
         </div>
         <div class="col-md-9">
             @yield('page')
