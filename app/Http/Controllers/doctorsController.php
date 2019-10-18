@@ -20,17 +20,18 @@ class doctorsController extends Controller
         $request->validate([
             'key' => 'required|max:9',
         ]);
-        $licenses = Doclicense::select(['status'])->get();
+        $licenses = Doclicense::select(['license_code','status'])->get();
+        $count = count($licenses);
         $inputs   = Doctor::find($id);
         if ($inputs->verify == 'not-verified' && $inputs->license == '') {
-            foreach ($licenses as $license) {
-                if ($license->status == 'not-in-use') {
+            for ($i = 0; $i < $count; $i++) {
+                if ($licenses[$i]->status == 'not-in-use' || $licenses[$i]->license_code !== $request->input('key')) {
                     try {
                         $inputs->update([
                             'license' => trim($request->input('key')),
                         ]);
                         session()->flash('type', 'success');
-                        session()->flash('message', 'You have just added a license key' . '<br>' . 'You will be notified withing 24 hours about successful verification');
+                        session()->flash('message', 'You have just added a license key. ./n. You will be notified withing 24 hours about successful verification');
                         return redirect()->back();
                     } catch (\Exception $e) {
                         session()->flash('type', 'danger');

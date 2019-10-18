@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Doctor extends Model
 {
@@ -14,12 +16,12 @@ class Doctor extends Model
         return $this->belongsTo(Department::class);
     }
 
-    public function license()
+    public function doclicense()
     {
         return $this->hasOne(doclicense::class);
     }
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

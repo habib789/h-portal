@@ -29,7 +29,7 @@ class CheckoutController extends Controller
         }
         $request->validate([
             'customer_name'    => 'required|string',
-            'phone'            => 'required|max:10',
+            'phone'            => 'required|min:11|max:11',
             'customer_address' => 'required|string|max:255',
         ]);
 
@@ -37,7 +37,7 @@ class CheckoutController extends Controller
         $order = Order::create([
             'user_id'          => auth()->user()->id,
             'customer_name'    => $request->input('customer_name'),
-            'phone'            => '+880' . $request->input('phone'),
+            'phone'            => '+88' . $request->input('phone'),
             'customer_address' => $request->input('customer_address'),
             'total_amount'     => $total,
         ]);
