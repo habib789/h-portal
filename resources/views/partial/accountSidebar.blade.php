@@ -19,8 +19,15 @@
                 </li>
             @elseif(auth()->user()->role == 'doctor')
                 <li class="nav-item">
+                    <a href="{{ route('account.information') }}" class="nav-link text-dark">Account Information</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-dark">Todays Appointments</a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link text-dark">My Patients</a>
                 </li>
+
             @endif
         </ul>
     </div>

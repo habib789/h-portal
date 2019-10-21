@@ -21,6 +21,8 @@ Route::get('/departments', 'HomeController@showDepartments')->name('department')
 Route::get('/shop', 'HomeController@showShop')->name('shop');
 Route::get('/category/{slug}', 'HomeController@catList')->name('catList');
 
+
+
 //authentication
 Route::get('/login', 'AuthController@loginForm')->name('auth.login');
 Route::post('/login', 'AuthController@LoginProcess');
@@ -36,16 +38,35 @@ Route::post('/cart/decrease', 'CartController@DecreaseFromCart')->name('decrease
 Route::post('/cart/remove', 'CartController@RemoveFromCart')->name('remove.cart');
 Route::get('/cart/clear', 'CartController@ClearFromCart')->name('clear.cart');
 
+
+//Authenticated User
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', 'AuthController@logout')->name('logout');
 
+
+
+//    Doctors
     Route::group(['middleware' => 'doctor'], function () {
         Route::get('/doctor/verify/license', 'doctorsController@verify')->name('license.verify');
         Route::put('/doctor/verify/{id}/license', 'doctorsController@verifyKey')->name('license.update');
+        Route::group(['middleware' => 'verified'], function () {
+            Route::get('/account', 'AccountController@index')->name('myProfile');
+            Route::get('/account/information', 'doctorsController@accountInformation')->name('account.information');
+            Route::get('/account/license/update', 'doctorsController@licenseUpdateForm')->name('licenseForm.update');
+            Route::put('/account/license/update', 'doctorsController@licenseUpdate')->name('licenseKey.update');
+            Route::get('/account/info/{id}/update', 'doctorsController@UpdateInfoShow')->name('info.show');
+            Route::put('/account/info/{id}/update', 'doctorsController@InfoUpdate')->name('info.update');
+        });
     });
+
+
+
+
+
+
+//    Verified User
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/account', 'AccountController@index')->name('myProfile');
-
         //Checkout
         Route::get('/checkout', 'CheckoutController@index')->name('checkout');
         Route::post('/checkout', 'CheckoutController@CheckoutProcess');
@@ -55,6 +76,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/account/OrderDetails/{id}/invoice', 'AccountController@generatePdf')->name('order.pdf');
     });
 
+
+
+
+
+
+
+
+
+//    Admin
     Route::group(['middleware' => 'admin'], function () {
         Route::get('/dashboard', 'DashboardController@showDashboard')->name('dashboard');
         Route::get('/dashboard/orderDetails/{id}/invoice', 'DashboardController@createPdf')->name('pdf.create');

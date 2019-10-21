@@ -43,4 +43,5 @@ class AccountController extends Controller
         return $pdf->download('invoice.pdf');
 //        return view('frontend.dashboard.pdf.orderdetails',$data);
     }
+
 }

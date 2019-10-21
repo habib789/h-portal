@@ -79,29 +79,35 @@ class adminDoctorsController extends Controller
         $request->validate([
             'license_key' => 'required',
         ]);
-        $licenses    = Doclicense::select(['id', 'license_code', 'status'])
+        $doc_license = $request->input('license_key');
+        $licenses    = Doclicense::select(['license_code', 'status'])
+            ->where('license_code', $doc_license)
             ->where('status', 'not-in-use')
             ->get();
-        $doc_license = $request->input('license_key');
+//        dd($licenses);
+        $count = count($licenses);
 
-        for ($i = 0; $i < 10; $i++) {
-            if ($doc_license == $licenses[$i]->license_code) {
+
+        for ($i = 0; $i < $count; $i++) {
+//            echo $i;
+            $match = $doc_license == $licenses[$i]->license_code;
+            if ($match && $match == true) {
                 $verify_doc = Doctor::find($id);
                 $verify_doc->update([
                     'verify' => 'verified',
                 ]);
-                Doclicense::where('license_code', $request->input('license_key'))
-                    ->where('status','not-in-use')
+
+                Doclicense::where('license_code', $doc_license)
+                    ->where('status', 'not-in-use')
                     ->update([
-                    'doctor_id' => $verify_doc->id,
-                    'status'    => 'in-use'
-                ]);
-                $user = Doctor::with('user:id,email')->where('verify', 'verified')->findOrFail($id);
-                event(new Registered($user));
+                        'doctor_id' => $verify_doc->id,
+                        'status'    => 'in-use'
+                    ]);
                 session()->flash('type', 'success');
                 session()->flash('message', 'License key matched');
                 return redirect()->back();
             } else {
+//                echo 'not matched';
                 session()->flash('type', 'danger');
                 session()->flash('message', 'License key dosent match');
                 return redirect()->back();

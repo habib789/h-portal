@@ -114,6 +114,7 @@ class AuthController extends Controller
             $doctor->age           = $request->age;
             $doctor->document      = $paper_file;
             $doctor->save();
+            event(new Registered($user));
 
             session()->flash('type', 'success');
             session()->flash('message', 'Successfully Registered');
