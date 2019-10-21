@@ -10,7 +10,7 @@
     @endif
     <div class="row">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card p-2">
                 <table class="table table-sm table-hover">
                     <tr>
                         <td class="font-weight-bold">Name</td>
@@ -37,9 +37,15 @@
                         <td class="font-weight-bold">Verification</td>
                         @if($doctor->verify=='not-verified')
                             <td><span class="badge bg-warning">{{ $doctor->verify }}</span></td>
-                        @else
+                        @elseif($doctor->verify=='verified')
                             <td>
-                            <span class="badge bg-success">
+                            <span class="badge bg-success text-light">
+                                {{ $doctor->verify }}
+                            </span>
+                            </td>
+                        @elseif($doctor->verify=='invalid-license')
+                            <td>
+                            <span class="badge bg-danger text-light">
                                 {{ $doctor->verify }}
                             </span>
                             </td>
@@ -64,7 +70,8 @@
                     <tr>
                         <td></td>
                         <td>
-                            <a href="{{ route('info.show', $doctor->id) }}" class="button btn btn-info btn-sm btn-block">Update Info</a>
+                            <a href="{{ route('info.show', $doctor->id) }}"
+                               class="button btn btn-info btn-sm btn-block">Update Info</a>
                         </td>
                     </tr>
                 </table>
@@ -95,9 +102,17 @@
                             <br>
                             <button class="button btn btn-info">Verify</button>
                         </form>
-                    @else
-                        <p>Your account is under investigation. We will notify you after successful verification</p>
+                    @elseif($doctor->verify == 'invalid-license')
+                        <p>Your have entered wrong license key or invalid license. To verify yourself, please enter the
+                            right license key in order to provide your services. </p>
                         <a class="text-info" href="{{ route('licenseForm.update') }}">Update License</a>
+                    @elseif($doctor->license !== null && $doctor->verify == 'invalid-license')
+                        <p>Your have entered wrong license key or invalid license. To verify yourself, please enter the
+                            right license key in order to provide your services. </p>
+                    @elseif($doctor->license !== null && $doctor->verify == 'not-verified')
+                        <p>Your account is under investigation. We will notify you after successful verification</p>
+                    @else
+                        <h6 class="card-title">Notice</h6>
                     @endif
                 </div>
             </div>

@@ -39,7 +39,7 @@
                                     <td>
                                         {{ $doctor->license }}
                                         <input type="hidden" name="license_key" VALUE="{{ $doctor->license }}" id="">
-                                        @if($doctor->verify == 'not-verified')
+                                        @if($doctor->verify == 'not-verified' || $doctor->verify == 'invalid-license')
                                             <button class="button btn btn-info btn-sm ml-3">Match</button>
                                         @endif
                                     </td>
@@ -53,10 +53,17 @@
                                 <td><span class="badge bg-warning">{{ $doctor->verify }}</span></td>
                             @else
                                 <td>
-                                    <span class="badge bg-success">
+                                    @if($doctor->verify=='verified')
+                                        <span class="badge bg-success">
                                         {{ $doctor->verify }}
                                     </span>
-                                    <small class="text-muted">at {{ $doctor->doclicense->updated_at->diffForHumans() }}</small>
+                                        <small
+                                            class="text-muted">at {{ $doctor->doclicense->updated_at->diffForHumans() }}</small>
+                                    @elseif($doctor->verify=='invalid-license')
+                                        <span class="badge bg-danger">
+                                        {{ $doctor->verify }}
+                                    </span>
+                                    @endif
                                 </td>
                             @endif
                         </tr>

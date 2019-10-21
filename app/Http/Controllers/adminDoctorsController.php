@@ -86,33 +86,49 @@ class adminDoctorsController extends Controller
             ->get();
 //        dd($licenses);
         $count = count($licenses);
-
-
-        for ($i = 0; $i < $count; $i++) {
+//        dd($count == 0);
+//        for ($i = 0; $i < $count; $i++) {
 //            echo $i;
-            $match = $doc_license == $licenses[$i]->license_code;
-            if ($match && $match == true) {
-                $verify_doc = Doctor::find($id);
-                $verify_doc->update([
-                    'verify' => 'verified',
-                ]);
+//        foreach ($licenses as $license) {
 
-                Doclicense::where('license_code', $doc_license)
-                    ->where('status', 'not-in-use')
-                    ->update([
-                        'doctor_id' => $verify_doc->id,
-                        'status'    => 'in-use'
+
+//            $match = ($doc_license == $license->license_code);
+//
+//            if ($match && $match == true) {
+                if ($count !== 0) {
+                    $verify_doc = Doctor::find($id);
+                    $verify_doc->update([
+                        'verify' => 'verified',
                     ]);
-                session()->flash('type', 'success');
-                session()->flash('message', 'License key matched');
-                return redirect()->back();
-            } else {
-//                echo 'not matched';
-                session()->flash('type', 'danger');
-                session()->flash('message', 'License key dosent match');
-                return redirect()->back();
-            }
-        }
+
+                    Doclicense::where('license_code', $doc_license)
+                        ->where('status', 'not-in-use')
+                        ->update([
+                            'doctor_id' => $verify_doc->id,
+                            'status'    => 'in-use',
+                        ]);
+                    session()->flash('type', 'success');
+                    session()->flash('message', 'License key matched');
+                    return redirect()->back();
+                } else {
+                    $verify_doc = Doctor::find($id);
+//                    dd($verify_doc);
+                    $verify_doc->where('license', $doc_license)
+//                        ->where('verify', 'not-verified')
+                        ->update([
+                            'license' => null,
+                            'verify'  => 'invalid-license',
+                        ]);
+                    session()->flash('type', 'danger');
+                    session()->flash('message', 'License key dosent match');
+                    return redirect()->back();
+                }
+//            } else {
+//                session()->flash('type', 'danger');
+//                session()->flash('message', 'License key dosent match');
+//                return redirect()->back();
+//            }
+//        }
 
     }
 

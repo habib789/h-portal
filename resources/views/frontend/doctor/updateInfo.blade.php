@@ -1,6 +1,6 @@
 @extends('masterpage.account')
 @section('title') Update info @stop
-@section('page')<h5 class="text-info font-weight-bold">Account Information</h5>@stop
+@section('page')Account Information@stop
 @section('bcumb') Update info @stop
 @section('content')
     @if(session()->has('message'))

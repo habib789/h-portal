@@ -1,7 +1,7 @@
 @extends('masterpage.account')
-@section('title') Account information @stop
-@section('page')<h5 class="text-info font-weight-bold">Account Information</h5>@stop
-@section('bcumb') Account information @stop
+@section('title') License Update @stop
+@section('page') License Update @stop
+@section('bcumb') License Update @stop
 @section('content')
     @if(session()->has('message'))
         <div class="alert alert-{{ session('type') }}">
@@ -12,8 +12,8 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    @if($doctor->license == 'pending' && $doctor->verify == 'not-verified')
-                        <h6 class="card-title">Please verify your license key</h6>
+                    @if($doctor->license == null && $doctor->verify == 'invalid-license')
+                        <h6 class="card-title">Please update your license key</h6>
                         {{--{{dd(auth()->user()->doctor->id)}}--}}
                         <form action="{{ route('licenseKey.update', auth()->user()->doctor->id) }}" method="post">
                             @csrf

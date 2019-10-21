@@ -36,6 +36,8 @@
                                         <span class="badge bg-success">Verified</span>
                                     @elseif($doctor->verify == 'not-verified')
                                         <span class="badge bg-warning">Not-verified</span>
+                                    @elseif($doctor->verify == 'invalid-license')
+                                        <span class="badge bg-danger">Invalid License</span>
                                     @endif
                                 </td>
                                 <td>

@@ -1,6 +1,6 @@
 @extends('masterpage.account')
 @section('title') Account @stop
-@section('page')<h5 class="text-info font-weight-bold">Dashboard</h5>@stop
+@section('page')Dashboard@stop
 @section('bcumb') Dashboard @stop
 @section('content')
     <div class="card">

@@ -31,7 +31,7 @@
             @includeWhen($sidebar,'partial.accountSidebar')
         </div>
         <div class="col-md-9">
-            @yield('page')
+            <h5 class="info font-weight-bold">@yield('page')</h5>
             @yield('content')
         </div>
     </div>

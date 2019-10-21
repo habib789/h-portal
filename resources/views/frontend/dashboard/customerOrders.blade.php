@@ -1,6 +1,6 @@
 @extends('masterpage.account')
 @section('title') My Order @stop
-@section('page')<h5 class="text-info font-weight-bold">MY ORDER</h5>@stop
+@section('page')MY ORDER@stop
 @section('bcumb') My Order @stop
 @section('content')
     <div class="card">

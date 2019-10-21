@@ -10181,3 +10181,7 @@ a .dept:hover {
   color: black;
   cursor: pointer;
 }
+
+h5 .info {
+  color: #0cb8b6;
+}

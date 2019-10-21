@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/account', 'AccountController@index')->name('myProfile');
             Route::get('/account/information', 'doctorsController@accountInformation')->name('account.information');
             Route::get('/account/license/update', 'doctorsController@licenseUpdateForm')->name('licenseForm.update');
-            Route::put('/account/license/update', 'doctorsController@licenseUpdate')->name('licenseKey.update');
+            Route::put('/account/license/{id}/update', 'doctorsController@licenseUpdate')->name('licenseKey.update');
             Route::get('/account/info/{id}/update', 'doctorsController@UpdateInfoShow')->name('info.show');
             Route::put('/account/info/{id}/update', 'doctorsController@InfoUpdate')->name('info.update');
         });
