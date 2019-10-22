@@ -65,6 +65,7 @@
 <script src="{{ asset('plugins/jquery-mapael/maps/world_countries.min.js')}}"></script>
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 <script src="{{ asset('js/dashboard2.js') }}"></script>
+@include('sweetalert::alert')
 
 </body>
 </html>

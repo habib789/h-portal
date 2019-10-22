@@ -110,7 +110,7 @@
                         <p>Your have entered wrong license key or invalid license. To verify yourself, please enter the
                             right license key in order to provide your services. </p>
                     @elseif($doctor->license !== null && $doctor->verify == 'not-verified')
-                        <p>Your account is under investigation. We will notify you after successful verification</p>
+                        <p>Your account is under investigation. You will be notified withing 24 hours about successful verification</p>
                     @else
                         <h6 class="card-title">Notice</h6>
                     @endif

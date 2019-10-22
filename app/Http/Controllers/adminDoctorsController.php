@@ -107,9 +107,9 @@ class adminDoctorsController extends Controller
                             'doctor_id' => $verify_doc->id,
                             'status'    => 'in-use',
                         ]);
-                    session()->flash('type', 'success');
-                    session()->flash('message', 'License key matched');
-                    return redirect()->back();
+//                    session()->flash('type', 'success');
+//                    session()->flash('message', 'License key matched');
+                    return redirect()->back()->with('success', 'License key matched');
                 } else {
                     $verify_doc = Doctor::find($id);
 //                    dd($verify_doc);
@@ -119,9 +119,9 @@ class adminDoctorsController extends Controller
                             'license' => null,
                             'verify'  => 'invalid-license',
                         ]);
-                    session()->flash('type', 'danger');
-                    session()->flash('message', 'License key dosent match');
-                    return redirect()->back();
+//                    session()->flash('type', 'danger');
+//                    session()->flash('message', 'License key dosent match');
+                    return redirect()->back()->with('error', 'License key dosent match');
                 }
 //            } else {
 //                session()->flash('type', 'danger');
