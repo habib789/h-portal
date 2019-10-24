@@ -11,7 +11,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('info.update', $docInfo->id) }}" method="post">
+            <form action="{{ route('info.update', $patient->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -22,7 +22,7 @@
                             <input type="text"
                                    class="form-control @error('first_name') is-invalid @enderror"
                                    name="first_name" id="first_name"
-                                   value="{{ $docInfo->first_name }}"/>
+                                   value="{{ $patient->first_name }}"/>
                             @error('first_name')
                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('last_name') is-invalid @enderror"
                                    name="last_name" id="last_name"
-                                   value="{{$docInfo->last_name }}"/>
+                                   value="{{$patient->last_name }}"/>
                             @error('last_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -86,7 +86,7 @@
                                 </div>
                                 <input type="text" name="phone"
                                        class="form-control @error('phone') is-invalid @enderror"
-                                       value="{{ $docInfo->phone }}" id="phone">
+                                       value="{{ $patient->phone }}" id="phone">
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -94,105 +94,69 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="address" class="font-weight-bold">Address</label><br>
-                            <textarea name="address" class="form-control @error('address') is-invalid @enderror" id="" cols="30" rows="4">
-                                {{ $docInfo->address }}
-                            </textarea>
-                            @error('address')
+                            <label class="font-weight-bold">Gender <span
+                                    class="text-danger">*</span></label>
+                            <select name="gender"
+                                    class="form-control @error('gender') is-invalid @enderror">
+                                <option class="hidden" selected disabled>Select gender
+                                </option>
+
+                                <option class="text-capitalize"
+                                        value="male" @if($patient->gender=='male') selected @endif>Male
+                                </option>
+                                <option class="text-capitalize"
+                                        value="female" @if($patient->gender=='female') selected @endif>
+                                    Female
+                                </option>
+
+                            </select>
+                            @error('gender')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                             @enderror
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <label class="radio inline">
-                                    <input type="radio" name="gender" value="male" @if($docInfo->gender) checked @endif>
-                                    <span> Male </span>
-                                </label>
-                                <label class="radio inline">
-                                    <input type="radio" name="gender" value="female" @if($docInfo->gender) checked @endif>
-                                    <span>Female </span>
-                                </label>
-                            </div>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="graduate" class="font-weight-bold">Graduate From <span
+                            <label for="blood_group" class="font-weight-bold">Blood Group<span
                                     class="text-danger">*</span></label>
-                            <input type="text" name="graduate"
-                                   class="form-control @error('graduate') is-invalid @enderror"
+                            <input type="text" name="blood_group"
+                                   class="form-control @error('blood_group') is-invalid @enderror"
                                    id="graduate"
-                                   value="{{ $docInfo->graduate }}"/>
-                            @error('graduate')
+                                   value="{{ $patient->blood_group }}"/>
+                            @error('blood_group')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label class="font-weight-bold">Select a department <span
-                                    class="text-danger">*</span></label>
-                            <select name="department"
-                                    class="form-control @error('department') is-invalid @enderror">
-                                <option class="hidden" selected disabled>Select department
-                                </option>
-                                @foreach($departments as $department)
-                                    <option class="text-capitalize"
-                                            value="{{ $department->id }} " @if($docInfo->department) selected @endif>{{
-                                        $department->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('department')
-                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label class="font-weight-bold">Enter your experience <span
-                                    class="text-danger">*</span></label>
-                            <select name="experience"
-                                    class="form-control @error('experience') is-invalid @enderror">
-                                <option class="hidden" selected disabled>Your experience level
-                                </option>
-                                <option value="2" @if($docInfo->experience) selected @endif>More than 2 years</option>
-                                <option value="5">More than 5 years</option>
-                                <option value="10">More than 10 years</option>
-                            </select>
-                            @error('experience')
-                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="degrees" class="font-weight-bold">Degrees <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" name="degrees"
-                                   class="form-control @error('degrees') is-invalid @enderror"
-                                   id="degrees"
-                                   value="{{ $docInfo->degrees }}"/>
-                            @error('degrees')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
+
                         <div class="form-group">
                             <label for="age" class="font-weight-bold">Date of birth <span
                                     class="text-danger">*</span></label>
                             <input type="text" name="age" class="form-control @error('age') is-invalid @enderror"
                                    id="age"
-                                   value="{{ $docInfo->age }}"/>
+                                   value="{{ $patient->age }}"/>
                             @error('age')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="font-weight-bold">Address</label><br>
+                            <textarea name="address" class="form-control @error('address') is-invalid @enderror" id=""
+                                      cols="30" rows="4">
+                                {{ $patient->address }}
+                            </textarea>
+                            @error('address')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                         <button class="button btn btn-info">Update</button>

@@ -20,6 +20,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/departments', 'HomeController@showDepartments')->name('department');
 Route::get('/shop', 'HomeController@showShop')->name('shop');
 Route::get('/category/{slug}', 'HomeController@catList')->name('catList');
+Route::get('/departments-doctors/{slug}', 'HomeController@DeptDocList')->name('deptDoctor.show');
 
 
 
@@ -51,7 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/doctor/verify/{id}/license', 'doctorsController@verifyKey')->name('license.update');
         Route::group(['middleware' => 'verified'], function () {
             Route::get('/account', 'AccountController@index')->name('myProfile');
-            Route::get('/account/information', 'doctorsController@accountInformation')->name('account.information');
+            Route::get('/account/information', 'doctorsController@accountInformation')->name('docAccount.information');
             Route::get('/account/license/update', 'doctorsController@licenseUpdateForm')->name('licenseForm.update');
             Route::put('/account/license/{id}/update', 'doctorsController@licenseUpdate')->name('licenseKey.update');
             Route::get('/account/info/{id}/update', 'doctorsController@UpdateInfoShow')->name('info.show');
@@ -67,6 +68,9 @@ Route::group(['middleware' => 'auth'], function () {
 //    Verified User
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/account', 'AccountController@index')->name('myProfile');
+        Route::get('/account/information', 'AccountController@PatientAccountInformation')->name('account.information');
+        Route::get('/account/info/{id}/update', 'AccountController@UpdateInfoShow')->name('info.show');
+        Route::put('/account/info/{id}/update', 'AccountController@InfoUpdate')->name('info.update');
         //Checkout
         Route::get('/checkout', 'CheckoutController@index')->name('checkout');
         Route::post('/checkout', 'CheckoutController@CheckoutProcess');

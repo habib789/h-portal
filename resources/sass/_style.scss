@@ -213,7 +213,7 @@ textarea.form-control {
 }
 
 .bg-overly {
-    background-color: rgba(52, 73, 94, .4);
+    background-color: rgba(52, 73, 94, .6);
     height: 100%;
 }
 
@@ -238,10 +238,11 @@ textarea.form-control {
 /*Button*/
 .bg-content a {
     text-decoration: none;
-    color: #c8d6e5;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px 25px;
-    border-radius: 50%;
+}
+.bg-content a:hover {
+    background-color: #0f6674;
+    color: white;
+    border: 1px solid #0cb8b6;
 }
 
 .bg-content a:hover {
@@ -390,13 +391,6 @@ footer .form-control:focus {
     color: #38A1F3;
 }
 
-.card-header {
-    position: relative;
-    background: #2980b9; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #2c3e50, #2980b9); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #2c3e50, #2980b9);
-    color: whitesmoke;
-}
 
 .contact li {
     line-height: 2;
@@ -473,6 +467,6 @@ a .dept:hover {
     cursor: pointer;
 }
 
-h5 .info{
+h5.info{
     color: #0cb8b6;
 }

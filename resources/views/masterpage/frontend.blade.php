@@ -13,10 +13,7 @@
 @yield('cover')
 {{--main-container--}}
 <div class="container">
-    @yield('heading')
-    <div class="row">
-        @yield('content')
-    </div>
+    @yield('content')
 </div>
 
 {{--<div class="container my-5">--}}

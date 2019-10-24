@@ -9,7 +9,10 @@
             </li>
             @if(auth()->user()->role == 'patient')
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">Account Information</a>
+                    <a href="{{ route('account.information') }}" class="nav-link text-dark">Account Information</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-dark">My Appointments</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('myOrder') }}" class="nav-link text-dark">My Orders</a>
@@ -19,13 +22,16 @@
                 </li>
             @elseif(auth()->user()->role == 'doctor')
                 <li class="nav-item">
-                    <a href="{{ route('account.information') }}" class="nav-link text-dark">Account Information</a>
+                    <a href="{{ route('docAccount.information') }}" class="nav-link text-dark">Account Information</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">Todays Appointments</a>
+                    <a href="#" class="nav-link text-dark">Today's Appointments</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link text-dark">My Patients</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-dark">Working Schedule</a>
                 </li>
 
             @endif

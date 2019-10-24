@@ -1,6 +1,6 @@
 @extends('masterpage.account')
 @section('title') My Order @stop
-@section('page')MY ORDER@stop
+@section('page') MY ORDER @stop
 @section('bcumb') My Order @stop
 @section('content')
     <div class="card">
