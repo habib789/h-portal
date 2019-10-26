@@ -104,9 +104,9 @@ class categoriesController extends Controller
                 'slug'   => Str::slug(trim($request->input('name'))),
                 'active' => $request->input('status'),
             ]);
-            session()->flash('type', 'success');
-            session()->flash('message', 'successfully Updated');
-            return redirect()->route('categories.index');
+//            session()->flash('type', 'success');
+//            session()->flash('message', 'successfully Updated');
+            return redirect()->route('categories.index')->with('success', 'Successfully Updated');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());

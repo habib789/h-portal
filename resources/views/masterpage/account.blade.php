@@ -5,6 +5,7 @@
     <title>@yield('title', 'Health Portal')</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @yield('css')
 </head>
 <body>
 
@@ -122,6 +123,7 @@
         });
     });
 </script>
+@yield('js')
 @include('sweetalert::alert')
 
 </body>

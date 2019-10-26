@@ -1,6 +1,6 @@
 @extends('masterpage.account')
 @section('title') Account information @stop
-@section('page')<h5 class="text-info font-weight-bold">Account Information</h5>@stop
+@section('page') Account Information @stop
 @section('bcumb') Account information @stop
 @section('content')
     @if(session()->has('message'))
@@ -20,12 +20,14 @@
                         <td class="font-weight-bold">Department</td>
                         <td>{{ $doctor->department->name }}</td>
                     </tr>
+
                     @if($doctor->address !== null)
                         <tr>
                             <td class="font-weight-bold">Address</td>
                             <td>{{ $doctor->address }}</td>
                         </tr>
                     @endif
+
                     @if($doctor->license !== null)
                         <tr>
                             <td class="font-weight-bold">License Key</td>
@@ -43,7 +45,7 @@
                                 {{ $doctor->verify }}
                             </span>
                             </td>
-                        @elseif($doctor->verify=='invalid-license')
+                        @elseif($doctor->verify == 'invalid-license')
                             <td>
                             <span class="badge bg-danger text-light">
                                 {{ $doctor->verify }}
@@ -110,7 +112,8 @@
                         <p>Your have entered wrong license key or invalid license. To verify yourself, please enter the
                             right license key in order to provide your services. </p>
                     @elseif($doctor->license !== null && $doctor->verify == 'not-verified')
-                        <p>Your account is under investigation. You will be notified withing 24 hours about successful verification</p>
+                        <p>Your account is under investigation. You will be notified withing 24 hours about successful
+                            verification</p>
                     @else
                         <h6 class="card-title">Notice</h6>
                     @endif

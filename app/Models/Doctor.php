@@ -24,4 +24,7 @@ class Doctor extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function timeSlots(){
+        return $this->hasMany(TimeSlot::class);
+    }
 }

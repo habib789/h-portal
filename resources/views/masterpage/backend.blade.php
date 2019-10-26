@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -65,6 +66,7 @@
 <script src="{{ asset('plugins/jquery-mapael/maps/world_countries.min.js')}}"></script>
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 <script src="{{ asset('js/dashboard2.js') }}"></script>
+@yield('js')
 @include('sweetalert::alert')
 
 </body>

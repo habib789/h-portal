@@ -52,11 +52,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/doctor/verify/{id}/license', 'doctorsController@verifyKey')->name('license.update');
         Route::group(['middleware' => 'verified'], function () {
             Route::get('/account', 'AccountController@index')->name('myProfile');
-            Route::get('/account/information', 'doctorsController@accountInformation')->name('docAccount.information');
-            Route::get('/account/license/update', 'doctorsController@licenseUpdateForm')->name('licenseForm.update');
-            Route::put('/account/license/{id}/update', 'doctorsController@licenseUpdate')->name('licenseKey.update');
-            Route::get('/account/info/{id}/update', 'doctorsController@UpdateInfoShow')->name('info.show');
-            Route::put('/account/info/{id}/update', 'doctorsController@InfoUpdate')->name('info.update');
+            Route::get('/account/doctor/information', 'doctorsController@accountInformation')->name('docAccount.information');
+            Route::get('/account/doctor/license/update', 'doctorsController@licenseUpdateForm')->name('licenseForm.update');
+            Route::put('/account/doctor/license/{id}/update', 'doctorsController@licenseUpdate')->name('licenseKey.update');
+            Route::get('/account/doctor/info/{id}/update', 'doctorsController@UpdateInfoShow')->name('info.show');
+            Route::put('/account/doctor/info/{id}/update', 'doctorsController@InfoUpdate')->name('info.update');
+            Route::get('/account/doctor/working-hours', 'doctorsController@shoeWorkingHours')->name('hours.show');
+            Route::post('/account/doctor/working-hours', 'doctorsController@SetHours');
         });
     });
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Days;
 use App\Models\Doclicense;
 use App\Models\Doctor;
+use App\Models\TimeSlot;
 use Illuminate\Http\Request;
 
 class doctorsController extends Controller
@@ -154,4 +156,48 @@ class doctorsController extends Controller
             return redirect()->back();
         }
     }
+
+    public function shoeWorkingHours()
+    {
+        $data            = [];
+        $data['sidebar'] = true;
+        $data['days']    = Days::get();
+        $data['slots']   = TimeSlot::with('day')->where('doctor_id', auth()->user()->doctor->id)->get();
+        return view('frontend.doctor.workingHours', $data);
+    }
+
+    public function SetHours(Request $request)
+    {
+        $request->validate([
+            'days'       => 'required',
+            'start_time' => 'required',
+            'end_time'   => 'required',
+        ]);
+        $dayId = $request->input('days');
+        $time  = TimeSlot::where('doctor_id', auth()->user()->doctor->id)
+            ->where('day_id', $dayId)
+            ->select('day_id')
+            ->get();
+        $count = count($time);
+//        dd($count);
+//        dd(boolval($time == $dayId));
+        if ($count > 0) {
+            TimeSlot::where('day_id', $dayId)
+                ->where('doctor_id', auth()->user()->doctor->id)
+                ->update([
+                'start_time' => $request->input('start_time'),
+                'end_time'   => $request->input('end_time'),
+            ]);
+            return redirect()->route('hours.show')->with('info', 'Schedule updated');
+        } else {
+            TimeSlot::create([
+                'doctor_id'  => auth()->user()->doctor->id,
+                'day_id'     => $request->input('days'),
+                'start_time' => trim($request->input('start_time')),
+                'end_time'   => trim($request->input('end_time')),
+            ]);
+            return redirect()->route('hours.show')->with('success', 'Added new schedule');
+        }
+    }
+
 }

@@ -20,7 +20,7 @@ class Controller extends BaseController
         $departments = Department::select(['id', 'name', 'slug', 'active'])->where('active', 1)->get();
         View::share('departments', $departments);
 
-        $categories = Category::select(['id', 'name', 'slug', 'active'])->get();
+        $categories = Category::select(['id', 'name', 'slug', 'active'])->where('active', 1)->get();
         View::share('categories', $categories);
     }
 

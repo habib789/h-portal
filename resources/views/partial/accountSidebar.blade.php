@@ -20,6 +20,7 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link text-dark">My Reports</a>
                 </li>
+
             @elseif(auth()->user()->role == 'doctor')
                 <li class="nav-item">
                     <a href="{{ route('docAccount.information') }}" class="nav-link text-dark">Account Information</a>
@@ -31,7 +32,7 @@
                     <a href="#" class="nav-link text-dark">My Patients</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">Working Schedule</a>
+                    <a href="{{ route('hours.show') }}" class="nav-link text-dark">Add working hours</a>
                 </li>
 
             @endif
