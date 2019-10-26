@@ -21,6 +21,7 @@ Route::get('/departments', 'HomeController@showDepartments')->name('department')
 Route::get('/shop', 'HomeController@showShop')->name('shop');
 Route::get('/category/{slug}', 'HomeController@catList')->name('catList');
 Route::get('/departments-doctors/{slug}', 'HomeController@DeptDocList')->name('deptDoctor.show');
+Route::get('/departments-doctors/profile/{id}', 'HomeController@DocProfile')->name('DocProfile.show');
 
 
 
@@ -52,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/doctor/verify/{id}/license', 'doctorsController@verifyKey')->name('license.update');
         Route::group(['middleware' => 'verified'], function () {
             Route::get('/account', 'AccountController@index')->name('myProfile');
-            Route::get('/account/doctor/information', 'doctorsController@accountInformation')->name('docAccount.information');
+            Route::get('/account/doctor/information', 'doctorsController@DocAccountInformation')->name('docAccount.information');
             Route::get('/account/doctor/license/update', 'doctorsController@licenseUpdateForm')->name('licenseForm.update');
             Route::put('/account/doctor/license/{id}/update', 'doctorsController@licenseUpdate')->name('licenseKey.update');
             Route::get('/account/doctor/info/{id}/update', 'doctorsController@UpdateInfoShow')->name('info.show');
@@ -70,9 +71,9 @@ Route::group(['middleware' => 'auth'], function () {
 //    Verified User
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/account', 'AccountController@index')->name('myProfile');
-        Route::get('/account/information', 'AccountController@PatientAccountInformation')->name('account.information');
-        Route::get('/account/info/{id}/update', 'AccountController@UpdateInfoShow')->name('info.show');
-        Route::put('/account/info/{id}/update', 'AccountController@InfoUpdate')->name('info.update');
+        Route::get('/account/patient/information', 'AccountController@PatientAccountInformation')->name('account.information');
+        Route::get('/account/info/{id}/update', 'AccountController@UserUpdateInfoShow')->name('UserInfo.show');
+        Route::put('/account/info/{id}/update', 'AccountController@UserInfoUpdate')->name('UserInfo.update');
         //Checkout
         Route::get('/checkout', 'CheckoutController@index')->name('checkout');
         Route::post('/checkout', 'CheckoutController@CheckoutProcess');

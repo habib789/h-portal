@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Days;
 use App\Models\Department;
 use App\Models\Doctor;
 use App\Models\Product;
+use App\Models\TimeSlot;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -51,7 +53,7 @@ class HomeController extends Controller
 
     public function DeptDocList($slug)
     {
-        $data                = [];
+        $data          = [];
         $data['depts'] = Department::with(['doctors' => function ($query) {
             $query->where('verify', 'verified');
         }])
@@ -62,5 +64,14 @@ class HomeController extends Controller
         $data['doctors'] = $data['depts']->doctors;
 //        dd($data['doctors']);
         return view('frontend.department.deptDocList', $data);
+    }
+
+    public function DocProfile($id)
+    {
+        $data           = [];
+        $data['doctor'] = Doctor::with('department', 'timeSlots')->findOrFail($id);
+        $data['days']   = Days::get();
+        $data['slots']  = TimeSlot::with('day')->where('doctor_id', $id)->get();
+        return view('frontend.department.docProfile', $data);
     }
 }

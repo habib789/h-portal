@@ -53,7 +53,7 @@ class AccountController extends Controller
         return view('frontend.patient.info', $data);
     }
 
-    public function UpdateInfoShow($id)
+    public function UserUpdateInfoShow($id)
     {
         $data            = [];
         $data['sidebar'] = true;
@@ -61,7 +61,7 @@ class AccountController extends Controller
         return view('frontend.patient.infoUpdate', $data);
     }
 
-    public function InfoUpdate(Request $request, $id)
+    public function UserInfoUpdate(Request $request, $id)
     {
         $request->validate([
             'first_name'  => 'required',

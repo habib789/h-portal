@@ -42,7 +42,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <a href="{{ route('info.update', auth()->user()->patient->id) }}"
+                            <a href="{{ route('UserInfo.update', auth()->user()->patient->id) }}"
                                class="button btn btn-info btn-sm btn-block">Update Info</a>
                         </td>
                     </tr>

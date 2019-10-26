@@ -104,7 +104,7 @@
                             <br>
                             <button class="button btn btn-info">Verify</button>
                         </form>
-                    @elseif($doctor->verify == 'invalid-license')
+                    @elseif($doctor->verify == 'invalid-license' && $doctor->license == null)
                         <p>Your have entered wrong license key or invalid license. To verify yourself, please enter the
                             right license key in order to provide your services. </p>
                         <a class="text-info" href="{{ route('licenseForm.update') }}">Update License</a>

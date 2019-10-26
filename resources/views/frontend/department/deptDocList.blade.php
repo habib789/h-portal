@@ -15,7 +15,7 @@
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch mt-5">
                 <div class="card bg-light">
                     <div class="card-header text-muted border-bottom-0">
-                        Digital Strategist
+                        Doctor Profile
                     </div>
                     <div class="card-body pt-0">
                         <div class="row">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-right">
-                            <a href="#" class="button btn btn-sm btn-info">
+                            <a href="" class="button btn btn-sm btn-info">
                                 <i class="fas fa-user"></i> View Profile
                             </a>
                         </div>

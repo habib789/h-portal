@@ -114,7 +114,7 @@ class adminDoctorsController extends Controller
                     $verify_doc = Doctor::find($id);
 //                    dd($verify_doc);
                     $verify_doc->where('license', $doc_license)
-//                        ->where('verify', 'not-verified')
+                        ->where('id', $id)
                         ->update([
                             'license' => null,
                             'verify'  => 'invalid-license',

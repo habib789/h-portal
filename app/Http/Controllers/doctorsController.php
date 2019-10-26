@@ -57,7 +57,7 @@ class doctorsController extends Controller
         }
     }
 
-    public function accountInformation()
+    public function DocAccountInformation()
     {
         $data            = [];
         $data['sidebar'] = true;
@@ -127,14 +127,14 @@ class doctorsController extends Controller
         $inputs   = Doctor::find($id);
         if ($inputs->verify == 'invalid-license' && $inputs->license == '') {
             for ($i = 0; $i <= $count; $i++) {
-                if ($licenses[$i]->status == 'not-in-use' && $licenses[$i]->license_code !== $request->input('key')) {
+                if ($licenses[$i]->status == 'not-in-use' || $licenses[$i]->license_code !== $request->input('key')) {
                     try {
                         $inputs->update([
                             'license' => trim($request->input('key')),
                         ]);
 //                        session()->flash('type', 'success');
 //                        session()->flash('message', 'You have just added a new license key.');
-                        return redirect()->route('account.information')->with('error', 'This license key is used by another user');
+                        return redirect()->route('docAccount.information')->with('success', 'You have just added a new license key');
                     } catch (\Exception $e) {
                         session()->flash('type', 'danger');
                         session()->flash('message', $e->getMessage());
