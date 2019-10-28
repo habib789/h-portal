@@ -179,22 +179,22 @@ class doctorsController extends Controller
             ->select('day_id')
             ->get();
         $count = count($time);
-//        dd($count);
-//        dd(boolval($time == $dayId));
+
+//        $start_time=
         if ($count > 0) {
             TimeSlot::where('day_id', $dayId)
                 ->where('doctor_id', auth()->user()->doctor->id)
                 ->update([
-                'start_time' => $request->input('start_time'),
-                'end_time'   => $request->input('end_time'),
+                'start_time' => strtotime(trim($request->input('start_time'))),
+                'end_time'   => strtotime(trim($request->input('end_time'))),
             ]);
             return redirect()->route('hours.show')->with('info', 'Schedule updated');
         } else {
             TimeSlot::create([
                 'doctor_id'  => auth()->user()->doctor->id,
                 'day_id'     => $request->input('days'),
-                'start_time' => trim($request->input('start_time')),
-                'end_time'   => trim($request->input('end_time')),
+                'start_time' => strtotime(trim($request->input('start_time'))),
+                'end_time'   => strtotime(trim($request->input('end_time'))),
             ]);
             return redirect()->route('hours.show')->with('success', 'Added new schedule');
         }

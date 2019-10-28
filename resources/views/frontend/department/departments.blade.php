@@ -15,12 +15,12 @@
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch mt-5">
                 <div class="card bg-light">
                     <div class="card-header text-muted border-bottom-0">
-                        Digital Strategist
+                        Doctor Profile
                     </div>
                     <div class="card-body pt-0">
                         <div class="row">
                             <div class="col-7">
-                                <h2 class="lead"><b>{{ $doctor->first_name.' '. $doctor->last_name }}</b></h2>
+                                <h2 class="lead"><strong>Dr. {{ $doctor->first_name.' '. $doctor->last_name }}</strong></h2>
                                 <p class="text-muted text-sm"><b>Department: </b> {{ $doctor->department->name }} </p>
                                 <p class="text-muted text-sm"><b>Experiences: </b> {{ $doctor->experience }} years of
                                     experiences</p>

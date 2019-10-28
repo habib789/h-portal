@@ -70,14 +70,20 @@
                     <h5><b>Working Schedule</b></h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-sm table-hover">
-                        @foreach($slots as $slot)
-                            <tr>
-                                <td class="font-weight-bold text-uppercase">{{ $slot->day->day_name }}</td>
-                                <td>{{ $slot->start_time.' To '.$slot->end_time }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
+                    @if(count($slots) > 0)
+                        <table class="table table-sm table-hover">
+                            @foreach($slots as $slot)
+                                <tr>
+                                    <td class="font-weight-bold text-uppercase">{{ $slot->day->day_name }}</td>
+                                    <td>{{ date('h:i A',$slot->start_time).' To '.date('h:i A',$slot->end_time) }}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    @else
+                        <div class="alert alert-info">
+                            Currently you dont set any working schedule. Please add your schedule and let patient allow to reach you
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -91,7 +97,7 @@
     <script>
         $(document).ready(function () {
             $('#timepick .time').timepicker({
-                'timeFormat': 'h:i:s',
+                'timeFormat': 'h:i A',
             });
         });
     </script>

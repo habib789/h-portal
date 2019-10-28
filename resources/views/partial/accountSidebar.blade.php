@@ -12,7 +12,7 @@
                     <a href="{{ route('account.information') }}" class="nav-link text-dark">Account Information</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">My Appointments</a>
+                    <a href="{{ route('myAppointments') }}" class="nav-link text-dark">My Appointments</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('myOrder') }}" class="nav-link text-dark">My Orders</a>

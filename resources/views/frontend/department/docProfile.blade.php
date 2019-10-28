@@ -2,7 +2,7 @@
 
 @section('cover')
     <div class="context">
-        <h1 class="font-weight-bold">Departments</h1>
+        <h1 class="font-weight-bold">Doctor Profile</h1>
     </div>
 @stop
 
@@ -77,20 +77,28 @@
                             <h5 class="text-uppercase"><b>Working Hours</b></h5>
                         </div>
                         <div class="card-body">
-                            <table class="table table-sm table-hover">
-                                @foreach($slots as $slot)
-                                    <tr>
-                                        <td class="font-weight-bold text-uppercase">{{ $slot->day->day_name }}</td>
-                                        <td>{{ $slot->start_time.' To '.$slot->end_time }}</td>
-                                        <td>
-                                            <button class="button btn btn-info btn-sm">
-                                                BOOK
-                                                <i class="far fa-clock"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </table>
+                            @if(count($slots)>0)
+                                <table class="table table-sm table-hover">
+                                    @foreach($slots as $slot)
+                                        <tr>
+                                            <td class="font-weight-bold text-uppercase">{{ $slot->day->day_name }}</td>
+                                            <td>{{ date('h:i A', $slot->start_time).' To '.date('h:i A', $slot->end_time) }}</td>
+                                            <td>
+                                                {{--                                            {{ dd($slot->id) }}--}}
+                                                <a href="{{ route('appointment', $slot->id) }}"
+                                                   class="button btn btn-info btn-sm">
+                                                    BOOK
+                                                    <i class="far fa-clock"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            @else
+                                <div class="alert alert-info">
+                                    Currently the doctor dont have any working schedule
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -47,7 +47,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-right">
-                            <a href="" class="button btn btn-sm btn-info">
+                            <a href="{{ route('DocProfile.show', $doctor->id) }}" class="button btn btn-sm btn-info">
                                 <i class="fas fa-user"></i> View Profile
                             </a>
                         </div>
@@ -58,5 +58,3 @@
     </div>
 
 @stop
-
-

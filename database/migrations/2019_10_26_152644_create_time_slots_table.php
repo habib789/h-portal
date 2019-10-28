@@ -17,8 +17,8 @@ class CreateTimeSlotsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('day_id');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->integer('start_time');
+            $table->integer('end_time');
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('day_id')->references('id')->on('days')->onDelete('cascade')->onUpdate('cascade');
         });

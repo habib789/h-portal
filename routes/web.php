@@ -24,7 +24,6 @@ Route::get('/departments-doctors/{slug}', 'HomeController@DeptDocList')->name('d
 Route::get('/departments-doctors/profile/{id}', 'HomeController@DocProfile')->name('DocProfile.show');
 
 
-
 //authentication
 Route::get('/login', 'AuthController@loginForm')->name('auth.login');
 Route::post('/login', 'AuthController@LoginProcess');
@@ -46,7 +45,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', 'AuthController@logout')->name('logout');
 
 
-
 //    Doctors
     Route::group(['middleware' => 'doctor'], function () {
         Route::get('/doctor/verify/license', 'doctorsController@verify')->name('license.verify');
@@ -64,16 +62,20 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-
-
-
-
 //    Verified User
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/account', 'AccountController@index')->name('myProfile');
         Route::get('/account/patient/information', 'AccountController@PatientAccountInformation')->name('account.information');
         Route::get('/account/info/{id}/update', 'AccountController@UserUpdateInfoShow')->name('UserInfo.show');
         Route::put('/account/info/{id}/update', 'AccountController@UserInfoUpdate')->name('UserInfo.update');
+
+
+        //Appointments
+        Route::get('/doctor-appointment/{id}','AppointmentController@showAppointment')->name('appointment');
+        Route::post('/doctor-appointment/{id}','AppointmentController@appointmentStore');
+        Route::get('/account/appointment-info','AppointmentController@MyAppointments')->name('myAppointments');
+
+
         //Checkout
         Route::get('/checkout', 'CheckoutController@index')->name('checkout');
         Route::post('/checkout', 'CheckoutController@CheckoutProcess');
@@ -82,13 +84,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/account/OrderDetails/{id}', 'AccountController@OrderDetails')->name('orderDetails');
         Route::get('/account/OrderDetails/{id}/invoice', 'AccountController@generatePdf')->name('order.pdf');
     });
-
-
-
-
-
-
-
 
 
 //    Admin
