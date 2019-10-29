@@ -1,4 +1,7 @@
 @extends('masterpage.frontend')
+{{--@section('css')--}}
+{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
+{{--@stop--}}
 
 @section('cover')
     <div class="context">
@@ -8,36 +11,38 @@
 
 
 @section('content')
-    <div class="col-md-2 mt-5">
-        @include('partial.category')
-    </div>
-    <div class="col-md-7 col-sm-12">
-        <p class="text-muted mt-5">Showing 1-12 of 30 Products</p>
-        <div class="row">
-            @foreach($products as $product)
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100 card-fig">
-                        <figure class="figure">
-                            <div class="fig-img">
-                                <img src="{{ asset('uploads/images/'.$product->photo) }}"
-                                     class="figure-img img-fluid rounded" alt="...">
-                            </div>
-                            <figcaption class="figure-caption text-capitalize font-weight-bold text-center">
-                                <a href="">
-                                    {{ $product->name }}
-                                </a>
-                                <small>{{ $product->type }}</small>
-                                <p> BDT {{ number_format($product->price,2) }}</p>
-                            </figcaption>
-                            <form action="{{ route('cart') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <button class="button btn btn-sm btn-block">add to cart</button>
-                            </form>
-                        </figure>
+    <div class="row" id="app">
+        <div class="col-md-2 mt-5">
+            @include('partial.category')
+        </div>
+        <div class="col-md-7 col-sm-12">
+            <p class="text-muted mt-5">Showing 1-12 of 30 Products</p>
+            <div class="row">
+                @foreach($products as $product)
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card h-100 card-fig">
+                            <figure class="figure">
+                                <div class="fig-img">
+                                    <img src="{{ asset('uploads/images/'.$product->photo) }}"
+                                         class="figure-img img-fluid rounded" alt="...">
+                                </div>
+                                <figcaption class="figure-caption text-capitalize font-weight-bold text-center">
+                                    <a href="">
+                                        {{ $product->name }}
+                                    </a>
+                                    <small>{{ $product->type }}</small>
+                                    <p> BDT {{ number_format($product->price,2) }}</p>
+                                </figcaption>
+                                <form action="{{ route('cart') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <button class="button btn btn-sm btn-block">add to cart</button>
+                                </form>
+                            </figure>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 
@@ -93,8 +98,7 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
 
     <a href="#cart_modal" data-toggle="modal" class="to_top">
         <span class="badge badge-dark shopping">{{ $count }}</span>
@@ -103,3 +107,28 @@
 @stop
 
 
+{{--@section('js')--}}
+{{--    <script>--}}
+{{--        const app = new Vue({--}}
+{{--            el: '#app',--}}
+{{--            data: {--}}
+{{--                cart: [],--}}
+{{--                total: 0--}}
+{{--            },--}}
+{{--            methods: {--}}
+{{--                addToCart: function (productId) {--}}
+{{--                    axios.post('/cart', {--}}
+{{--                        'product_id': productId--}}
+{{--                    })--}}
+{{--                        .then(function (response) {--}}
+{{--                            console.log(response);--}}
+{{--                        })--}}
+{{--                        .catch(function (error) {--}}
+{{--                            console.log(error);--}}
+{{--                        })--}}
+
+{{--                }--}}
+{{--            },--}}
+{{--        });--}}
+{{--    </script>--}}
+{{--@stop--}}

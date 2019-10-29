@@ -35,6 +35,7 @@ Route::post('/doctor/register', 'AuthController@DocRegisterProcess');
 //cart
 Route::get('/cart', 'CartController@index')->name('cart');
 Route::post('/cart', 'CartController@AddToCart');
+Route::post('/cart/increase', 'CartController@IncreaseCart')->name('increase.cart');
 Route::post('/cart/decrease', 'CartController@DecreaseFromCart')->name('decrease.cart');
 Route::post('/cart/remove', 'CartController@RemoveFromCart')->name('remove.cart');
 Route::get('/cart/clear', 'CartController@ClearFromCart')->name('clear.cart');

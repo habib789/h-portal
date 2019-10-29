@@ -54,9 +54,9 @@ class CheckoutController extends Controller
         event(new OrderCreate($order));
 
         session()->forget('cart');
-        session()->flash('type', 'success');
-        session()->flash('message', 'Order has been placed');
-        return redirect()->route('cart');
+//        session()->flash('type', 'success');
+//        session()->flash('message', 'Order has been placed');
+        return redirect()->route('shop')->with('success','Order created successfully');
     }
 
 }

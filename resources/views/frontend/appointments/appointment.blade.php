@@ -43,6 +43,7 @@
                                class="form-control @error('appointment_date') is-invalid @enderror"
                                name="appointment_date" id="appointment_date"
                                value="{{ old('appointment_date') }}"/>
+                        <small>Select a date within next 7 days</small>
                         @error('appointment_date')
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
@@ -96,9 +97,11 @@
     <script>
         $(document).ready(function () {
             $('#timepick').timepicker({
-                'timeFormat': 'H:i a',
-                'interval': 30,
+                'timeFormat': 'H:i A',
+                'interval': 20,
                 'scrollbar': true,
+                'minTime': '8',
+                'maxTime':'8:00pm',
             });
         });
     </script>

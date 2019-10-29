@@ -20,6 +20,7 @@
                             <td>Preferred Time</td>
                             <td>Appointment Created</td>
                             <td>Status</td>
+                            <td>Action</td>
                         </tr>
                         @foreach($appointments as $appointment)
                             <tr>
@@ -29,6 +30,9 @@
                                 <td>{{ date('h:i A',$appointment->appointment_time) }}</td>
                                 <td>{{ $appointment->created_at->diffForHumans() }}</td>
                                 <td>{{ $appointment->appointment_status }}</td>
+                                <td>
+                                    <a href="">Details</a>
+                                </td>
                             </tr>
                         @endforeach
                     </table>

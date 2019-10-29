@@ -50,14 +50,14 @@
                             <form action="{{ route('decrease.cart') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $productId }}" id="">
-                                <button class="btn btn-danger btn-sm">-</button>
+                                <button class="button btn btn-info btn-sm">-</button>
                             </form>
 
                             <span class="px-2">{{ $product['quantity'] }}</span>
-                            <form action="{{ route('cart') }}" method="post">
+                            <form action="{{ route('increase.cart') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $productId }}" id="">
-                                <button class="btn btn-info btn-sm">+</button>
+                                <button class="button btn btn-info btn-sm">+</button>
                             </form>
                         </td>
                         <td>BDT {{ number_format($product['total'],2) }}</td>
