@@ -26,6 +26,14 @@
                         </a>
                     </li>
                     <li class="nav-item has-treeview menu-open">
+                        <a href="{{ route('appointments.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-stethoscope"></i>
+                            <p>
+                                Appointments
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview menu-open">
                         <a href="{{ route('orders.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -44,7 +52,7 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('doctors.index') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-info"></i>
+                                    <i class="nav-icon fas fa-user-md"></i>
                                     <p>Doctors List</p>
                                 </a>
                             </li>

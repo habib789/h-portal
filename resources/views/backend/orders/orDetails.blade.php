@@ -36,6 +36,9 @@
                             <br>
                             <b>Order ID:</b> #{{ $order->id }}<br>
                             <b>Payment Due:</b> {{ $order->payment_status }}<br>
+                            @if($order->transaction_code !== null )
+                                <b>Transaction code:</b> {{ $order->transaction_code }}<br>
+                            @endif
                         </div>
                     </div>
 

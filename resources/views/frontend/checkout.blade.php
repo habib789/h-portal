@@ -2,6 +2,43 @@
 @section('title')
     Checkout
 @stop
+@section('css')
+    <style>
+        /**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+        .StripeElement {
+            box-sizing: border-box;
+
+            height: 40px;
+
+            padding: 10px 12px;
+
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background-color: white;
+            width: 100%;
+
+            box-shadow: 0 1px 3px 0 #e6ebf1;
+            -webkit-transition: box-shadow 150ms ease;
+            transition: box-shadow 150ms ease;
+        }
+
+        .StripeElement--focus {
+            box-shadow: 0 1px 3px 0 #cfd7df;
+        }
+
+        .StripeElement--invalid {
+            border-color: #fa755a;
+        }
+
+        .StripeElement--webkit-autofill {
+            background-color: #fefde5 !important;
+        }
+    </style>
+@stop
+
 @section('cover')
     <div class="context">
         <h1 class="font-weight-bold">Checkout</h1>
@@ -48,13 +85,15 @@
 
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Billing address</h4>
-                <form class="needs-validation" action="{{ route('checkout') }}" method="post">
+                <form class="needs-validation" action="{{ route('checkout') }}" method="post" id="payment-form">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="customer_name">Customer name</label>
-                            <input type="text" name="customer_name" class="form-control @error('customer_name') is-invalid @enderror"
-                                   id="customer_name" value="{{ auth()->user()->patient->first_name .' '.auth()->user()->patient->last_name}}">
+                            <input type="text" name="customer_name"
+                                   class="form-control @error('customer_name') is-invalid @enderror"
+                                   id="customer_name"
+                                   value="{{ auth()->user()->patient->first_name .' '.auth()->user()->patient->last_name}}">
                             @error('customer_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -94,73 +133,111 @@
                         </div>
                     </div>
                     <hr class="mb-4">
-                    <button class="button btn btn-info btn-block my-3" type="submit">Proceed to checkout</button>
-                </form>
-                {{--                    <div class="custom-control custom-checkbox">--}}
-                {{--                        <input type="checkbox" class="custom-control-input" id="same-address">--}}
-                {{--                        <label class="custom-control-label" for="same-address">Shipping address is the same as my--}}
-                {{--                            billing address</label>--}}
-                {{--                    </div>--}}
-                {{--                    <div class="custom-control custom-checkbox">--}}
-                {{--                        <input type="checkbox" class="custom-control-input" id="save-info">--}}
-                {{--                        <label class="custom-control-label" for="save-info">Save this information for next time</label>--}}
-                {{--                    </div>--}}
-                {{--                    <hr class="mb-4">--}}
 
-                {{--                    <h4 class="mb-3">Payment</h4>--}}
 
-                {{--                    <div class="d-block my-3">--}}
-                {{--                        <div class="custom-control custom-radio">--}}
-                {{--                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked--}}
-                {{--                                   required>--}}
-                {{--                            <label class="custom-control-label" for="credit">Credit card</label>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="custom-control custom-radio">--}}
-                {{--                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>--}}
-                {{--                            <label class="custom-control-label" for="debit">Debit card</label>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="custom-control custom-radio">--}}
-                {{--                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>--}}
-                {{--                            <label class="custom-control-label" for="paypal">PayPal</label>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                    <div class="row">--}}
-                {{--                        <div class="col-md-6 mb-3">--}}
-                {{--                            <label for="cc-name">Name on card</label>--}}
-                {{--                            <input type="text" class="form-control" id="cc-name" placeholder="" required>--}}
-                {{--                            <small class="text-muted">Full name as displayed on card</small>--}}
-                {{--                            <div class="invalid-feedback">--}}
-                {{--                                Name on card is required--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="col-md-6 mb-3">--}}
-                {{--                            <label for="cc-number">Credit card number</label>--}}
-                {{--                            <input type="text" class="form-control" id="cc-number" placeholder="" required>--}}
-                {{--                            <div class="invalid-feedback">--}}
-                {{--                                Credit card number is required--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                    <div class="row">--}}
-                {{--                        <div class="col-md-3 mb-3">--}}
-                {{--                            <label for="cc-expiration">Expiration</label>--}}
-                {{--                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>--}}
-                {{--                            <div class="invalid-feedback">--}}
-                {{--                                Expiration date required--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="col-md-3 mb-3">--}}
-                {{--                            <label for="cc-cvv">CVV</label>--}}
-                {{--                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>--}}
-                {{--                            <div class="invalid-feedback">--}}
-                {{--                                Security code required--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                    <hr class="mb-4">--}}
+                                <h4 class="mb-3">Payment</h4>
+                                <div class="d-block my-3">
+                                    <div class="custom-control custom-radio">
+                                        <input id="online" name="payment" type="radio" value="online" class="custom-control-input" checked
+                                               required>
+                                        <label class="custom-control-label" for="online">Pay Online</label>
+                                    </div>
 
+                                    <div class="custom-control custom-radio">
+                                        <input id="cash" name="payment" type="radio" value="cash-in-delivery" class="custom-control-input" required>
+                                        <label class="custom-control-label" for="cash">Cash in delivery</label>
+                                    </div>
+                                </div>
+
+                    <script src="https://js.stripe.com/v3/"></script>
+                        <div class="form-row">
+                            <label for="card-element">
+                                Credit or debit card
+                            </label>
+                            <div id="card-element">
+                                <!-- A Stripe Element will be inserted here. -->
+                            </div>
+                            <!-- Used to display form errors. -->
+                            <div id="card-errors" role="alert"></div>
+                        </div>
+                        <button class="button btn btn-info btn-block my-3">Proceed to checkout</button>
+                    </form>
+                    <hr class="mb-4">
+                </div>
             </div>
         </div>
-    </div>
 
-@endsection
+@stop
+
+
+@section('js')
+    <script>
+        // Create a Stripe client.
+        var stripe = Stripe('pk_test_KVy08f3dhKSS7I7wvjD0BQHf003s3ZiB2F');
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+        var style = {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+        // Create an instance of the card Element.
+        var card = elements.create('card', {style: style});
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function (result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+        }
+    </script>
+@stop

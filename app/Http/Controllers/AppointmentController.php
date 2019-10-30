@@ -31,12 +31,16 @@ class AppointmentController extends Controller
         $request->validate([
             'patient_name'     => 'required',
             'health_issue'     => 'required',
-            'appointment_date' => 'required|date|after_or_equal:today|before_or_equal:'.date('Y-m-d',$com),
+            'appointment_date' => 'required|date|after_or_equal:today|before_or_equal:'.date('M,d Y',$com),
             'appointment_time' => 'required',
             'appointment_fee'  => 'required',
         ]
             //['appointment_date.before_or_equal'=> 'The appointment date must be a date before or equal to '.date('d-m-Y',$com)]
         );
+//        $booked = Appointment::where('patient_id',auth()->user()->patient->id)
+//            ->where('appointment_date', )
+//            ->get();
+
         Appointment::create([
             'patient_id'       => $request->input('patient_id'),
             'doctor_id'        => $request->input('doctor_id'),

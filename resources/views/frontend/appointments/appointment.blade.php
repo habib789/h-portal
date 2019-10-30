@@ -97,7 +97,7 @@
     <script>
         $(document).ready(function () {
             $('#timepick').timepicker({
-                'timeFormat': 'H:i A',
+                'timeFormat': 'h:i A',
                 'interval': 20,
                 'scrollbar': true,
                 'minTime': '8',

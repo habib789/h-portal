@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
         //Checkout
         Route::get('/checkout', 'CheckoutController@index')->name('checkout');
         Route::post('/checkout', 'CheckoutController@CheckoutProcess');
+
         //order
         Route::get('/account/myOrder', 'AccountController@showOrder')->name('myOrder');
         Route::get('/account/OrderDetails/{id}', 'AccountController@OrderDetails')->name('orderDetails');
@@ -96,5 +97,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/dashboard/categories', 'categoriesController');
         Route::resource('/dashboard/products', 'ProductsController');
         Route::resource('/dashboard/doctors', 'adminDoctorsController');
+        Route::resource('/dashboard/appointments', 'adminAppointmentsController');
     });
 });

@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('total_amount',11);
             $table->string('payment_status',11)->default('pending');
             $table->string('payment_details')->nullable();
+            $table->string('transaction_code',191)->nullable();
             $table->string('op_status')->default('pending');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
