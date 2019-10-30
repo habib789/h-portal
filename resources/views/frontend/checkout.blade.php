@@ -135,21 +135,25 @@
                     <hr class="mb-4">
 
 
-                                <h4 class="mb-3">Payment</h4>
-                                <div class="d-block my-3">
-                                    <div class="custom-control custom-radio">
-                                        <input id="online" name="payment" type="radio" value="online" class="custom-control-input" checked
-                                               required>
-                                        <label class="custom-control-label" for="online">Pay Online</label>
-                                    </div>
+                    <h4 class="mb-3">Payment</h4>
+{{--                    <div class="d-block my-3">--}}
+{{--                        <div class="custom-control custom-radio">--}}
+{{--                            <input id="online" name="payment" type="radio" value="online"--}}
+{{--                                   class="custom-control-input"--}}
+{{--                                   checked--}}
+{{--                                   required>--}}
+{{--                            <label class="custom-control-label" for="online">Pay Online</label>--}}
+{{--                        </div>--}}
 
-                                    <div class="custom-control custom-radio">
-                                        <input id="cash" name="payment" type="radio" value="cash-in-delivery" class="custom-control-input" required>
-                                        <label class="custom-control-label" for="cash">Cash in delivery</label>
-                                    </div>
-                                </div>
+{{--                        <div class="custom-control custom-radio">--}}
+{{--                            <input id="cash" name="payment" type="radio" value="cash-in-delivery"--}}
+{{--                                   class="custom-control-input" required>--}}
+{{--                            <label class="custom-control-label" for="cash">Cash in delivery</label>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
                     <script src="https://js.stripe.com/v3/"></script>
+                    <div id="show">
                         <div class="form-row">
                             <label for="card-element">
                                 Credit or debit card
@@ -160,17 +164,30 @@
                             <!-- Used to display form errors. -->
                             <div id="card-errors" role="alert"></div>
                         </div>
-                        <button class="button btn btn-info btn-block my-3">Proceed to checkout</button>
-                    </form>
-                    <hr class="mb-4">
-                </div>
+                    </div>
+                    <button class="button btn btn-info btn-block my-3">Proceed to checkout</button>
+                </form>
+                <hr class="mb-4">
             </div>
         </div>
+    </div>
 
 @stop
 
 
 @section('js')
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            $('#cash').click(function () {--}}
+{{--                $('#show').css('display','none');--}}
+{{--            });--}}
+{{--            $('#online').click(function () {--}}
+{{--                $('#show').css('display','block');--}}
+{{--            });--}}
+{{--        })--}}
+{{--    </script>--}}
+
+
     <script>
         // Create a Stripe client.
         var stripe = Stripe('pk_test_KVy08f3dhKSS7I7wvjD0BQHf003s3ZiB2F');

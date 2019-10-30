@@ -8,11 +8,10 @@
 
 @section('content')
     <div class="row">
-
         @include('partial.departments')
 
         @foreach($doctors as $doctor)
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch mt-5">
+            <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch mt-5">
                 <div class="card bg-light">
                     <div class="card-header text-muted border-bottom-0">
                         Doctor Profile
@@ -37,7 +36,7 @@
                                 </ul>
                             </div>
                             <div class="col-5 text-center">
-                                @if($doctor->gender== 'male')
+                                @if($doctor->gender == 'male')
                                     <img src="{{ asset('img/maledoc.jpg') }}" alt="" class="img-circle img-fluid">
                                 @elseif($doctor->gender=='female')
                                     <img src="{{ asset('img/femaledoc.jpg') }}" alt="" class="img-circle img-fluid">

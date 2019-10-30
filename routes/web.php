@@ -92,6 +92,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::get('/dashboard', 'DashboardController@showDashboard')->name('dashboard');
         Route::get('/dashboard/orderDetails/{id}/invoice', 'DashboardController@createPdf')->name('pdf.create');
+        Route::get('/dashboard/unverified-doctors', 'DashboardController@docNotify')->name('doc.notify');
+        Route::get('/dashboard/{id}/unverified/doctors', 'DashboardController@NotifyDoctors')->name('unverified.notify');
+
         Route::resource('/dashboard/departments', 'departmentsController');
         Route::resource('/dashboard/orders', 'OrdersController');
         Route::resource('/dashboard/categories', 'categoriesController');

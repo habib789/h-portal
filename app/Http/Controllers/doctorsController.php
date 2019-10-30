@@ -32,8 +32,6 @@ class doctorsController extends Controller
                         $inputs->update([
                             'license' => trim($request->input('key')),
                         ]);
-//                        session()->flash('type', 'success');
-//                        session()->flash('message', 'You have just added a license key. ./n. You will be notified withing 24 hours about successful verification');
                         return redirect()->back()->with('success', 'You have just added a license key.');
                     } catch (\Exception $e) {
                         session()->flash('type', 'danger');
@@ -47,12 +45,8 @@ class doctorsController extends Controller
                 }
             }
         } elseif ($inputs->verify == 'not-verified' && $inputs->license !== '') {
-//            session()->flash('type', 'info');
-//            session()->flash('message', 'You have already added a license key');
             return redirect()->back()->with('info', 'You have already added a license key');
         } else {
-//            session()->flash('type', 'danger');
-//            session()->flash('message', 'you have entered wrong license key');
             return redirect()->back()->with('error', 'You have entered wrong license key');
         }
     }
@@ -107,9 +101,7 @@ class doctorsController extends Controller
                 'degrees'       => trim($request->input('degrees')),
                 'age'           => trim($request->input('age')),
             ]);
-            session()->flash('type', 'success');
-            session()->flash('message', 'Account Info updated');
-            return redirect()->route('account.information');
+            return redirect()->route('account.information')->with('success','Account Info updated');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());
@@ -132,8 +124,6 @@ class doctorsController extends Controller
                         $inputs->update([
                             'license' => trim($request->input('key')),
                         ]);
-//                        session()->flash('type', 'success');
-//                        session()->flash('message', 'You have just added a new license key.');
                         return redirect()->route('docAccount.information')->with('success', 'You have just added a new license key');
                     } catch (\Exception $e) {
                         session()->flash('type', 'danger');
@@ -141,15 +131,9 @@ class doctorsController extends Controller
                         return redirect()->back();
                     }
                 } else {
-//                    session()->flash('type', 'info');
-//                    session()->flash('message', 'This license key is used by another doctor!!');
                     return redirect()->back()->with('error', 'This license key is used by another user');
                 }
             }
-//        } elseif (($inputs->verify == 'invalid-license' || $inputs->verify == 'not-verified') && $inputs->license !== '') {
-//            session()->flash('type', 'info');
-//            session()->flash('message', 'You have already added a license key');
-//            return redirect()->back();
         } else {
             session()->flash('type', 'danger');
             session()->flash('message', 'you have entered wrong license key');

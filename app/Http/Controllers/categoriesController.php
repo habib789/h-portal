@@ -37,7 +37,7 @@ class categoriesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|unique:categories,name,',
         ],
             [
                 'name.required' => 'Category name cannot be empty!',

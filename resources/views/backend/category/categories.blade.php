@@ -22,7 +22,7 @@
                             <label for="category">Category Name</label>
                             <input type="text" name="name"
                                    class="form-control @error('name') is-invalid @enderror"
-                                   id="category"
+                                   id="category" value="{{ old('name') }}"
                                    placeholder="Enter category">
                             @error('name')
                             <span class="invalid-feedback">

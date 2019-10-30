@@ -37,7 +37,7 @@ class departmentsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|unique:departments,name,',
         ],
             [
                 'name.required' => 'Department name cannot be empty!',
@@ -98,8 +98,6 @@ class departmentsController extends Controller
                 'slug'   => Str::slug(trim($request->input('name'))),
                 'active' => $request->input('status'),
             ]);
-//            session()->flash('type', 'success');
-//            session()->flash('message', 'successfully Updated');
             return redirect()->route('departments.index')->with('success','Successfully Updated');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');

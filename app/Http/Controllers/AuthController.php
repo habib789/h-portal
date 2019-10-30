@@ -73,7 +73,7 @@ class AuthController extends Controller
         $request->validate([
             'first_name'            => 'required',
             'last_name'             => 'required',
-            'email'                 => 'required|email|unique:users',
+            'email'                 => 'required|email|unique:users,email',
             'password'              => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
             'phone'                 => 'required|string|min:6|max:11|unique:doctors,phone',
@@ -115,10 +115,7 @@ class AuthController extends Controller
             $doctor->document      = $paper_file;
             $doctor->save();
             event(new Registered($user));
-
-            session()->flash('type', 'success');
-            session()->flash('message', 'Successfully Registered');
-            return redirect()->route('auth.login');
+            return redirect()->route('auth.login')->with('success','Registered successfully');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());

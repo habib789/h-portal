@@ -18,7 +18,7 @@ class adminDoctorsController extends Controller
     public function index()
     {
         $data            = [];
-        $data['doctors'] = Doctor::get();
+        $data['doctors'] = Doctor::where('verify','verified')->get();
         return view('backend.doctors_list', $data);
     }
 

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\notifyUnverifiedDoctors;
 use App\Events\OrderCreate;
 use App\Listeners\OrderConfirmationNotification;
+use App\Listeners\sendEmailNotificationToUnverifiedDoctors;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         OrderCreate::class =>[
           OrderConfirmationNotification::class,
+        ],
+        notifyUnverifiedDoctors::class=>[
+          sendEmailNotificationToUnverifiedDoctors::class,
         ],
     ];
 

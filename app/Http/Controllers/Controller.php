@@ -17,10 +17,10 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $departments = Department::select(['id', 'name', 'slug', 'active'])->where('active', 1)->get();
+        $departments = Department::select(['id', 'name', 'slug', 'active'])->get();
         View::share('departments', $departments);
 
-        $categories = Category::select(['id', 'name', 'slug', 'active'])->where('active', 1)->get();
+        $categories = Category::select(['id', 'name', 'slug', 'active'])->get();
         View::share('categories', $categories);
     }
 

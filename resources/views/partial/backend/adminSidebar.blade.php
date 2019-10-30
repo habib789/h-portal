@@ -43,6 +43,26 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user-md"></i>
+                            <p>Doctors</p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('doctors.index') }}" class="nav-link">
+                                    <i class="nav-icon far fa-circle text-info"></i>
+                                    <p>Doctors List</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('doc.notify') }}" class="nav-link">
+                                    <i class="nav-icon far fa-circle text-info"></i>
+                                    <p>Unverified doctors List</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
                                 Lists View
@@ -50,12 +70,6 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('doctors.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-user-md"></i>
-                                    <p>Doctors List</p>
-                                </a>
-                            </li>
                             <li class="nav-item">
                                 <a href="{{ route('departments.index') }}" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>

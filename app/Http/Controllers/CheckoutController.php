@@ -29,6 +29,12 @@ class CheckoutController extends Controller
 
         if ($subtotal >= 100) {
             if (!empty($cart)) {
+                $request->validate([
+                    'customer_name'    => 'required|string',
+                    'phone'            => 'required|min:11|max:11',
+                    'customer_address' => 'required|string|max:255',
+                ]);
+
                 Stripe::setApiKey('sk_test_9yfUqjk39wVMpolDQ8fpk4GB003GyLgymJ');
                 $token  = $_POST['stripeToken'];
                 $charge = Charge::create([
@@ -36,12 +42,6 @@ class CheckoutController extends Controller
                     'currency'    => 'usd',
                     'description' => 'Amount Paid',
                     'source'      => $token,
-                ]);
-
-                $request->validate([
-                    'customer_name'    => 'required|string',
-                    'phone'            => 'required|min:11|max:11',
-                    'customer_address' => 'required|string|max:255',
                 ]);
 
                 $order = Order::create([
