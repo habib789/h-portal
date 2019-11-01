@@ -33,7 +33,13 @@
                                 <td>{{ $appointment->patient->phone }}</td>
                                 <td>{{ $appointment->appointment_date->format('M,d Y') }}</td>
                                 <td>{{ $appointment->created_at->diffForHumans() }}</td>
-                                <td>{{ $appointment->appointment_status }}</td>
+                                <td>
+                                    @if($appointment->appointment_status == 'prescribed')
+                                        <span class="badge bg-success">Prescribed</span>
+                                    @elseif($appointment->appointment_status == 'pending')
+                                        <span class="badge bg-warning">Pending</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <span class="badge bg-info">
                                         <a href="">Details</a>

@@ -124,10 +124,37 @@
                         <div class="form-group">
                             <label for="blood_group" class="font-weight-bold">Blood Group<span
                                     class="text-danger">*</span></label>
-                            <input type="text" name="blood_group"
-                                   class="form-control @error('blood_group') is-invalid @enderror"
-                                   id="graduate"
-                                   value="{{ $patient->blood_group }}"/>
+                            <select name="blood_group"
+                                    class="form-control @error('blood_group') is-invalid @enderror">
+                                <option class="hidden" selected disabled>Select gender
+                                </option>
+
+                                <option class="text-uppercase"
+                                        value="A+" @if($patient->blood_group=='A+') selected @endif>A+
+                                </option>
+                                <option class="text-uppercase" value="A-"
+                                        @if($patient->blood_group=='A-') selected @endif>A-
+                                </option>
+                                <option class="text-uppercase" value="B+"
+                                        @if($patient->blood_group=='AB+') selected @endif>AB+
+                                </option>
+                                <option class="text-uppercase" value="B-"
+                                        @if($patient->blood_group=='B-') selected @endif>B-
+                                </option>
+                                <option class="text-uppercase" value="O+"
+                                        @if($patient->blood_group=='O+') selected @endif>O+
+                                </option>
+                                <option class="text-uppercase" value="O-"
+                                        @if($patient->blood_group=='O-') selected @endif>O-
+                                </option>
+                                <option class="text-uppercase" value="AB+"
+                                        @if($patient->blood_group=='AB+') selected @endif>AB+
+                                </option>
+                                <option class="text-uppercase" value="AB-"
+                                        @if($patient->blood_group=='AB-') selected @endif>AB-
+                                </option>
+
+                            </select>
                             @error('blood_group')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -136,15 +163,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="age" class="font-weight-bold">Date of birth <span
+                            <label for="date_of_birth" class="font-weight-bold">Date of birth <span
                                     class="text-danger">*</span></label>
-                            <input type="text" name="age" class="form-control @error('age') is-invalid @enderror"
-                                   id="age"
-                                   value="{{ $patient->age }}"/>
-                            @error('age')
+                            <input type="date" name="date_of_birth"
+                                   class="form-control @error('date_of_birth') is-invalid @enderror"
+                                   id="date_of_birth"
+                                   value="{{ date('Y-m-d', strtotime($patient->date_of_birth)) }}"/>
+                            @error('date_of_birth')
                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                         <div class="form-group">

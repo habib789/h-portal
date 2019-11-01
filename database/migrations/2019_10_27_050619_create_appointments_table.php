@@ -17,6 +17,7 @@ class CreateAppointmentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('time_slot_id');
             $table->string('patient_name',191);
             $table->text('health_issue');
@@ -26,6 +27,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('appointment_status', 22)->default('pending');
             $table->foreign('patient_id')->references('id')->on('patients')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('doctor_id')->references('id')->on('doctors')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('time_slot_id')->references('id')->on('time_slots')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

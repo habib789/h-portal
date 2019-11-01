@@ -20,6 +20,9 @@ class AuthController extends Controller
 
     public function RegisterProcess(Request $request)
     {
+        $before = today();
+        $com    = strtotime($before) - 3153600000;
+//        dd(date('M,d Y', $com));
         $request->validate([
             'first_name'            => 'required',
             'last_name'             => 'required',
@@ -29,7 +32,7 @@ class AuthController extends Controller
             'phone'                 => 'required|string|min:6|max:11|unique:patients,phone',
             'gender'                => 'required',
             'blood_group'           => 'required',
-            'age'                   => 'required|string|min:1|max:3',
+            'date_of_birth'         => 'required|date|before_or_equal:today|after_or_equal:' . date('Y-m-d', $com),
         ]);
 
         try {
@@ -42,19 +45,17 @@ class AuthController extends Controller
             $patient        = new Patient();
             $request->phone = '+88' . $request->phone;
 //            dd($request->phone );
-            $patient->user_id     = $user->id;
-            $patient->first_name  = $request->first_name;
-            $patient->last_name   = $request->last_name;
-            $patient->gender      = $request->gender;
-            $patient->phone       = $request->phone;
-            $patient->blood_group = $request->blood_group;
-            $patient->age         = $request->age;
+            $patient->user_id       = $user->id;
+            $patient->first_name    = $request->first_name;
+            $patient->last_name     = $request->last_name;
+            $patient->gender        = $request->gender;
+            $patient->phone         = $request->phone;
+            $patient->blood_group   = $request->blood_group;
+            $patient->date_of_birth = $request->date_of_birth;
             $patient->save();
             event(new Registered($user));
 
-            session()->flash('type', 'success');
-            session()->flash('message', 'Successfully Registered');
-            return redirect()->route('auth.login');
+            return redirect()->route('auth.login')->with('success', 'Registered successfully');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());
@@ -70,6 +71,10 @@ class AuthController extends Controller
 
     public function DocRegisterProcess(Request $request)
     {
+        $before = today();
+        $com    = strtotime($before) - 788400000;
+        $after    = strtotime($before) - 3153600000;
+        $age = date('Y',$com) - date('Y',strtotime($before));
         $request->validate([
             'first_name'            => 'required',
             'last_name'             => 'required',
@@ -82,7 +87,7 @@ class AuthController extends Controller
             'department'            => 'required',
             'experience'            => 'required',
             'degrees'               => 'required',
-            'age'                   => 'required|string|min:1|max:3',
+            'date_of_birth'         => 'required|date|before_or_equal:'.date('Y-m-d', $com).'|after_or_equal:' . date('Y-m-d', $after),
             'paper'                 => 'required|mimes:doc,docx,pdf|max:5129',
         ]);
 
@@ -111,11 +116,11 @@ class AuthController extends Controller
             $doctor->graduate      = $request->graduate;
             $doctor->experience    = $request->experience;
             $doctor->degrees       = $request->degrees;
-            $doctor->age           = $request->age;
+            $doctor->date_of_birth = $request->date_of_birth;
             $doctor->document      = $paper_file;
             $doctor->save();
             event(new Registered($user));
-            return redirect()->route('auth.login')->with('success','Registered successfully');
+            return redirect()->route('auth.login')->with('success', 'Registered successfully');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());
@@ -140,9 +145,7 @@ class AuthController extends Controller
 //            dd(Auth::user()->doctor);
             return redirect()->intended('/');
         }
-        session()->flash('type', 'danger');
-        session()->flash('message', 'Invalid Credentials');
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Invalid Credentials');
     }
 
     public function logout()

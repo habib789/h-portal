@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class Doctor extends Model
 {
     protected $guarded = [];
+    protected $dates=['date_of_birth',];
 //    public $timestamps = false;
 
     public function department()

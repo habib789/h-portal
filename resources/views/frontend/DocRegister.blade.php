@@ -183,12 +183,13 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="age" class="font-weight-bold">Date of birth <span
+                            <label for="date_of_birth" class="font-weight-bold">Date of birth <span
                                     class="text-danger">*</span></label>
-                            <input type="text" name="age" class="form-control @error('age') is-invalid @enderror"
-                                   id="age"
-                                   value="{{ old('age') }}"/>
-                            @error('age')
+                            <input type="date" name="date_of_birth" class="form-control @error('date_of_birth') is-invalid @enderror"
+                                   id="date_of_birth"
+                                   value="{{ old('date_of_birth') }}"/>
+                            <small class="text-muted">Minimum require age 25</small>
+                            @error('date_of_birth')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -216,7 +217,5 @@
             </div>
         </div>
     </div>
-
-
 
 @stop

@@ -11,56 +11,58 @@
             {{ session('message') }}
         </div>
     @endif
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md-7">
             <div class="card p-2">
-                <form action="" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="days">Select working day</label>
-                        <select name="days"
-                                class="form-control @error('days') is-invalid @enderror">
-                            <option class="hidden" selected disabled>Select day
-                            </option>
-                            @foreach($days as $day)
-                                <option class="text-capitalize" value="{{ $day->id }}">{{ $day->day_name }}</option>
-                            @endforeach
+               <div class="card-body">
+                   <form action="" method="post">
+                       @csrf
+                       <div class="form-group">
+                           <label class="font-weight-bold" for="days">Select working day</label>
+                           <select name="days"
+                                   class="form-control @error('days') is-invalid @enderror">
+                               <option class="hidden" selected disabled>Select day
+                               </option>
+                               @foreach($days as $day)
+                                   <option class="text-capitalize" value="{{ $day->id }}">{{ $day->day_name }}</option>
+                               @endforeach
 
-                        </select>
-                        @error('days')
-                        <span class="invalid-feedback" role="alert">
+                           </select>
+                           @error('days')
+                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
-                    </div>
+                           @enderror
+                       </div>
 
-                    <div id="timepick">
-                        <div class="form-group">
-                            <label for="time" class="font-weight-bold">Start Time</label>
-                            <input type="text" name="start_time"
-                                   class="time form-control @error('start_time') is-invalid @enderror"
-                                   value="{{ old('start_time') }}"/>
-                            @error('start_time')
-                            <span class="invalid-feedback" role="alert">
+                       <div id="timepick">
+                           <div class="form-group">
+                               <label for="time" class="font-weight-bold">Start Time</label>
+                               <input type="text" name="start_time"
+                                      class="time form-control @error('start_time') is-invalid @enderror"
+                                      value="{{ old('start_time') }}"/>
+                               @error('start_time')
+                               <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                            @enderror
-                        </div>
+                               @enderror
+                           </div>
 
-                        <div class="form-group">
-                            <label for="time" class="font-weight-bold">End Time</label>
-                            <input type="text" name="end_time"
-                                   class="time form-control @error('end_time') is-invalid @enderror"
-                                   value="{{ old('end_time') }}"/>
-                            @error('end_time')
-                            <span class="invalid-feedback" role="alert">
+                           <div class="form-group">
+                               <label for="time" class="font-weight-bold">End Time</label>
+                               <input type="text" name="end_time"
+                                      class="time form-control @error('end_time') is-invalid @enderror"
+                                      value="{{ old('end_time') }}"/>
+                               @error('end_time')
+                               <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <button class="button btn btn-info">Add schedule</button>
-                </form>
+                               @enderror
+                           </div>
+                       </div>
+                       <button class="button btn btn-info">Add schedule</button>
+                   </form>
+               </div>
             </div>
         </div>
 

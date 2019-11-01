@@ -117,10 +117,9 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <input type="text" name="age" class="form-control @error('age') is-invalid @enderror"
-                                       placeholder="Age*"
-                                       value="{{ old('age') }}"/>
-                                @error('age')
+                                <input type="date" name="date_of_birth" class="form-control @error('date_of_birth') is-invalid @enderror"
+                                       placeholder="Date of Birth*"/>
+                                @error('date_of_birth')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

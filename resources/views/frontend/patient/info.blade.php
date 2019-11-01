@@ -36,8 +36,12 @@
                         <td class="text-capitalize">{{ $patient->gender }}</td>
                     </tr>
                     <tr>
+                        <td class="font-weight-bold">Age</td>
+                        <td class="text-capitalize">{{ date('Y',strtotime(today())) - date('Y',strtotime($patient->date_of_birth)) }}</td>
+                    </tr>
+                    <tr>
                         <td class="font-weight-bold">Date of Birth</td>
-                        <td>{{ $patient->age }}</td>
+                        <td>{{ date('M,d Y', strtotime($patient->date_of_birth)) }}</td>
                     </tr>
                     <tr>
                         <td></td>

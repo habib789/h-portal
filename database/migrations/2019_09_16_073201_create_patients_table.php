@@ -22,7 +22,7 @@ class CreatePatientsTable extends Migration
             $table->string('gender',191);
             $table->string('phone',15)->unique();
             $table->string('blood_group',191);
-            $table->string('age',191);
+            $table->date('date_of_birth');
             $table->text('image')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

@@ -26,7 +26,7 @@
                     <a href="{{ route('docAccount.information') }}" class="nav-link text-dark">Account Information</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">Today's Appointments</a>
+                    <a href="{{ route('today.Appointments') }}" class="nav-link text-dark">Today's Appointments</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link text-dark">My Patients</a>

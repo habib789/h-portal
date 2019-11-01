@@ -27,7 +27,7 @@ class CreateDoctorsTable extends Migration
             $table->string('graduate',191);
             $table->string('experience',191);
             $table->string('degrees',191);
-            $table->string('age',191);
+            $table->date('date_of_birth');
             $table->text('document');
             $table->text('image')->nullable();
             $table->timestamps();

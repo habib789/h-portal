@@ -10046,8 +10046,21 @@ textarea.form-control {
   border-radius: 0;
 }
 
+.card .button_org {
+  background-color: coral;
+  box-shadow: none;
+  text-transform: uppercase;
+  color: whitesmoke;
+  border-radius: 0;
+}
+
 .card .button:hover {
   background-color: #1ba87e;
+  color: whitesmoke;
+}
+
+.card .button_org:hover {
+  background-color: darkorange;
   color: whitesmoke;
 }
 
@@ -10063,7 +10076,7 @@ textarea.form-control {
 }
 
 .info button.btn-info:hover {
-  background-color: #0f6674;
+  background-color: #0cb8b6;
   color: white;
   transition: 0.6s;
 }

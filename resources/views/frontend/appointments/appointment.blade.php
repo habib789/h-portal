@@ -65,7 +65,7 @@
                             <label for="health_issue" class="font-weight-bold">Health Issue</label>
                             <textarea name="health_issue"
                                       class="form-control @error('health_issue') is-invalid @enderror" id="health_issue"
-                                      cols="30" rows="3">
+                                      cols="30" rows="3" placeholder="Give a brief about your health issue">
                             {{ old('health_issue') }}
                         </textarea>
                             @error('health_issue')
@@ -83,6 +83,7 @@
                             @enderror
                         </div>
                         <input type="hidden" name="doctor_id" id="" value="{{ $slot->doctor->id }}">
+                        <input type="hidden" name="department_id" id="" value="{{ $slot->doctor->department->id }}">
                         <input type="hidden" name="patient_id" id="" value="{{ $patient->id }}">
                         <input type="hidden" name="time_slot_id" id="" value="{{ $slot->id }}">
                         <button class="button btn btn-info btn-lg">BOOK APPOINTMENT</button>

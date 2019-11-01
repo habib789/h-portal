@@ -24,4 +24,9 @@ class Appointment extends Model
     {
         return $this->belongsTo(TimeSlot::class);
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

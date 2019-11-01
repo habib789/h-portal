@@ -66,8 +66,12 @@
                         <td>{{ $doctor->degrees }}</td>
                     </tr>
                     <tr>
+                        <td class="font-weight-bold">Age</td>
+                        <td class="text-capitalize">{{ date('Y',strtotime(today())) - date('Y',strtotime($doctor->date_of_birth)) }}</td>
+                    </tr>
+                    <tr>
                         <td class="font-weight-bold">Date of Birth</td>
-                        <td>{{ $doctor->age }}</td>
+                        <td>{{ date('M,d Y', strtotime($doctor->date_of_birth)) }}</td>
                     </tr>
                     <tr>
                         <td></td>

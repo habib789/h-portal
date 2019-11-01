@@ -14,15 +14,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('department') }}">Departments</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Blog</a>
-            </li>
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="">Blog</a>--}}
+{{--            </li>--}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('shop') }}">Shop</a>
             </li>
-            <li>
-                <a class="nav-link" href="#contact">Contact</a>
-            </li>
+{{--            <li>--}}
+{{--                <a class="nav-link" href="#contact">Contact</a>--}}
+{{--            </li>--}}
         </ul>
         <ul class="navbar-nav ml-auto">
             @guest

@@ -1,7 +1,7 @@
 @extends('masterpage.account')
-@section('title') My Appointments @stop
-@section('page') My Appointments @stop
-@section('bcumb') My Appointments @stop
+@section('title') Today's Appointments @stop
+@section('page') Today's Appointments @stop
+@section('bcumb') Today's Appointments @stop
 @section('content')
     @if(session()->has('message'))
         <div class="alert alert-{{ session('type') }}">
@@ -11,36 +11,35 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card p-2">
-                @if(count($appointments) > 0)
+                @if(count($todayAppointments) > 0)
                     <table class="table table-sm table-hover">
                         <tr class="font-weight-bold">
                             <td>Patient Name</td>
-                            <td>Doctor Name</td>
-                            <td>Doctor Department</td>
                             <td>Appointment Date</td>
                             <td>Preferred Time</td>
-                            <td>Appointment Created</td>
-                            <td>Status</td>
                             <td>Action</td>
                         </tr>
-                        @foreach($appointments as $appointment)
+                        @foreach($todayAppointments as $appointment)
                             <tr>
                                 <td>{{ $appointment->patient_name }}</td>
-                                <td>Dr. {{ $appointment->doctor->first_name}}</td>
-                                <td class="text-capitalize">{{ $appointment->department->name}}</td>
                                 <td>{{ $appointment->appointment_date->format('M,d Y') }}</td>
                                 <td>{{ date('h:i A',$appointment->appointment_time) }}</td>
-                                <td>{{ $appointment->created_at->diffForHumans() }}</td>
-                                <td>{{ $appointment->appointment_status }}</td>
                                 <td>
-                                    <a href="">Details</a>
+                                    @if($appointment->appointment_status == 'prescribed')
+                                        <span class="badge bg-success">Prescribed</span>
+                                    @elseif($appointment->appointment_status == 'pending')
+                                        <span class="badge bg-warning">Pending</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('details.Appointments', $appointment->patient->id) }}">Details</a>
                                 </td>
                             </tr>
                         @endforeach
                     </table>
                 @else
-                    <div class="alert alert-info">
-                        You dont make any appointment yet!!
+                    <div class="p-5">
+                        <p class="alert alert-info">!!Just relax!! There are no appointments today.</p>
                     </div>
                 @endif
             </div>

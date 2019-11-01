@@ -63,25 +63,27 @@ class AccountController extends Controller
 
     public function UserInfoUpdate(Request $request, $id)
     {
+        $before = today();
+        $com    = strtotime($before) - 3153600000;
         $request->validate([
-            'first_name'  => 'required',
-            'last_name'   => 'required',
-            'phone'       => 'required|min:11|max:14|unique:patients,phone,' . $id,
-            'blood_group' => 'required',
-            'address'     => 'required',
-            'gender'      => 'required',
-            'age'         => 'required',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'phone'         => 'required|min:11|max:14|unique:patients,phone,' . $id,
+            'blood_group'   => 'required',
+            'address'       => 'required',
+            'gender'        => 'required',
+            'date_of_birth' => 'required|date|before_or_equal:today|after_or_equal:' . date('Y-m-d', $com),
         ]);
         $info_update = Patient::find($id);
         try {
             $info_update->update([
-                'first_name'  => trim($request->input('first_name')),
-                'last_name'   => trim($request->input('last_name')),
-                'phone'       => trim($request->input('phone')),
-                'address'     => trim($request->input('address')),
-                'gender'      => trim($request->input('gender')),
-                'blood_group' => trim($request->input('blood_group')),
-                'age'         => trim($request->input('age')),
+                'first_name'    => trim($request->input('first_name')),
+                'last_name'     => trim($request->input('last_name')),
+                'phone'         => trim($request->input('phone')),
+                'address'       => trim($request->input('address')),
+                'gender'        => trim($request->input('gender')),
+                'blood_group'   => trim($request->input('blood_group')),
+                'date_of_birth' => trim($request->input('date_of_birth')),
             ]);
             return redirect()->route('account.information')->with('success', 'Account info updated');
         } catch (\Exception $e) {

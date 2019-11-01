@@ -75,6 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/doctor-appointment/{id}','AppointmentController@showAppointment')->name('appointment');
         Route::post('/doctor-appointment/{id}','AppointmentController@appointmentStore');
         Route::get('/account/appointment-info','AppointmentController@MyAppointments')->name('myAppointments');
+        Route::get('/account/today/appointments','AppointmentController@DocAppointments')->name('today.Appointments');
+        Route::get('/account/today/appointments/{id}/details','AppointmentController@AppointmentsDetails')->name('details.Appointments');
 
 
         //Checkout

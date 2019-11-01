@@ -19,6 +19,7 @@ class DashboardController extends Controller
         $data['total_appointments'] = Appointment::select('id')->count();
         $data['total_orders'] = Order::select('id')->count();
         $data['totals'] = User::select('id')->count();
+        $data['orders'] = Order::get();
         return view('backend.dashboard', $data);
     }
 
@@ -51,4 +52,5 @@ class DashboardController extends Controller
             event(new notifyUnverifiedDoctors($doctor));
         return redirect()->back()->with('toast_success','License verification email sent successfully');
     }
+
 }

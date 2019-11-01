@@ -1,6 +1,38 @@
 @extends('masterpage.backend')
 @section('title') Dashboard @stop
 @section('bcumb')  Dashboard @stop
+@section('css')
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Sales', 'Expenses', 'Profit'],
+                ['2014', 1000, 400, 200],
+
+                @foreach($orders as $order)
+                {{ '["'.$order->created_at.'"],' }}
+                @endforeach
+            ]);
+
+            var options = {
+                chart: {
+                    title: 'Company Performance',
+                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+@stop
+
+
+
 
 @section('content')
     <div class="row">
@@ -60,6 +92,14 @@
                     <span class="info-box-text">Total Appointments</span>
                     <span class="info-box-number">{{ $total_appointments }}</span>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div id="columnchart_material" style=" height: 300px;"></div>
             </div>
         </div>
     </div>
