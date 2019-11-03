@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Days;
 use App\Models\Doctor;
 use App\models\Patient;
 use App\Models\TimeSlot;
@@ -36,24 +37,30 @@ class AppointmentController extends Controller
                 'appointment_time' => 'required',
                 'appointment_fee'  => 'required',
             ]
-        //['appointment_date.before_or_equal'=> 'The appointment date must be a date before or equal to '.date('d-m-Y',$com)]
         );
-//        $booked = Appointment::where('patient_id',auth()->user()->patient->id)
-//            ->where('appointment_date', )
-//            ->get();
+//
+        $findAppointment = Appointment::where('patient_id', auth()->user()->patient->id)
+            ->where('department_id', $request->input('department_id'))
+            ->whereBetween('appointment_date', [date('Y-m-d', strtotime($before)), date('Y-m-d', $com)])
+            ->count();
 
-        Appointment::create([
-            'patient_id'       => $request->input('patient_id'),
-            'doctor_id'        => $request->input('doctor_id'),
-            'department_id'    => $request->input('department_id'),
-            'time_slot_id'     => $request->input('time_slot_id'),
-            'patient_name'     => trim($request->input('patient_name')),
-            'appointment_date' => strtotime($request->input('appointment_date')),
-            'appointment_time' => strtotime(trim($request->input('appointment_time'))),
-            'health_issue'     => trim($request->input('health_issue')),
-            'appointment_fee'  => $request->input('appointment_fee'),
-        ]);
-        return redirect()->route('myAppointments')->with('success', 'Appointment Created');
+
+        if ($findAppointment == 0) {
+            Appointment::create([
+                'patient_id'       => $request->input('patient_id'),
+                'doctor_id'        => $request->input('doctor_id'),
+                'department_id'    => $request->input('department_id'),
+                'time_slot_id'     => $request->input('time_slot_id'),
+                'patient_name'     => trim($request->input('patient_name')),
+                'appointment_date' => strtotime($request->input('appointment_date')),
+                'appointment_time' => strtotime(trim($request->input('appointment_time'))),
+                'health_issue'     => trim($request->input('health_issue')),
+                'appointment_fee'  => $request->input('appointment_fee'),
+            ]);
+            return redirect()->route('myAppointments')->with('success', 'Appointment Created');
+        } else {
+            return redirect()->back()->with('toast_error', 'Sorry! You have already an appointment in this week. You can book appointment in other departments');
+        }
     }
 
     public function myAppointments()
@@ -68,10 +75,10 @@ class AppointmentController extends Controller
 
     public function DocAppointments()
     {
-        $today =today();
-        $match_today = date('Y-m-d',strtotime($today));
+        $today                     = today();
+        $match_today               = date('Y-m-d', strtotime($today));
         $data                      = [];
-        $data['sidebar'] = true;
+        $data['sidebar']           = true;
         $data['todayAppointments'] = Appointment::with('patient')
             ->where('appointment_date', $match_today)
             ->get();
@@ -80,11 +87,47 @@ class AppointmentController extends Controller
 
     public function AppointmentsDetails($id)
     {
+        $data                    = [];
+        $data['sidebar']         = true;
+        $data['patient_details'] = Appointment::with('patient')
+            ->where('patient_id', $id)
+            ->where('appointment_date', date('Y-m-d', strtotime(today())))
+            ->get();
+        return view('frontend.appointments.todaysAppDetails', $data);
+    }
+
+    public function ShowAllAppointments()
+    {
+        $data                 = [];
+        $data['sidebar']      = true;
+        $data['Appointments'] = Appointment::with('patient')
+            ->orderByDesc('appointment_date')
+            ->orderByDesc('appointment_time')
+            ->paginate(7);
+        return view('frontend.appointments.allAppointments', $data);
+    }
+
+    public function ShowAllAppointmentsDetails($id)
+    {
+        $data                    = [];
+        $data['sidebar']         = true;
+        $date = Appointment::where('patient_id',$id)->get();
+        dd($date);
+        $data['patient_details'] = Appointment::with('patient')
+            ->where('patient_id', $id)
+            ->where('appointment_date', date('Y-m-d', strtotime(today())))
+            ->get();
+        return view('frontend.appointments.todaysAppDetails', $data);
+    }
+
+
+    public function showPrescriptionForm()
+    {
         $data = [];
         $data['sidebar'] = true;
-        $data['patient_details'] = Appointment::with('patient')
-            ->where('patient_id',$id)
-            ->get();
-        return view('frontend.appointments.todaysAppDetails',$data);
+        return view('frontend.appointments.prescription',$data);
     }
+
+
+
 }

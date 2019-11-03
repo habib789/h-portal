@@ -101,7 +101,7 @@
             $('#timepick .time').timepicker({
                 'timeFormat': 'h:i A',
                 'minTime': '8',
-                'maxTime':'8:00pm',
+                'maxTime':'10:00pm',
             });
         });
     </script>

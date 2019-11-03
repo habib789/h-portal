@@ -29,12 +29,14 @@
                     <a href="{{ route('today.Appointments') }}" class="nav-link text-dark">Today's Appointments</a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('all.Appointments') }}" class="nav-link text-dark">Appointments</a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link text-dark">My Patients</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('hours.show') }}" class="nav-link text-dark">Add working hours</a>
                 </li>
-
             @endif
         </ul>
     </div>

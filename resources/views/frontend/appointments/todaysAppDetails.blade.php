@@ -1,6 +1,9 @@
 @extends('masterpage.account')
 @section('title') Patient Details @stop
 @section('page') Patient Details @stop
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+@stop
 @section('bcumb') Patient Details @stop
 @section('content')
     @if(session()->has('message'))
@@ -9,7 +12,7 @@
         </div>
     @endif
     <div class="row mb-3">
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div class="card">
                 @foreach($patient_details as $patient_detail)
                     <div class="card-header">
@@ -18,7 +21,8 @@
                     </div>
                     <div class="card-header">
                         <small class="text-capitalize font-weight-bold">Patient Age</small>
-                        <p>{{ date('Y',strtotime(today())) - date('Y',strtotime($patient_detail->patient->date_of_birth)) }} years old</p>
+                        <p>{{ date('Y',strtotime(today())) - date('Y',strtotime($patient_detail->patient->date_of_birth)) }}
+                            years old</p>
                     </div>
                     <div class="card-header">
                         <small class="text-capitalize font-weight-bold">Patient Blood Group</small>
@@ -29,11 +33,13 @@
                         <p>{{ $patient_detail->health_issue }}</p>
                     </div>
                 @endforeach
-                    <a class="button btn btn-info" href="">Prescribe</a>
+                <a class="button btn btn-info" href="{{ route('prescription') }}">Prescribe</a>
             </div>
         </div>
     </div>
 @stop
+
+
 
 
 

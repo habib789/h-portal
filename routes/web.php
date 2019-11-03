@@ -59,6 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::put('/account/doctor/info/{id}/update', 'doctorsController@InfoUpdate')->name('info.update');
             Route::get('/account/doctor/working-hours', 'doctorsController@shoeWorkingHours')->name('hours.show');
             Route::post('/account/doctor/working-hours', 'doctorsController@SetHours');
+            Route::get('/account/patients/all/appointments', 'AppointmentController@ShowAllAppointments')->name('all.Appointments');
+            Route::get('/account/patients/all/appointments/{id}/details', 'AppointmentController@ShowAllAppointmentsDetails')->name('all.AppointmentsDetails');
+            Route::get('/account/today/appointments','AppointmentController@DocAppointments')->name('today.Appointments');
+            Route::get('/account/today/appointments/{id}/details','AppointmentController@AppointmentsDetails')->name('details.Appointments');
+            Route::get('/account/doctor/prescription','AppointmentController@showPrescriptionForm')->name('prescription');
         });
     });
 
@@ -75,8 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/doctor-appointment/{id}','AppointmentController@showAppointment')->name('appointment');
         Route::post('/doctor-appointment/{id}','AppointmentController@appointmentStore');
         Route::get('/account/appointment-info','AppointmentController@MyAppointments')->name('myAppointments');
-        Route::get('/account/today/appointments','AppointmentController@DocAppointments')->name('today.Appointments');
-        Route::get('/account/today/appointments/{id}/details','AppointmentController@AppointmentsDetails')->name('details.Appointments');
+
 
 
         //Checkout

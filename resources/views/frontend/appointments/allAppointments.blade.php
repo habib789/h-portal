@@ -1,7 +1,7 @@
 @extends('masterpage.account')
-@section('title') Today's Appointments @stop
-@section('page') Today's Appointments @stop
-@section('bcumb') Today's Appointments @stop
+@section('title') Appointments @stop
+@section('page') Appointments @stop
+@section('bcumb') Appointments @stop
 @section('content')
     @if(session()->has('message'))
         <div class="alert alert-{{ session('type') }}">
@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card p-2">
-                @if(count($todayAppointments) > 0)
+                @if(count($Appointments) > 0)
                     <table class="table table-sm table-hover">
                         <tr class="font-weight-bold">
                             <td>Patient Name</td>
@@ -20,7 +20,7 @@
                             <td>Status</td>
                             <td>Action</td>
                         </tr>
-                        @foreach($todayAppointments as $appointment)
+                        @foreach($Appointments as $appointment)
                             <tr>
                                 <td>{{ $appointment->patient_name }}</td>
                                 <td>{{ $appointment->appointment_date->format('M,d Y') }}</td>
@@ -33,14 +33,14 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('details.Appointments', $appointment->patient->id) }}">Details</a>
+                                    <a href="{{ route('all.AppointmentsDetails', $appointment->patient->id) }}">Details</a>
                                 </td>
                             </tr>
                         @endforeach
                     </table>
                 @else
                     <div class="p-5">
-                        <p class="alert alert-info">There are no appointments today.</p>
+                        <p class="alert alert-info">There are no appointments.</p>
                     </div>
                 @endif
             </div>

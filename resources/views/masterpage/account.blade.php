@@ -103,17 +103,6 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="{{ asset('js/parallax.min.js') }}"></script>
-<script src="{{ asset('js/jquery.nicescroll-master/jquery.nicescroll.min.js') }}"></script>
-<script>
-    $(function () {
-        $("body").niceScroll({
-            cursorcolor: "#1dd1a1",
-            cursorborder: 0,
-            cursorwidth: "8px",
-        });
-    });
-
-</script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.navbar .dmenu').hover(function () {

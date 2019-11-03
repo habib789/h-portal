@@ -102,7 +102,7 @@
                 'interval': 20,
                 'scrollbar': true,
                 'minTime': '8',
-                'maxTime':'8:00pm',
+                'maxTime':'10:00pm',
             });
         });
     </script>
