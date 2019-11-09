@@ -23,6 +23,7 @@ class DashboardController extends Controller
         return view('backend.dashboard', $data);
     }
 
+
     public function createPdf($id)
     {
         $data             = [];

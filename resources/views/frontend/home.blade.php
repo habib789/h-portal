@@ -3,11 +3,10 @@
 @section('cover')
     <div class="bg">
         <div class="bg-overly">
-            <div class="bg-content">
+            <div class="bg-content bg-overlay">
                 <h1 class="text-capitalize hungry">need a doctor?</h1>
                 <h1 class="text-capitalize">We are ensuring the best Quality and consistency to our patient</h1>
-                <br><br>
-                <a class="button btn-info btn-lg py-3 px-5" href="">APPOINTMENT NOW</a>
+
             </div>
         </div>
     </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\OrderCreate;
 use App\Models\Order;
+use App\Models\User;
+use App\Notifications\OrderNotify;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Stripe\Charge;
@@ -65,13 +67,16 @@ class CheckoutController extends Controller
                 $order = Order::with('user')->find($order->id);
                 event(new OrderCreate($order));
 
+//                $admin = User::where('role', 'admin')->get();
+//                $admin->notify(new OrderNotify($order));
+
                 session()->forget('cart');
                 return redirect()->route('shop')->with('success', 'Order created successfully');
             } else {
                 return redirect('/shop');
             }
-        }else{
-            return redirect()->route('cart')->with('toast_error','You have to order minimum purchase rate of BDT 100 TK');
+        } else {
+            return redirect()->route('cart')->with('toast_error', 'You have to order minimum purchase rate of BDT 100 TK');
         }
 
     }

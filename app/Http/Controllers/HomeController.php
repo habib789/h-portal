@@ -27,12 +27,23 @@ class HomeController extends Controller
 
     public function showShop()
     {
-        $data             = [];
-        $data['products'] = Product::with('category')->paginate(12);
-        $data['cart']     = session()->has('cart') ? session('cart') : [];
-        $data['subtotal'] = array_sum(array_column($data['cart'], 'total'));
-        $data['count']    = count($data['cart']);
-//        dd($data['count']);
+        $searchItem       = request()->input('search');
+        if (request()->input('search') !== null) {
+            $data             = [];
+            $data['products'] = Product::with('category')
+                ->where('name', 'like', '%'.$searchItem.'%')
+                ->paginate(12);
+            $data['cart']     = session()->has('cart') ? session('cart') : [];
+            $data['subtotal'] = array_sum(array_column($data['cart'], 'total'));
+            $data['count']    = count($data['cart']);
+        } else {
+            $data             = [];
+            $data['products'] = Product::with('category')->paginate(12);
+            $data['cart']     = session()->has('cart') ? session('cart') : [];
+            $data['subtotal'] = array_sum(array_column($data['cart'], 'total'));
+            $data['count']    = count($data['cart']);
+        }
+        $data['searchItem'] = $searchItem;
         return view('frontend.products', $data);
     }
 

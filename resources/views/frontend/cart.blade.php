@@ -16,7 +16,7 @@
                 <thead>
                 <tr>
                     <td colspan="7">
-                        <a class="btn btn-info btn-sm px-5" href="{{ route('shop') }}">Continue Shopping</a>
+                        <a class="btn btn-info btn-sm px-5" href="{{ route('shop') }}">Add medicines</a>
                     </td>
                 </tr>
                 <tr class="font-weight-bold">
@@ -108,12 +108,17 @@
             </div>
         @else
             <br>
-            <div class="alert alert-info">
-                Your cart is empty! <br>
-                You need to add some products First.
+            <div class="card-body">
+                <div class="text-center">
+                    <i class="fas fa-dolly fa-3x" style="color: #00c054;"></i>
+                </div>
+                <div class="alert alert-info mt-2">
+                    Your cart is empty! <br>
+                    You need to add some products First.
+                </div>
             </div>
             <div>
-                <a class="btn btn-info btn-sm px-5" href="{{ route('shop') }}">Continue Shopping</a>
+                <a class="btn btn-info btn-sm px-5" href="{{ route('shop') }}">Buy medicines</a>
             </div>
         @endif
     </div>

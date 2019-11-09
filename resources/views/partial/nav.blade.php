@@ -18,7 +18,7 @@
 {{--                <a class="nav-link" href="">Blog</a>--}}
 {{--            </li>--}}
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('shop') }}">Shop</a>
+                <a class="nav-link" href="{{ route('shop') }}">Pharmacy</a>
             </li>
 {{--            <li>--}}
 {{--                <a class="nav-link" href="#contact">Contact</a>--}}

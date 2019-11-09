@@ -11,14 +11,23 @@
 
 @section('content')
     <div class="container">
+        <div class="search-sec mt-3 w-50">
+            <form action="{{ route('shop') }}" method="get" novalidate="novalidate">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" class="form-control search-slt" placeholder="Enter medicine name">
+                    </div>
+                    <div class="form-group">
+                        <button class="button btn btn-info wrn-btn">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="row">
-
-
-            <div class="col-md-4 mt-5">
+            <div class="col-md-4 mt-3">
                 @include('partial.category')
             </div>
-            <div class="col-md-8 col-sm-12">
-                <p class="text-muted mt-5">Showing 1-12 of 30 Products</p>
+            <div class="col-md-8 col-sm-12 mt-5">
                 <div class="row" id="app">
                     @foreach($products as $product)
                         <div class="col-lg-3 col-md-6 mb-4">
@@ -28,9 +37,12 @@
                                         <img src="{{ asset('uploads/images/'.$product->photo) }}"
                                              class="figure-img img-fluid rounded" alt="...">
                                     </div>
+                                    @php
+                                        $name = str_replace($searchItem,'<span style="background-color:#0cb8b6;color:white;">'.$searchItem.'</span>', $product->name);
+                                    @endphp
                                     <figcaption class="figure-caption text-capitalize font-weight-bold text-center">
                                         <a href="">
-                                            {{ $product->name }}
+                                            {!! $name !!}
                                         </a>
                                         <small>{{ $product->type }}</small>
                                         <p> BDT {{ number_format($product->price,2) }}</p>
@@ -39,7 +51,7 @@
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <button
-                                                class="button btn btn-sm btn-block">add to cart
+                                            class="button btn btn-sm btn-block">add to cart
                                         </button>
                                     </form>
                                 </figure>
@@ -97,9 +109,14 @@
                                 </div>
                             </div>
                         @else
-                            <div class="alert alert-info">
-                                Your cart is empty! <br>
-                                You need to add some products First.
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <i class="fas fa-dolly fa-3x" style="color: #00c054;"></i>
+                                </div>
+                                <div class="alert alert-info mt-2">
+                                    Your cart is empty! <br>
+                                    You need to add some products First.
+                                </div>
                             </div>
                         @endif
                     </div>

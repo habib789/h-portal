@@ -18,7 +18,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/departments', 'HomeController@showDepartments')->name('department');
-Route::get('/shop', 'HomeController@showShop')->name('shop');
+Route::get('/pharmacy', 'HomeController@showShop')->name('shop');
 Route::get('/category/{slug}', 'HomeController@catList')->name('catList');
 Route::get('/departments-doctors/{slug}', 'HomeController@DeptDocList')->name('deptDoctor.show');
 Route::get('/departments-doctors/profile/{id}', 'HomeController@DocProfile')->name('DocProfile.show');

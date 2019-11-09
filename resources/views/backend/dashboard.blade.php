@@ -1,32 +1,73 @@
 @extends('masterpage.backend')
 @section('title') Dashboard @stop
-@section('bcumb')  Dashboard @stop
+@section('bcumb') Dashboard @stop
 @section('css')
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.charts.load('current', {'packages':['bar']});
+        google.charts.load('current', {'packages': ['bar']});
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Year', 'Sales', 'Expenses', 'Profit'],
-                ['2014', 1000, 400, 200],
-
-                @foreach($orders as $order)
-                {{ '["'.$order->created_at.'"],' }}
-                @endforeach
+                ['Date', 'Amount'],
+                ['Total', 'Amount'],
+                <?php
+                $orders = \App\Models\Order::get();
+                if (count($orders) > 0) {
+                    foreach ($orders as $order) {
+                        echo "['" . $order->created_at . "','" . $order->total_amount . "'],";
+                    }
+                }
+                ?>
             ]);
 
             var options = {
                 chart: {
-                    title: 'Company Performance',
-                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                    title: '',
+                    subtitle: 'Company statistical view: Daily Basis',
                 }
             };
 
             var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
             chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+
+
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                // ['Task', 'Hours per Day'],
+                // ['Work',     11],
+                // ['Eat',      2],
+                // ['Commute',  2],
+                // ['Watch TV', 2],
+                // ['Sleep',    7]
+                <?php
+                $appointments = \App\Models\Appointment::with('department')
+
+                    ->get();
+                if (count($appointments) > 0) {
+                    foreach ($appointments as $appointment) {
+                        echo "['" . $appointment->department->name . "','" . $appointment->id . "'],";
+                    }
+                }
+                ?>
+            ]);
+
+            var options = {
+                title: 'Department-wise Appointment'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
         }
     </script>
 @stop
@@ -97,10 +138,13 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-7">
+            <div class="card-body">
                 <div id="columnchart_material" style=" height: 300px;"></div>
             </div>
+        </div>
+        <div class="col-md-5 card-body">
+            <div id="piechart"></div>
         </div>
     </div>
 
