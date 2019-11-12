@@ -28,4 +28,9 @@ class Doctor extends Model
     public function timeSlots(){
         return $this->hasMany(TimeSlot::class);
     }
+
+    public function report()
+    {
+        return $this->hasOne(Report::class);
+    }
 }

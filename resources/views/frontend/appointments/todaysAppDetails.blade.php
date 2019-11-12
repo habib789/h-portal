@@ -14,7 +14,7 @@
     <div class="row mb-3">
         <div class="col-md-4">
             <div class="card">
-                @foreach($patient_details as $patient_detail)
+
                     <div class="card-header">
                         <small class="text-capitalize font-weight-bold">Patient Name</small>
                         <p>{{ $patient_detail->patient_name }}</p>
@@ -32,8 +32,8 @@
                         <small class="text-capitalize font-weight-bold">Patient Health Issue</small>
                         <p>{{ $patient_detail->health_issue }}</p>
                     </div>
-                @endforeach
-                <a class="button btn btn-info" href="{{ route('prescription') }}">Prescribe</a>
+
+                <a class="button btn btn-info" href="{{ route('prescription',$patient_detail->id) }}">Prescribe</a>
             </div>
         </div>
     </div>

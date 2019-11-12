@@ -27,7 +27,7 @@
                                 <td>{{ date('h:i A',$appointment->appointment_time) }}</td>
                                 <td>
                                     @if($appointment->appointment_status == 'prescribed')
-                                        <span class="badge bg-success">Prescribed</span>
+                                        <span class="badge bg-info text-white">Prescribed</span>
                                     @elseif($appointment->appointment_status == 'pending')
                                         <span class="badge bg-warning">Pending</span>
                                     @endif

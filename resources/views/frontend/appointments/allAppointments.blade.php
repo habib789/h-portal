@@ -27,14 +27,16 @@
                                 <td>{{ date('h:i A',$appointment->appointment_time) }}</td>
                                 <td>
                                     @if($appointment->appointment_status == 'prescribed')
-                                        <span class="badge bg-success">Prescribed</span>
+                                        <span class="badge bg-success text-white">Prescribed</span>
                                     @elseif($appointment->appointment_status == 'pending')
                                         <span class="badge bg-warning">Pending</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <a href="{{ route('all.AppointmentsDetails', $appointment->patient->id) }}">Details</a>
-                                </td>
+                                @if($appointment->appointment_status == 'prescribed')
+                                    <td>
+                                        <a href="{{ route('all.AppointmentsDetails', $appointment->id) }}">Details</a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </table>

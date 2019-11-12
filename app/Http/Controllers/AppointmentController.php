@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Days;
+use App\Models\Department;
 use App\Models\Doctor;
 use App\models\Patient;
+use App\Models\Report;
 use App\Models\TimeSlot;
 use Illuminate\Http\Request;
 
@@ -80,6 +82,8 @@ class AppointmentController extends Controller
         $data                      = [];
         $data['sidebar']           = true;
         $data['todayAppointments'] = Appointment::with('patient')
+            ->where('department_id', auth()->user()->doctor->department_id)
+            ->where('doctor_id', auth()->user()->doctor->id)
             ->where('appointment_date', $match_today)
             ->get();
         return view('frontend.appointments.todaysApp', $data);
@@ -89,10 +93,10 @@ class AppointmentController extends Controller
     {
         $data                    = [];
         $data['sidebar']         = true;
-        $data['patient_details'] = Appointment::with('patient')
+        $data['patient_detail'] = Appointment::with('patient')
             ->where('patient_id', $id)
             ->where('appointment_date', date('Y-m-d', strtotime(today())))
-            ->get();
+            ->first();
         return view('frontend.appointments.todaysAppDetails', $data);
     }
 
@@ -101,6 +105,8 @@ class AppointmentController extends Controller
         $data                 = [];
         $data['sidebar']      = true;
         $data['Appointments'] = Appointment::with('patient')
+            ->where('doctor_id', auth()->user()->doctor->id)
+            ->where('department_id', auth()->user()->doctor->department_id)
             ->orderByDesc('appointment_date')
             ->orderByDesc('appointment_time')
             ->paginate(7);
@@ -109,25 +115,77 @@ class AppointmentController extends Controller
 
     public function ShowAllAppointmentsDetails($id)
     {
-        $data                    = [];
-        $data['sidebar']         = true;
-        $date = Appointment::where('patient_id',$id)->get();
-        dd($date);
-        $data['patient_details'] = Appointment::with('patient')
-            ->where('patient_id', $id)
-            ->where('appointment_date', date('Y-m-d', strtotime(today())))
-            ->get();
-        return view('frontend.appointments.todaysAppDetails', $data);
-    }
-
-
-    public function showPrescriptionForm()
-    {
-        $data = [];
+        $data            = [];
         $data['sidebar'] = true;
-        return view('frontend.appointments.prescription',$data);
+        $data['report']  = Appointment::with('doctor', 'patient')
+            ->where('id', $id)
+            ->where('doctor_id', auth()->user()->doctor->id)
+            ->where('department_id', auth()->user()->doctor->department_id)
+            ->first();
+        $data['rep'] = Report::with(['appointment' => function ($query) {
+            $query->where('department_id', auth()->user()->doctor->department_id);
+        }])
+            ->where('appointment_id', $id)
+            ->where('doctor_id', auth()->user()->doctor->id)
+            ->first();
+        return view('frontend.appointments.allPatientReports', $data);
     }
 
 
+    public function showPrescriptionForm($id)
+    {
+        $data                = [];
+        $data['sidebar']     = true;
+        $data['appointment'] = Appointment::with('patient', 'doctor')
+            ->where('id', $id)
+            ->get();
+        return view('frontend.appointments.prescription', $data);
+    }
+
+    public function PrescriptionStore(Request $request)
+    {
+        $request->validate([
+            'appointment_id' => 'required',
+            'patient_id'     => 'required',
+            'doctor_id'      => 'required',
+            'test'           => 'string|max:255|nullable',
+            'medication'     => 'string|max:255|nullable',
+            'notes'          => 'required|string|max:255',
+        ]);
+
+        try {
+            $insertReport = Report::create([
+                'appointment_id' => $request->input('appointment_id'),
+                'patient_id'     => $request->input('patient_id'),
+                'doctor_id'      => $request->input('doctor_id'),
+                'test'           => trim($request->input('test')),
+                'medication'     => trim($request->input('medication')),
+                'notes'          => trim($request->input('notes')),
+            ]);
+            $insertReport->appointment()->update([
+                'appointment_status' => 'prescribed',
+            ]);
+            return redirect()->back()->with('success', 'Prescription created');
+        } catch (\Exception $e) {
+            session()->flash('type', 'danger');
+            session()->flash('message', $e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function myMediRecords($id)
+    {
+        $data            = [];
+        $data['sidebar'] = true;
+        $data['report']  = Appointment::with('doctor', 'patient')
+            ->where('id', $id)
+            ->where('patient_id', auth()->user()->patient->id)
+            ->first();
+        $data['rep'] = Report::with('appointment')
+            ->where('appointment_id', $id)
+            ->where('patient_id', auth()->user()->patient->id)
+            ->first();
+        return view('frontend.appointments.myRecords', $data);
+    }
 
 }

@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class doctorsController extends Controller
 {
+    public function index()
+    {
+        $data=[];
+        $data['sidebar']= true;
+        return view('frontend.doctor.dashboard', $data);
+    }
     public function verify()
     {
         $data            = [];

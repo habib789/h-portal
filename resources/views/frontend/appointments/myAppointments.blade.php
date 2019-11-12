@@ -31,10 +31,18 @@
                                 <td>{{ $appointment->appointment_date->format('M,d Y') }}</td>
                                 <td>{{ date('h:i A',$appointment->appointment_time) }}</td>
                                 <td>{{ $appointment->created_at->diffForHumans() }}</td>
-                                <td>{{ $appointment->appointment_status }}</td>
                                 <td>
-                                    <a href="">Details</a>
+                                    @if($appointment->appointment_status == 'prescribed')
+                                        <span class="badge bg-success text-white">Prescribed</span>
+                                    @elseif($appointment->appointment_status == 'pending')
+                                        <span class="badge bg-warning">Pending</span>
+                                    @endif
                                 </td>
+                                @if($appointment->appointment_status == 'prescribed')
+                                    <td>
+                                        <a href="{{ route('myMediRecords', $appointment->id) }}">Prescription</a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </table>

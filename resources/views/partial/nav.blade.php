@@ -40,7 +40,7 @@
                     </li>
                 @elseif(auth()->user()->role == 'doctor')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('myProfile') }}">My Account</a>
+                        <a class="nav-link" href="{{ route('Profile.Doc') }}">My Account</a>
                     </li>
                 @else
                     <li class="nav-item">

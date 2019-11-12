@@ -13,7 +13,7 @@
                             <div class="col-12">
                                 <h4>
                                     <i class="fas fa-globe"></i> Health Portal
-                                    <small class="float-right">Date: {{ $order->created_at }}</small>
+                                    <small class="float-right">Date: {{ $order->created_at->format('d-m-Y h:i A') }}</small>
                                 </h4>
                             </div>
                         </div>

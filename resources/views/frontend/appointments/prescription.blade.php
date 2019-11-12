@@ -16,40 +16,46 @@
                     Prescription From
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="{{ route('prescription.store') }}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <label for="patient_name" class="font-weight-bold">First name <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text"
-                                           class="form-control @error('patient_name') is-invalid @enderror"
-                                           name="patient_name" id="first_name"
-                                           value="{{ old('patient_name') }}"/>
-                                    @error('patient_name')
+                                    <label for="test" class="font-weight-bold">Medical Test</label> <span><small>(Optional)</small></span><br>
+                                    <textarea class="form-control text-left" name="test" id="test" placeholder="Write some medical tests if needed." rows="4">
+                                        {{ old('test') }}
+                                    </textarea>
+                                    @error('test')
                                     <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="test" class="font-weight-bold">Medical Test<span
-                                            class="text-muted">(Optional)</span></label><br>
-                                    <small class="text-muted">Write some medical test if needed</small>
-                                    <textarea class="form-control text-left" name="test" id="medication" rows="4"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="medication" class="font-weight-bold">Medication Details <span
-                                            class="text-danger">*</span></label><br>
+                                    <label for="medication" class="font-weight-bold">Medication Details</label><br>
                                     <small class="text-muted">Please type in your medication along with prescribed dosage information.</small>
-                                    <textarea class="form-control text-left" name="medication" id="medication" placeholder="Example-Medicine name/1+0+1/after or before meal" rows="4"></textarea>
+                                    <textarea class="form-control text-left" name="medication" id="medication" placeholder="Example-Medicine name/1+0+1/after or before meal" rows="4">
+                                        {{ old('medication') }}
+                                    </textarea>
                                     @error('medication')
                                     <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="notes" class="font-weight-bold">Notes<span
+                                            class="text-danger">*</span></label><br>
+                                    <textarea class="form-control @error('notes') is-invalid @enderror text-left" name="notes" id="notes" placeholder="Write notes" rows="4"></textarea>
+                                    @error('notes')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <input type="hidden" name="appointment_id" id="" value="{{ $appointment[0]->id }}">
+                                <input type="hidden" name="patient_id" id="" value="{{ $appointment[0]->patient_id }}">
+                                <input type="hidden" name="doctor_id" id="" value="{{ $appointment[0]->doctor_id }}">
                                 <button class="button btn btn-info">Prescribe</button>
                             </div>
                         </div>

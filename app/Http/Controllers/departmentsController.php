@@ -52,7 +52,7 @@ class departmentsController extends Controller
             Department::create($inputs);
 //            session()->flash('type', 'success');
 //            session()->flash('message', 'successfully created a new department');
-            return redirect()->route('departments.index')->with('success','successfully created a new department');
+            return redirect()->route('departments.index')->with('success','successfully created new department');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());

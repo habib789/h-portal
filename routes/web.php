@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/doctor/verify/license', 'doctorsController@verify')->name('license.verify');
         Route::put('/doctor/verify/{id}/license', 'doctorsController@verifyKey')->name('license.update');
         Route::group(['middleware' => 'verified'], function () {
-            Route::get('/account', 'AccountController@index')->name('myProfile');
+            Route::get('/account/doctor', 'doctorsController@index')->name('Profile.Doc');
             Route::get('/account/doctor/information', 'doctorsController@DocAccountInformation')->name('docAccount.information');
             Route::get('/account/doctor/license/update', 'doctorsController@licenseUpdateForm')->name('licenseForm.update');
             Route::put('/account/doctor/license/{id}/update', 'doctorsController@licenseUpdate')->name('licenseKey.update');
@@ -63,7 +63,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/account/patients/all/appointments/{id}/details', 'AppointmentController@ShowAllAppointmentsDetails')->name('all.AppointmentsDetails');
             Route::get('/account/today/appointments','AppointmentController@DocAppointments')->name('today.Appointments');
             Route::get('/account/today/appointments/{id}/details','AppointmentController@AppointmentsDetails')->name('details.Appointments');
-            Route::get('/account/doctor/prescription','AppointmentController@showPrescriptionForm')->name('prescription');
+
+            Route::get('/account/doctor/{id}/prescription','AppointmentController@showPrescriptionForm')->name('prescription');
+            Route::post('/account/doctor/prescription','AppointmentController@PrescriptionStore')->name('prescription.store');
+
         });
     });
 
@@ -80,6 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/doctor-appointment/{id}','AppointmentController@showAppointment')->name('appointment');
         Route::post('/doctor-appointment/{id}','AppointmentController@appointmentStore');
         Route::get('/account/appointment-info','AppointmentController@MyAppointments')->name('myAppointments');
+        Route::get('/account/appointment/{id}/my_medical_records','AppointmentController@myMediRecords')->name('myMediRecords');
 
 
 

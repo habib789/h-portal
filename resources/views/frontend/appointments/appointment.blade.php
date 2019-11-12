@@ -49,44 +49,46 @@
                         @enderror
                     </div>
 
-                        <div class="form-group">
-                            <label for="appointment_time" class="font-weight-bold">Appointment Time</label>
-                            <input type="text" name="appointment_time" id="timepick"
-                                   class="appointment_time form-control @error('appointment_time') is-invalid @enderror"
-                                   value="{{ old('appointment_time') }}"/>
-                            <small>Select time between {{ date('h:i A',$slot->start_time).'-'.date('h:i A',$slot->end_time) }}</small>
-                            @error('appointment_time')
-                            <span class="invalid-feedback" role="alert">
+                    <div class="form-group">
+                        <label for="appointment_time" class="font-weight-bold">Appointment Time</label>
+                        <input type="text" name="appointment_time" id="timepick"
+                               class="appointment_time form-control @error('appointment_time') is-invalid @enderror"
+                               value="{{ old('appointment_time') }}"/>
+                        <small>Select time
+                            between {{ date('h:i A',$slot->start_time).'-'.date('h:i A',$slot->end_time) }}</small>
+                        @error('appointment_time')
+                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="health_issue" class="font-weight-bold">Health Issue</label>
-                            <textarea name="health_issue"
-                                      class="form-control @error('health_issue') is-invalid @enderror" id="health_issue"
-                                      cols="30" rows="3" placeholder="Give a brief about your health issue">
-                            {{ old('health_issue') }}
-                        </textarea>
-                            @error('health_issue')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="appointment_fee" class="font-weight-bold">Appointment Fee</label>
-                            <input type="text"
-                                   class="form-control @error('appointment_fee') is-invalid @enderror"
-                                   name="appointment_fee" id="appointment_fee"
-                                   value="{{ number_format('500',2) }}" readonly/>
-                            @error('appointment_fee')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                            @enderror
-                        </div>
-                        <input type="hidden" name="doctor_id" id="" value="{{ $slot->doctor->id }}">
-                        <input type="hidden" name="department_id" id="" value="{{ $slot->doctor->department->id }}">
-                        <input type="hidden" name="patient_id" id="" value="{{ $patient->id }}">
-                        <input type="hidden" name="time_slot_id" id="" value="{{ $slot->id }}">
-                        <button class="button btn btn-info btn-lg">BOOK APPOINTMENT</button>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="health_issue" class="font-weight-bold">Health Issue<span
+                                class="text-danger">*</span></label><br>
+                        <textarea class="form-control @error('health_issue') is-invalid @enderror text-left"
+                                  name="health_issue" id="health_issue"
+                                  placeholder="Describe your health issue in few words" rows="4"></textarea>
+                        @error('health_issue')
+                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="appointment_fee" class="font-weight-bold">Appointment Fee</label>
+                        <input type="text"
+                               class="form-control @error('appointment_fee') is-invalid @enderror"
+                               name="appointment_fee" id="appointment_fee"
+                               value="{{ number_format('500',2) }}" readonly/>
+                        @error('appointment_fee')
+                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+                    </div>
+                    <input type="hidden" name="doctor_id" id="" value="{{ $slot->doctor->id }}">
+                    <input type="hidden" name="department_id" id="" value="{{ $slot->doctor->department->id }}">
+                    <input type="hidden" name="patient_id" id="" value="{{ $patient->id }}">
+                    <input type="hidden" name="time_slot_id" id="" value="{{ $slot->id }}">
+                    <button class="button btn btn-info btn-lg">BOOK APPOINTMENT</button>
                 </form>
             </div>
         </div>
@@ -102,7 +104,7 @@
                 'interval': 20,
                 'scrollbar': true,
                 'minTime': '8',
-                'maxTime':'10:00pm',
+                'maxTime': '10:00pm',
             });
         });
     </script>

@@ -29,4 +29,9 @@ class Appointment extends Model
     {
         return $this->belongsTo(Department::class);
     }
+
+    public function report()
+    {
+        return $this->hasOne(Report::class);
+    }
 }
