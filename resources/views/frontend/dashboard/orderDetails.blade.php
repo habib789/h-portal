@@ -89,7 +89,7 @@
                             <div class="col-12">
                                 <a href="" target="" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                                 <a href="{{ route('order.pdf', $order->id) }}" class="button btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-download"></i> Download PDF
+                                    <i class="fas fa-download"></i> Download Invoice
                                 </a>
                             </div>
                         </div>

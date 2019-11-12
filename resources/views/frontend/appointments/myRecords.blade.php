@@ -90,7 +90,7 @@
                         <div class="row no-print">
                             <div class="col-12">
                                 <a href="" target="" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                                <a href="" class="button btn btn-primary float-right" style="margin-right: 5px;">
+                                <a href="{{ route('electronic.prescription', $report->id) }}" class="button btn btn-primary float-right" style="margin-right: 5px;">
                                     <i class="fas fa-download"></i> Download PDF
                                 </a>
                             </div>

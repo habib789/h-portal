@@ -9,6 +9,7 @@ use App\Models\Doctor;
 use App\models\Patient;
 use App\Models\Report;
 use App\Models\TimeSlot;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -188,4 +189,20 @@ class AppointmentController extends Controller
         return view('frontend.appointments.myRecords', $data);
     }
 
+    public function elcetronicInvoice($id)
+    {
+        $data            = [];
+        $data['sidebar'] = true;
+        $data['report']  = Appointment::with('doctor', 'patient')
+            ->where('id', $id)
+            ->where('patient_id', auth()->user()->patient->id)
+            ->first();
+        $data['rep'] = Report::with('appointment')
+            ->where('appointment_id', $id)
+            ->where('patient_id', auth()->user()->patient->id)
+            ->first();
+
+        $pdf              = PDF::loadView('frontend.dashboard.pdf.myRec', $data);
+        return $pdf->download('e-prescription.pdf');
+    }
 }
