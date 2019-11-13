@@ -33,7 +33,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('details.Appointments', $appointment->patient->id) }}">Details</a>
+                                    <a href="{{ route('details.Appointments', $appointment->id) }}">Details</a>
                                 </td>
                             </tr>
                         @endforeach

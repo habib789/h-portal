@@ -32,7 +32,6 @@
                         <small class="text-capitalize font-weight-bold">Patient Health Issue</small>
                         <p>{{ $patient_detail->health_issue }}</p>
                     </div>
-
                 <a class="button btn btn-info" href="{{ route('prescription',$patient_detail->id) }}">Prescribe</a>
             </div>
         </div>

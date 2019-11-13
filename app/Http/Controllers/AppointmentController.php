@@ -72,6 +72,7 @@ class AppointmentController extends Controller
         $data['sidebar']      = true;
         $data['appointments'] = Appointment::with('patient', 'doctor', 'timeSlot')
             ->where('patient_id', auth()->user()->patient->id)
+            ->orderByDesc('created_at')
             ->get();
         return view('frontend.appointments.myAppointments', $data);
     }
@@ -92,10 +93,10 @@ class AppointmentController extends Controller
 
     public function AppointmentsDetails($id)
     {
-        $data                    = [];
-        $data['sidebar']         = true;
+        $data                   = [];
+        $data['sidebar']        = true;
         $data['patient_detail'] = Appointment::with('patient')
-            ->where('patient_id', $id)
+            ->where('id', $id)
             ->where('appointment_date', date('Y-m-d', strtotime(today())))
             ->first();
         return view('frontend.appointments.todaysAppDetails', $data);
@@ -123,7 +124,7 @@ class AppointmentController extends Controller
             ->where('doctor_id', auth()->user()->doctor->id)
             ->where('department_id', auth()->user()->doctor->department_id)
             ->first();
-        $data['rep'] = Report::with(['appointment' => function ($query) {
+        $data['rep']     = Report::with(['appointment' => function ($query) {
             $query->where('department_id', auth()->user()->doctor->department_id);
         }])
             ->where('appointment_id', $id)
@@ -139,7 +140,9 @@ class AppointmentController extends Controller
         $data['sidebar']     = true;
         $data['appointment'] = Appointment::with('patient', 'doctor')
             ->where('id', $id)
-            ->get();
+            ->where('appointment_date', date('Y-m-d', strtotime(today())))
+            ->first();
+//        dd($data['appointment']);
         return view('frontend.appointments.prescription', $data);
     }
 
@@ -182,7 +185,7 @@ class AppointmentController extends Controller
             ->where('id', $id)
             ->where('patient_id', auth()->user()->patient->id)
             ->first();
-        $data['rep'] = Report::with('appointment')
+        $data['rep']     = Report::with('appointment')
             ->where('appointment_id', $id)
             ->where('patient_id', auth()->user()->patient->id)
             ->first();
@@ -197,12 +200,36 @@ class AppointmentController extends Controller
             ->where('id', $id)
             ->where('patient_id', auth()->user()->patient->id)
             ->first();
-        $data['rep'] = Report::with('appointment')
+        $data['rep']     = Report::with('appointment')
             ->where('appointment_id', $id)
             ->where('patient_id', auth()->user()->patient->id)
             ->first();
 
-        $pdf              = PDF::loadView('frontend.dashboard.pdf.myRec', $data);
+        $pdf = PDF::loadView('frontend.dashboard.pdf.myRec', $data);
         return $pdf->download('e-prescription.pdf');
+    }
+
+    public function updatePrescriptionForm($id)
+    {
+        $data                  = [];
+        $data['sidebar']       = true;
+        $data['patientReport'] = Report::where('appointment_id', $id)->first();
+        return view('frontend.appointments.updatePrescription', $data);
+    }
+
+    public function updatePrescription(Request $request, $id)
+    {
+        $request->validate([
+            'test'       => 'string|max:255|nullable',
+            'medication' => 'string|max:255|nullable',
+            'notes'      => 'required|string|max:255',
+        ]);
+        $update_report = Report::where('appointment_id',$id)->first();
+        $update_report->update([
+            'test'       => trim($request->input('test')),
+            'medication' => trim($request->input('medication')),
+            'notes'      => trim($request->input('notes')),
+        ]);
+        return redirect()->back()->with('success','Prescription Updated');
     }
 }

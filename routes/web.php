@@ -66,6 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::get('/account/doctor/{id}/prescription','AppointmentController@showPrescriptionForm')->name('prescription');
             Route::post('/account/doctor/prescription','AppointmentController@PrescriptionStore')->name('prescription.store');
+            Route::get('/account/doctor/prescription/{id}/edit','AppointmentController@updatePrescriptionForm')->name('prescription.show');
+            Route::put('/account/doctor/prescription/{id}/edit','AppointmentController@updatePrescription')->name('prescription.update');
 
         });
     });

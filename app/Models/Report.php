@@ -17,4 +17,9 @@ class Report extends Model
     {
         return $this->belongsTo(Doctor::class);
     }
+
+    public function patient()
+    {
+        return $this->hasOne(Patient::class);
+    }
 }
