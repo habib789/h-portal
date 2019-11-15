@@ -34,23 +34,27 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <p>Total Appointments <span style="font-size: 18px;"
-                                                        class="badge badge-secondary">{{ $total_appointment }}</span>
-                            </p>
-                        </div>
-                        <div class="card-header">
-                            <p>Successful Visits <span style="font-size: 18px;" class="badge badge-success">{{ $success_appointment }}</span>
-                            </p>
-                        </div>
-                        <div class="card-header">
-                            <p>Pending Appointments <span style="font-size: 18px;" class="badge badge-danger">{{ $pending_appointment }}</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+              <div class="card">
+                  <div class="card-body">
+                      <form action="{{ route('uploadPhoto') }}" method="post" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          <div class="form-group">
+                              <label class="font-weight-bold">Upload your photo <span
+                                      class="text-danger">*</span></label>
+                              <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
+                                     value="{{ old('image') }}"/>
+                              <small class="text-muted">Photo must be no longer than 10MB</small>
+                              @error('image')
+                              <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                              @enderror
+                          </div>
+                          <button class="button btn btn-info">Upload</button>
+                      </form>
+                  </div>
+              </div>
             </div>
         </div>
     @endif

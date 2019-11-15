@@ -10,12 +10,11 @@
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ['Date', 'Amount'],
-                ['Total', 'Amount'],
                 <?php
                 $orders = \App\Models\Order::get();
                 if (count($orders) > 0) {
                     foreach ($orders as $order) {
-                        echo "['" . $order->created_at . "','" . $order->total_amount . "'],";
+                        echo "['" . date('d-m-y',strtotime($order->created_at)) . "','" . $order->total_amount . "'],";
                     }
                 }
                 ?>
@@ -43,16 +42,15 @@
         function drawChart() {
 
             var data = google.visualization.arrayToDataTable([
-                // ['Task', 'Hours per Day'],
-                // ['Work',     11],
-                // ['Eat',      2],
+                ['Task', 'Hours per Day'],
+                ['Work',     11],
+                ['Eat',      2],
                 // ['Commute',  2],
                 // ['Watch TV', 2],
                 // ['Sleep',    7]
                 <?php
                 $appointments = \App\Models\Appointment::with('department')
-
-                    ->get();
+                 ->get();
                 if (count($appointments) > 0) {
                     foreach ($appointments as $appointment) {
                         echo "['" . $appointment->department->name . "','" . $appointment->id . "'],";
@@ -109,7 +107,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Sales</span>
-                    <span class="info-box-number">{{ $total_orders }}</span>
+                    <span class="info-box-number">BDT {{ $total_orders }} TK</span>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="invoice p-3 mb-3">
+                    <div class="invoice p-3 mb-3" id="app">
                         <div class="row">
                             <div class="col-12">
                                 <h4>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="row no-print">
                             <div class="col-12">
-                                <a href="" target="" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                <a href="" @click.prevent="printMe()" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                                 <a href="{{ route('pdf.create', $order->id) }}" class="button btn btn-info float-right" style="margin-right: 5px;">
                                     <i class="fas fa-download"></i> Generate PDF
                                 </a>

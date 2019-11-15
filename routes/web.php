@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/doctor/verify/{id}/license', 'doctorsController@verifyKey')->name('license.update');
         Route::group(['middleware' => 'verified'], function () {
             Route::get('/account/doctor', 'doctorsController@index')->name('Profile.Doc');
+            Route::get('/account/doctor/photo/upload', 'doctorsController@uploadPhotoForm')->name('uploadPhoto');
+            Route::put('/account/doctor/photo/upload', 'doctorsController@uploadPhoto');
             Route::get('/account/doctor/information', 'doctorsController@DocAccountInformation')->name('docAccount.information');
             Route::get('/account/doctor/license/update', 'doctorsController@licenseUpdateForm')->name('licenseForm.update');
             Route::put('/account/doctor/license/{id}/update', 'doctorsController@licenseUpdate')->name('licenseKey.update');
@@ -76,6 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
 //    Verified User
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/account', 'AccountController@index')->name('myProfile');
+        Route::get('/account/patient/photo/upload', 'AccountController@uploadPhotoForm')->name('uploadPatientPhoto');
+        Route::put('/account/patient/photo/upload', 'AccountController@uploadPhoto');
         Route::get('/account/patient/information', 'AccountController@PatientAccountInformation')->name('account.information');
         Route::get('/account/info/{id}/update', 'AccountController@UserUpdateInfoShow')->name('UserInfo.show');
         Route::put('/account/info/{id}/update', 'AccountController@UserInfoUpdate')->name('UserInfo.update');

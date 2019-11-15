@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Days;
 use App\Models\Doclicense;
 use App\Models\Doctor;
 use App\Models\TimeSlot;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class doctorsController extends Controller
 {
@@ -14,8 +16,44 @@ class doctorsController extends Controller
     {
         $data=[];
         $data['sidebar']= true;
+        $data['doc'] = Doctor::find(auth()->user()->doctor->id);
+        $data['total_appointment'] = Appointment::where('doctor_id', auth()->user()->doctor->id)
+            ->count();
+        $data['success_appointment'] = Appointment::where('doctor_id', auth()->user()->doctor->id)
+            ->where('appointment_status','prescribed')
+            ->count();
+        $data['pending_appointment'] = Appointment::where('doctor_id', auth()->user()->doctor->id)
+            ->where('appointment_status','pending')
+            ->count();
         return view('frontend.doctor.dashboard', $data);
     }
+
+    public function uploadPhotoForm()
+    {
+        $data=[];
+        $data['sidebar']= true;
+        $data['doc'] = Doctor::find(auth()->user()->doctor->id);
+        return view('frontend.doctor.uploadPhoto', $data);
+    }
+
+    public function uploadPhoto(Request $request)
+    {
+        $request->validate([
+           'image' => 'required|image|max:10240',
+        ]);
+        $docPhoto = $request->file('image');
+//        dd($docPhoto);
+        $docPhoto_file = uniqid('doc_', true) . Str::random(10) . '.' . $docPhoto->getClientOriginalExtension();
+        if ($docPhoto->isValid()) {
+            $docPhoto->storeAs('images', $docPhoto_file);
+        }
+        $uploadPhoto = Doctor::find(auth()->user()->doctor->id);
+        $uploadPhoto->update([
+            'image'=> $docPhoto_file,
+        ]);
+        return redirect()->back()->with('success', 'Picture uploaded');
+    }
+
     public function verify()
     {
         $data            = [];

@@ -4,10 +4,10 @@
     </div>
     <div class="card-body">
         <ul class="nav nav-pills nav-sidebar flex-column">
-            <li class="nav-item">
-                <a href="{{ route('myProfile') }}" class="nav-link text-dark">Dashboard</a>
-            </li>
             @if(auth()->user()->role == 'patient')
+                <li class="nav-item">
+                    <a href="{{ route('myProfile') }}" class="nav-link text-dark">Dashboard</a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('account.information') }}" class="nav-link text-dark">Account Information</a>
                 </li>
@@ -22,6 +22,9 @@
                 </li>
 
             @elseif(auth()->user()->role == 'doctor')
+                <li class="nav-item">
+                    <a href="{{ route('Profile.Doc') }}" class="nav-link text-dark">Dashboard</a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('docAccount.information') }}" class="nav-link text-dark">Account Information</a>
                 </li>

@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\models\Patient;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 
 class AccountController extends Controller
@@ -15,7 +16,34 @@ class AccountController extends Controller
     {
         $data            = [];
         $data['sidebar'] = true;
+        $data['patient'] = Patient::find(auth()->user()->patient->id);
         return view('frontend.dashboard.accounts', $data);
+    }
+
+    public function uploadPhotoForm()
+    {
+        $data            = [];
+        $data['sidebar'] = true;
+        $data['patient'] = Patient::find(auth()->user()->patient->id);
+        return view('frontend.dashboard.patientPic', $data);
+    }
+
+    public function uploadPhoto(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|max:10240',
+        ]);
+        $patPhoto = $request->file('image');
+//        dd($docPhoto);
+        $patPhoto_file = uniqid('pat_', true) . Str::random(10) . '.' . $patPhoto->getClientOriginalExtension();
+        if ($patPhoto->isValid()) {
+            $patPhoto->storeAs('images', $patPhoto_file);
+        }
+        $uploadPhoto = Patient::find(auth()->user()->patient->id);
+        $uploadPhoto->update([
+            'image'=> $patPhoto_file,
+        ]);
+        return redirect()->back()->with('success', 'Picture uploaded');
     }
 
     public function showOrder()

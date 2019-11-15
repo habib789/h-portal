@@ -18,6 +18,7 @@
                             </div>
                         </div>
 
+                    <div id="app">
                         <div class="row invoice-info">
                             <div class="col-sm-4">
                                 Customer : <span class="font-weight-bold">{{ $order->customer_name }}</span>
@@ -85,14 +86,16 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row no-print">
                             <div class="col-12">
-                                <a href="" target="" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                <a href="" @click.prevent="printMe()" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                                 <a href="{{ route('order.pdf', $order->id) }}" class="button btn btn-primary float-right" style="margin-right: 5px;">
                                     <i class="fas fa-download"></i> Download Invoice
                                 </a>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ class DashboardController extends Controller
     {
         $data           = [];
         $data['total_appointments'] = Appointment::select('id')->count();
-        $data['total_orders'] = Order::select('id')->count();
+        $data['total_orders'] = Order::sum('total_amount');
         $data['totals'] = User::select('id')->count();
         $data['orders'] = Order::get();
         return view('backend.dashboard', $data);

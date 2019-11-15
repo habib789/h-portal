@@ -3,11 +3,12 @@
 @section('page') Prescription @stop
 @section('bcumb') Prescription @stop
 
+
 @section('content')
     <section class="content card">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-8">
                     <div class="invoice p-3 mb-3">
                         <div class="row">
                             <div class="col-12">
@@ -97,8 +98,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="star">
+                        <input type="radio" name="example" class="rating" value="1" />
+                        <input type="radio" name="example" class="rating" value="2" />
+                        <input type="radio" name="example" class="rating" value="3" />
+                        <input type="radio" name="example" class="rating" value="4" />
+                        <input type="radio" name="example" class="rating" value="5" />
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
 @stop
+
