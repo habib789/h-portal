@@ -11,6 +11,8 @@ use App\Models\Report;
 use App\Models\TimeSlot;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 class AppointmentController extends Controller
 {
@@ -49,6 +51,14 @@ class AppointmentController extends Controller
 
 
         if ($findAppointment == 0) {
+            Stripe::setApiKey('sk_test_9yfUqjk39wVMpolDQ8fpk4GB003GyLgymJ');
+            $token  = $_POST['stripeToken'];
+            $charge = Charge::create([
+                'amount'      => $request->input('appointment_fee') * 100,
+                'currency'    => 'usd',
+                'description' => 'Amount Paid',
+                'source'      => $token,
+            ]);
             Appointment::create([
                 'patient_id'       => $request->input('patient_id'),
                 'doctor_id'        => $request->input('doctor_id'),

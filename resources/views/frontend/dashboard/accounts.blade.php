@@ -16,13 +16,13 @@
                     <div class="card">
                         <div class="card-body">
                             <div style="max-height: 150px; max-width: 105px;" class="mx-auto">
-                                @if($patient->image!==null)
+                                @if(auth()->user()->patient->image!==null)
                                     <img src="{{ asset('uploads/images/'. $patient->image) }}" alt=""
                                          class="img-circle img-fluid">
-                                @elseif(auth()->user()->patient->gender=='female')
+                                @elseif(auth()->user()->patient->gender=='female' && auth()->user()->patient->image=="")
                                     <img src="{{ asset('img/femaledoc.jpg') }}" alt="" class="img-circle img-fluid">
-                                @elseif(auth()->user()->patient->gender == 'male')
-                                    <img src="{{ asset('uploads/images/'. $patient->image) }}" alt=""
+                                @elseif(auth()->user()->patient->gender == 'male' && auth()->user()->patient->image=="")
+                                    <img src="{{ asset('img/maledoc.jpg') }}" alt="error"
                                          class="img-circle img-fluid">
                                 @endif
                                 <div class="my-2">
