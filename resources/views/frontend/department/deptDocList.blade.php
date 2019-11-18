@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-5 text-center">
                                 @if($doctor->image !== null)
-                                    <img src="{{ asset('uploads/images'. $doctor->image) }}" alt="" class="img-circle img-fluid">
+                                    <img src="{{ asset('uploads/images/'. $doctor->image) }}" alt="" class="img-circle img-fluid">
                                 @elseif($doctor->gender== 'male')
                                     <img src="{{ asset('img/maledoc.jpg') }}" alt="" class="img-circle img-fluid">
                                 @elseif($doctor->gender=='female')

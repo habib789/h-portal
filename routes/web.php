@@ -91,6 +91,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/account/appointment-info','AppointmentController@MyAppointments')->name('myAppointments');
         Route::get('/account/appointment/{id}/my_medical_records','AppointmentController@myMediRecords')->name('myMediRecords');
         Route::get('/account/prescription/{id}/electronic-invoice', 'AppointmentController@elcetronicInvoice')->name('electronic.prescription');
+        Route::post('/account/prescription/doctor-rating', 'AppointmentController@ratings')->name('ratings');
 
 
 

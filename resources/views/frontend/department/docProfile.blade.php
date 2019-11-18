@@ -1,5 +1,11 @@
 @extends('masterpage.frontend')
-
+@section('css')
+    <style>
+        ul li h3{
+            color: #0cb8b6;
+        }
+    </style>
+@endsection
 @section('cover')
     <div class="context">
         <h1 class="font-weight-bold">Doctor Profile</h1>
@@ -16,18 +22,21 @@
                     <div class="card card-primary card-outline">
                         <div class="card-body">
                             <div class="text-center">
-                                @if($doctor->gender== 'male')
+                                @if($doctor->image !== null)
+                                    <img src="{{ asset('uploads/images/'. $doctor->image) }}" alt=""
+                                         class="img-circle img-fluid">
+                                @elseif($doctor->gender== 'male')
                                     <img src="{{ asset('img/maledoc.jpg') }}" alt="" class="img-circle img-fluid">
                                 @elseif($doctor->gender=='female')
                                     <img src="{{ asset('img/femaledoc.jpg') }}" alt="" class="img-circle img-fluid">
                                 @endif
                             </div>
 
-                            <h5 class="profile-username text-center">
+                            <h5 class="profile-username text-center mt-2">
                                 Dr. {{ $doctor->first_name.' '.$doctor->last_name }}
                             </h5>
 
-                            <p class="text-muted text-center">
+                            <p class="text-muted text-center text-capitalize">
                                 Department: <b>{{ $doctor->department->name }}</b>
                             </p>
 
@@ -35,6 +44,28 @@
                                 <li class="list-group-item">
                                     <b>Total visitor</b> <a class="float-right">1,322</a>
                                 </li>
+                                @if($ratingCount !==0)
+                                    <li class="list-group-item">
+                                        @if($rate == 1)
+                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9734; &#9734; &#9734;
+                                                &#9734;</h3>
+                                        @elseif($rate == 2)
+                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9734; &#9734;
+                                                &#9734;</h3>
+                                        @elseif($rate == 3)
+                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9733; &#9734;
+                                                &#9734;</h3>
+                                        @elseif($rate == 4)
+                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9733; &#9733;
+                                                &#9734;</h3>
+                                        @elseif($rate == 5)
+                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9733; &#9733;
+                                                &#9733;</h3>
+                                        @elseif($rate == 0)
+                                            <b>Ratings</b> <h3 class="float-right">Not rated yet</h3>
+                                        @endif
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -63,10 +94,6 @@
                                 <p class="text-muted">{{ $doctor->address }}</p>
                                 <hr>
                             @endif
-
-                            <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                                fermentum enim neque.</p>
                         </div>
                     </div>
                 </div>

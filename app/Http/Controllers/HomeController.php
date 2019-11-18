@@ -7,6 +7,7 @@ use App\Models\Days;
 use App\Models\Department;
 use App\Models\Doctor;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Models\TimeSlot;
 use Illuminate\Http\Request;
 
@@ -71,9 +72,7 @@ class HomeController extends Controller
             ->select(['id', 'name', 'slug', 'active'])
             ->where('slug', $slug)
             ->first();
-//        dd($data['departments']);
         $data['doctors'] = $data['depts']->doctors;
-//        dd($data['doctors']);
         return view('frontend.department.deptDocList', $data);
     }
 
@@ -83,6 +82,15 @@ class HomeController extends Controller
         $data['doctor'] = Doctor::with('department', 'timeSlots')->findOrFail($id);
         $data['days']   = Days::get();
         $data['slots']  = TimeSlot::with('day')->where('doctor_id', $id)->get();
+        $data['ratingSum'] = Rating::select('rating_star')
+            ->where('doctor_id', $id)
+            ->sum('rating_star');
+        $data['ratingCount'] = Rating::select('rating_star')
+            ->where('doctor_id', $id)
+            ->count('rating_star');
+        if ($data['ratingCount'] !== 0){
+            $data['rate'] = ceil($data['ratingSum'] / $data['ratingCount']);
+        }
         return view('frontend.department.docProfile', $data);
     }
 }

@@ -116,8 +116,7 @@ class departmentsController extends Controller
     {
         $dept = Department::find($id);
         $dept->delete();
-        session()->flash('type', 'danger');
-        session()->flash('message', 'successfully Deleted');
+        alert('success', 'successfully Deleted');
         return redirect()->route('departments.index');
     }
 }

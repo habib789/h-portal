@@ -7,10 +7,13 @@ use App\Models\Days;
 use App\Models\Department;
 use App\Models\Doctor;
 use App\models\Patient;
+use App\Models\Rating;
 use App\Models\Report;
 use App\Models\TimeSlot;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Stripe\Charge;
 use Stripe\Stripe;
 
@@ -241,5 +244,38 @@ class AppointmentController extends Controller
             'notes'      => trim($request->input('notes')),
         ]);
         return redirect()->back()->with('success','Prescription Updated');
+    }
+
+
+    public function ratings(Request $request) {
+        $request->validate([
+           'review' => 'required|string|max:255',
+           'rating' => 'required',
+        ]);
+        $appointment_id = $request->appointment_id;
+
+        $rated = Rating::where('appointment_id',$appointment_id)
+            ->where('patient_id', \auth()->user()->patient->id)
+            ->count();
+        if ($rated > 0 ){
+            Alert::info('You have already provided your ratings','Info');
+            return redirect()->back();
+        }else{
+        $doc = Appointment::select('doctor_id')
+            ->where('id', $request->appointment_id)
+            ->first();
+
+            $rating = new Rating();
+            $rating->doctor_id = $doc->doctor_id;
+            $rating->patient_id = \auth()->user()->patient->id;
+            $rating->appointment_id = $request->appointment_id;
+            $rating->rating_star = $request->rating;
+            $rating->review = $request->review;
+            $rating->save();
+
+            Alert::success('Thank you for rating','success');
+            return redirect()->back();
+
+        }
     }
 }
