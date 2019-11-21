@@ -84,17 +84,8 @@ class adminDoctorsController extends Controller
             ->where('license_code', $doc_license)
             ->where('status', 'not-in-use')
             ->get();
-//        dd($licenses);
+
         $count = count($licenses);
-//        dd($count == 0);
-//        for ($i = 0; $i < $count; $i++) {
-//            echo $i;
-//        foreach ($licenses as $license) {
-
-
-//            $match = ($doc_license == $license->license_code);
-//
-//            if ($match && $match == true) {
                 if ($count !== 0) {
                     $verify_doc = Doctor::find($id);
                     $verify_doc->update([
@@ -107,8 +98,6 @@ class adminDoctorsController extends Controller
                             'doctor_id' => $verify_doc->id,
                             'status'    => 'in-use',
                         ]);
-//                    session()->flash('type', 'success');
-//                    session()->flash('message', 'License key matched');
                     return redirect()->back()->with('success', 'License key matched');
                 } else {
                     $verify_doc = Doctor::find($id);
@@ -119,16 +108,8 @@ class adminDoctorsController extends Controller
                             'license' => null,
                             'verify'  => 'invalid-license',
                         ]);
-//                    session()->flash('type', 'danger');
-//                    session()->flash('message', 'License key dosent match');
                     return redirect()->back()->with('error', 'License key dosent match');
                 }
-//            } else {
-//                session()->flash('type', 'danger');
-//                session()->flash('message', 'License key dosent match');
-//                return redirect()->back();
-//            }
-//        }
 
     }
 

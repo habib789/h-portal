@@ -15,8 +15,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-
-        return view('frontend.home');
+        $data=[];
+        $data['doctors'] = Doctor::with('department')->where('verify', 'verified')->paginate(8);
+        return view('frontend.home',$data);
     }
 
     public function showDepartments()
@@ -75,6 +76,8 @@ class HomeController extends Controller
         $data['doctors'] = $data['depts']->doctors;
         return view('frontend.department.deptDocList', $data);
     }
+
+
 
     public function DocProfile($id)
     {

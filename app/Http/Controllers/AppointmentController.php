@@ -59,7 +59,7 @@ class AppointmentController extends Controller
             $charge = Charge::create([
                 'amount'      => $request->input('appointment_fee') * 100,
                 'currency'    => 'usd',
-                'description' => 'Amount Paid',
+                'description' => 'Appointment fee Paid',
                 'source'      => $token,
             ]);
             Appointment::create([
@@ -237,43 +237,44 @@ class AppointmentController extends Controller
             'medication' => 'string|max:255|nullable',
             'notes'      => 'required|string|max:255',
         ]);
-        $update_report = Report::where('appointment_id',$id)->first();
+        $update_report = Report::where('appointment_id', $id)->first();
         $update_report->update([
             'test'       => trim($request->input('test')),
             'medication' => trim($request->input('medication')),
             'notes'      => trim($request->input('notes')),
         ]);
-        return redirect()->back()->with('success','Prescription Updated');
+        return redirect()->back()->with('success', 'Prescription Updated');
     }
 
 
-    public function ratings(Request $request) {
+    public function ratings(Request $request)
+    {
         $request->validate([
-           'review' => 'required|string|max:255',
-           'rating' => 'required',
+            'review' => 'required|string|max:255',
+            'rating' => 'required',
         ]);
         $appointment_id = $request->appointment_id;
 
-        $rated = Rating::where('appointment_id',$appointment_id)
+        $rated = Rating::where('appointment_id', $appointment_id)
             ->where('patient_id', \auth()->user()->patient->id)
             ->count();
-        if ($rated > 0 ){
-            Alert::info('You have already provided your ratings','Info');
+        if ($rated > 0) {
+            Alert::info('You have already provided your ratings', 'Info');
             return redirect()->back();
-        }else{
-        $doc = Appointment::select('doctor_id')
-            ->where('id', $request->appointment_id)
-            ->first();
+        } else {
+            $doc = Appointment::select('doctor_id')
+                ->where('id', $request->appointment_id)
+                ->first();
 
-            $rating = new Rating();
-            $rating->doctor_id = $doc->doctor_id;
-            $rating->patient_id = \auth()->user()->patient->id;
+            $rating                 = new Rating();
+            $rating->doctor_id      = $doc->doctor_id;
+            $rating->patient_id     = \auth()->user()->patient->id;
             $rating->appointment_id = $request->appointment_id;
-            $rating->rating_star = $request->rating;
-            $rating->review = $request->review;
+            $rating->rating_star    = $request->rating;
+            $rating->review         = $request->review;
             $rating->save();
 
-            Alert::success('Thank you for rating','success');
+            Alert::success('Thank you for rating', 'success');
             return redirect()->back();
 
         }

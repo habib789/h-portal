@@ -42,42 +42,6 @@
                             @enderror
                         </div>
 
-                        {{--                        <div class="form-group">--}}
-                        {{--                            <label for="email" class="font-weight-bold">Email</label>--}}
-                        {{--                            <input type="email" class="form-control @error('email') is-invalid @enderror"--}}
-                        {{--                                   name="email" id="email"--}}
-                        {{--                                   value="{{ old('email') }}"/>--}}
-                        {{--                            @error('email')--}}
-                        {{--                            <span class="invalid-feedback" role="alert">--}}
-                        {{--                                                <strong>{{ $message }}</strong>--}}
-                        {{--                                            </span>--}}
-                        {{--                            @enderror--}}
-                        {{--                        </div>--}}
-
-                        {{--                        <div class="form-group">--}}
-                        {{--                            <label for="password" class="font-weight-bold">Password <span--}}
-                        {{--                                    class="text-danger">*</span></label>--}}
-                        {{--                            <input type="password" class="form-control @error('password') is-invalid @enderror"--}}
-                        {{--                                   name="password" id="password"/>--}}
-                        {{--                            @error('password')--}}
-                        {{--                            <span class="invalid-feedback" role="alert">--}}
-                        {{--                                <strong>{{ $message }}</strong>--}}
-                        {{--                            </span>--}}
-                        {{--                            @enderror--}}
-                        {{--                        </div>--}}
-                        {{--                        <div class="form-group">--}}
-                        {{--                            <label for="password_confirmation" class="font-weight-bold">Password Confirmation <span--}}
-                        {{--                                    class="text-danger">*</span></label>--}}
-                        {{--                            <input type="password"--}}
-                        {{--                                   class="form-control @error('password_confirmation') is-invalid @enderror"--}}
-                        {{--                                   name="password_confirmation" id="password_confirmation"--}}
-                        {{--                                   value=""/>--}}
-                        {{--                            @error('password_confirmation')--}}
-                        {{--                            <span class="invalid-feedback" role="alert">--}}
-                        {{--                                        <strong>{{ $message }}</strong>--}}
-                        {{--                                        </span>--}}
-                        {{--                            @enderror--}}
-                        {{--                        </div>--}}
                         <div class="form-group">
                             <label for="phone" class="font-weight-bold">Phone</label><br>
                             <div class="input-group ">

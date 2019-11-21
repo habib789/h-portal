@@ -14,32 +14,32 @@ class doctorsController extends Controller
 {
     public function index()
     {
-        $data=[];
-        $data['sidebar']= true;
-        $data['doc'] = Doctor::find(auth()->user()->doctor->id);
-        $data['total_appointment'] = Appointment::where('doctor_id', auth()->user()->doctor->id)
+        $data                        = [];
+        $data['sidebar']             = true;
+        $data['doc']                 = Doctor::find(auth()->user()->doctor->id);
+        $data['total_appointment']   = Appointment::where('doctor_id', auth()->user()->doctor->id)
             ->count();
         $data['success_appointment'] = Appointment::where('doctor_id', auth()->user()->doctor->id)
-            ->where('appointment_status','prescribed')
+            ->where('appointment_status', 'prescribed')
             ->count();
         $data['pending_appointment'] = Appointment::where('doctor_id', auth()->user()->doctor->id)
-            ->where('appointment_status','pending')
+            ->where('appointment_status', 'pending')
             ->count();
         return view('frontend.doctor.dashboard', $data);
     }
 
     public function uploadPhotoForm()
     {
-        $data=[];
-        $data['sidebar']= true;
-        $data['doc'] = Doctor::find(auth()->user()->doctor->id);
+        $data            = [];
+        $data['sidebar'] = true;
+        $data['doc']     = Doctor::find(auth()->user()->doctor->id);
         return view('frontend.doctor.uploadPhoto', $data);
     }
 
     public function uploadPhoto(Request $request)
     {
         $request->validate([
-           'image' => 'required|image|max:10240',
+            'image' => 'required|image|max:10240',
         ]);
         $docPhoto = $request->file('image');
 //        dd($docPhoto);
@@ -49,7 +49,7 @@ class doctorsController extends Controller
         }
         $uploadPhoto = Doctor::find(auth()->user()->doctor->id);
         $uploadPhoto->update([
-            'image'=> $docPhoto_file,
+            'image' => $docPhoto_file,
         ]);
         return redirect()->back()->with('success', 'Picture uploaded');
     }
@@ -122,15 +122,15 @@ class doctorsController extends Controller
     public function InfoUpdate(Request $request, $id)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name'  => 'required',
-            'phone'      => 'required|min:11|max:14|unique:doctors,phone,' . $id,
-            'graduate'   => 'required',
-            'experience' => 'required',
-            'department' => 'required',
-            'address'    => 'required',
-            'degrees'    => 'required',
-            'age'        => 'required',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'phone'         => 'required|min:11|max:14|unique:doctors,phone,' . $id,
+            'graduate'      => 'required',
+            'experience'    => 'required',
+            'department'    => 'required',
+            'address'       => 'required',
+            'degrees'       => 'required',
+            'date_of_birth' => 'required|date',
         ]);
         $info_update = Doctor::find($id);
         try {
@@ -143,9 +143,9 @@ class doctorsController extends Controller
                 'graduate'      => trim($request->input('graduate')),
                 'experience'    => trim($request->input('experience')),
                 'degrees'       => trim($request->input('degrees')),
-                'age'           => trim($request->input('age')),
+                'date_of_birth' => trim($request->input('date_of_birth')),
             ]);
-            return redirect()->route('account.information')->with('success','Account Info updated');
+            return redirect()->route('docAccount.information')->with('success', 'Account Info updated');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());
@@ -213,9 +213,9 @@ class doctorsController extends Controller
             TimeSlot::where('day_id', $dayId)
                 ->where('doctor_id', auth()->user()->doctor->id)
                 ->update([
-                'start_time' => strtotime(trim($request->input('start_time'))),
-                'end_time'   => strtotime(trim($request->input('end_time'))),
-            ]);
+                    'start_time' => strtotime(trim($request->input('start_time'))),
+                    'end_time'   => strtotime(trim($request->input('end_time'))),
+                ]);
             return redirect()->route('hours.show')->with('info', 'Schedule updated');
         } else {
             TimeSlot::create([

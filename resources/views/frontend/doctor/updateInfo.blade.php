@@ -42,42 +42,6 @@
                             @enderror
                         </div>
 
-                        {{--                        <div class="form-group">--}}
-                        {{--                            <label for="email" class="font-weight-bold">Email</label>--}}
-                        {{--                            <input type="email" class="form-control @error('email') is-invalid @enderror"--}}
-                        {{--                                   name="email" id="email"--}}
-                        {{--                                   value="{{ old('email') }}"/>--}}
-                        {{--                            @error('email')--}}
-                        {{--                            <span class="invalid-feedback" role="alert">--}}
-                        {{--                                                <strong>{{ $message }}</strong>--}}
-                        {{--                                            </span>--}}
-                        {{--                            @enderror--}}
-                        {{--                        </div>--}}
-
-                        {{--                        <div class="form-group">--}}
-                        {{--                            <label for="password" class="font-weight-bold">Password <span--}}
-                        {{--                                    class="text-danger">*</span></label>--}}
-                        {{--                            <input type="password" class="form-control @error('password') is-invalid @enderror"--}}
-                        {{--                                   name="password" id="password"/>--}}
-                        {{--                            @error('password')--}}
-                        {{--                            <span class="invalid-feedback" role="alert">--}}
-                        {{--                                <strong>{{ $message }}</strong>--}}
-                        {{--                            </span>--}}
-                        {{--                            @enderror--}}
-                        {{--                        </div>--}}
-                        {{--                        <div class="form-group">--}}
-                        {{--                            <label for="password_confirmation" class="font-weight-bold">Password Confirmation <span--}}
-                        {{--                                    class="text-danger">*</span></label>--}}
-                        {{--                            <input type="password"--}}
-                        {{--                                   class="form-control @error('password_confirmation') is-invalid @enderror"--}}
-                        {{--                                   name="password_confirmation" id="password_confirmation"--}}
-                        {{--                                   value=""/>--}}
-                        {{--                            @error('password_confirmation')--}}
-                        {{--                            <span class="invalid-feedback" role="alert">--}}
-                        {{--                                        <strong>{{ $message }}</strong>--}}
-                        {{--                                        </span>--}}
-                        {{--                            @enderror--}}
-                        {{--                        </div>--}}
                         <div class="form-group">
                             <label for="phone" class="font-weight-bold">Phone</label><br>
                             <div class="input-group ">
@@ -106,16 +70,27 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <div>
-                                <label class="radio inline">
-                                    <input type="radio" name="gender" value="male" @if($docInfo->gender) checked @endif>
-                                    <span> Male </span>
-                                </label>
-                                <label class="radio inline">
-                                    <input type="radio" name="gender" value="female" @if($docInfo->gender) checked @endif>
-                                    <span>Female </span>
-                                </label>
-                            </div>
+                            <label class="font-weight-bold">Gender <span
+                                    class="text-danger">*</span></label>
+                            <select name="gender"
+                                    class="form-control @error('gender') is-invalid @enderror">
+                                <option class="hidden" selected disabled>Select gender
+                                </option>
+
+                                <option class="text-capitalize"
+                                        value="male" @if($docInfo->gender=='male') selected @endif>Male
+                                </option>
+                                <option class="text-capitalize"
+                                        value="female" @if($docInfo->gender=='female') selected @endif>
+                                    Female
+                                </option>
+
+                            </select>
+                            @error('gender')
+                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                            @enderror
                         </div>
                     </div>
 
@@ -184,12 +159,12 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="age" class="font-weight-bold">Date of birth <span
+                            <label for="date_of_birth" class="font-weight-bold">Date of birth <span
                                     class="text-danger">*</span></label>
-                            <input type="text" name="age" class="form-control @error('age') is-invalid @enderror"
-                                   id="age"
-                                   value="{{ $docInfo->age }}"/>
-                            @error('age')
+                            <input type="date" name="date_of_birth" class="form-control @error('date_of_birth') is-invalid @enderror"
+                                   id="date_of_birth"
+                                   value="{{ date('Y-m-d', strtotime($docInfo->date_of_birth)) }}"/>
+                            @error('date_of_birth')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

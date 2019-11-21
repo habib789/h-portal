@@ -24,6 +24,7 @@ Route::get('/departments-doctors/{slug}', 'HomeController@DeptDocList')->name('d
 Route::get('/departments-doctors/profile/{id}', 'HomeController@DocProfile')->name('DocProfile.show');
 
 
+
 //authentication
 Route::get('/login', 'AuthController@loginForm')->name('auth.login');
 Route::post('/login', 'AuthController@LoginProcess');
