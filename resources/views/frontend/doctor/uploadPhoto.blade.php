@@ -24,7 +24,7 @@
                             @elseif(auth()->user()->doctor->gender=='female')
                                 <img src="{{ asset('img/femaledoc.jpg') }}" alt="" class="img-circle img-fluid">
                             @elseif(auth()->user()->doctor->gender == 'male')
-                                <img src="{{ asset('uploads/images/'. $doc->image) }}" alt="" class="img-circle img-fluid">
+                                <img src="{{ asset('img/maledoc.jpg') }}" alt="" class="img-circle img-fluid">
                             @endif
                         </div>
                         <div class="mx-auto my-2">

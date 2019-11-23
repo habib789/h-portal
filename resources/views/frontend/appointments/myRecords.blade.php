@@ -25,86 +25,90 @@
             <div class="row">
                 <div class="col-8">
                     <div class="invoice p-3 mb-3">
-                        <div class="row">
-                            <div class="col-12">
-                                <h4>
-                                    <i class="fas fa-globe"></i> Health Portal
-                                    <small
-                                        class="float-right">Date: {{ $report->created_at->format('d-m-Y h:i A') }}</small>
-                                </h4>
+                        <div id="print">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        <i class="fas fa-globe"></i> Health Portal
+                                        <small
+                                            class="float-right">Date: {{ $report->created_at->format('d-m-Y h:i A') }}</small>
+                                    </h4>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row invoice-info card-header">
-                            <div class="col-sm-12 text-right ml-auto">
+
+                            <div class="row invoice-info card-header">
+                                <div class="col-sm-12 text-right ml-auto">
                                 <span
                                     class="font-weight-bold">Dr. {{ $report->doctor->first_name.' '.$report->doctor->last_name }}</span>
-                                <address>
-                                    {{ $report->doctor->degrees }}<br>
-                                    Phone: {{ $report->doctor->phone }}<br>
-                                    Email: {{ $report->doctor->user->email }}<br>
-                                </address>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <div>
-                                    <strong>Patient Name</strong>
-                                    <p>{{ $report->patient_name }}</p>
-                                </div>
-                                <div>
-                                    <strong>Patient Age</strong>
-                                    <p>{{ date('Y',strtotime($report->appointment_date)) - date('Y',strtotime($report->patient->date_of_birth)) }}</p>
-                                </div>
-                                <div>
-                                    <strong>Patient Phone</strong>
-                                    <p>{{ $report->patient->phone }}</p>
-                                </div>
-                                <div>
-                                    <strong>Patient Email</strong>
-                                    <p>{{ $report->patient->user->email }}</p>
-                                </div>
-                                <div>
-                                    <strong>Patient health issue</strong>
-                                    <p>{{ $report->health_issue }}</p>
+                                    <address>
+                                        {{ $report->doctor->degrees }}<br>
+                                        Phone: {{ $report->doctor->phone }}<br>
+                                        Email: {{ $report->doctor->user->email }}<br>
+                                    </address>
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-md-6">
-                                @if($rep->test !== "")
-                                    <div class="card-body">
-                                        <small><strong>Tests Name</strong></small><br>
-                                        <div>
-                                            {{ $rep->test }}
-                                        </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div>
+                                        <strong>Patient Name</strong>
+                                        <p>{{ $report->patient_name }}</p>
                                     </div>
-                                @endif
+                                    <div>
+                                        <strong>Patient Age</strong>
+                                        <p>{{ date('Y',strtotime($report->appointment_date)) - date('Y',strtotime($report->patient->date_of_birth)) }}</p>
+                                    </div>
+                                    <div>
+                                        <strong>Patient Phone</strong>
+                                        <p>{{ $report->patient->phone }}</p>
+                                    </div>
+                                    <div>
+                                        <strong>Patient Email</strong>
+                                        <p>{{ $report->patient->user->email }}</p>
+                                    </div>
+                                    <div>
+                                        <strong>Patient health issue</strong>
+                                        <p>{{ $report->health_issue }}</p>
+                                    </div>
+                                </div>
 
-                                @if($rep->medication !== "")
-                                    <div class="card-body">
-                                        <small><strong>Medication</strong></small><br>
-                                        <div>
-                                            {{ $rep->medication }}
+                                <div class="col-sm-12 col-md-6">
+                                    @if($rep->test !== "")
+                                        <div class="card-body">
+                                            <small><strong>Tests Name</strong></small><br>
+                                            <div>
+                                                {{ $rep->test }}
+                                            </div>
                                         </div>
-                                    </div>
-                                @endif
+                                    @endif
 
-                                @if($rep->notes !== "")
-                                    <div class="card-body">
-                                        <small><strong>Notes</strong></small><br>
-                                        <div>
-                                            {{ $rep->notes }}
+                                    @if($rep->medication !== "")
+                                        <div class="card-body">
+                                            <small><strong>Medication</strong></small><br>
+                                            <div>
+                                                {{ $rep->medication }}
+                                            </div>
                                         </div>
-                                    </div>
-                                @endif
+                                    @endif
+
+                                    @if($rep->notes !== "")
+                                        <div class="card-body">
+                                            <small><strong>Notes</strong></small><br>
+                                            <div>
+                                                {{ $rep->notes }}
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
 
                         <div class="row no-print">
                             <div class="col-12">
-                                <a href="" target="" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                <a href="" onclick="printContent()" class="btn btn-default"><i class="fas fa-print"></i>
+                                    Print</a>
                                 <a href="{{ route('electronic.prescription', $report->id) }}"
                                    class="button btn btn-primary float-right" style="margin-right: 5px;">
                                     <i class="fas fa-download"></i> Download Prescription
@@ -114,43 +118,6 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-
-                    {{--                    <div class="card border-success mb-3" style="max-width: 18rem;">--}}
-                    {{--                        <div class="card-header bg-transparent border-success">Review for--}}
-                    {{--                            <div class="card-body text-success">--}}
-                    {{--                                <form action="{{ route('ratings') }}" method="post">--}}
-                    {{--                                    <input type="hidden" name="appointment_id" value="{{ $report->id }}">--}}
-                    {{--                                    @csrf--}}
-                    {{--                                    <div class="rating">--}}
-                    {{--                                    <span>--}}
-                    {{--                                        <input type="radio" id="str5" value="5" name="rating_star">--}}
-                    {{--                                        <label for="str5" class="icon-star2 text-warning has"></label>--}}
-                    {{--                                    </span>--}}
-                    {{--                                        <span>--}}
-                    {{--                                        <input type="radio" id="str4" value="4" name="rating_star">--}}
-                    {{--                                        <label for="str4" class="icon-star2 text-warning has"></label>--}}
-                    {{--                                        </span>--}}
-                    {{--                                        <span>--}}
-                    {{--                                        <input type="radio" id="str3" value="3" name="rating_star">--}}
-                    {{--                                        <label for="str3" class="icon-star2 text-warning has"></label>--}}
-                    {{--                                    </span>--}}
-                    {{--                                        <span>--}}
-                    {{--                                        <input type="radio" id="str2" value="2" name="rating_star">--}}
-                    {{--                                        <label for="str2" class="icon-star2 text-warning has"></label>--}}
-                    {{--                                    </span>--}}
-                    {{--                                        <span class="checked">--}}
-                    {{--                                        <input type="radio" id="str1" value="1" name="rating_star">--}}
-                    {{--                                        <label for="str1" class="icon-star2 text-warning has"></label>--}}
-                    {{--                                    </span>--}}
-                    {{--                                    </div>--}}
-                    {{--                                    <div class="form-group">--}}
-                    {{--                                        <textarea class="form-control" name="review" required></textarea>--}}
-                    {{--                                    </div>--}}
-                    {{--                                    <button class="btn btn-success">Submit</button>--}}
-                    {{--                                </form>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
 
                     <div class="well well-sm">
                         <div class="text-right">
@@ -194,6 +161,17 @@
 @stop
 
 @section('js')
+
+    <script>
+        function printContent() {
+            var restore = document.body.innerHTML;
+            var printContent = document.getElementById('print').innerHTML;
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = restore;
+        }
+    </script>
+
     <script>
         (function (e) {
             var t, o = {className: "autosizejs", append: "", callback: !1, resizeDelay: 10},
@@ -377,4 +355,5 @@
             });
         });
     </script>
+
 @stop

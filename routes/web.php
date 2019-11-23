@@ -113,6 +113,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard/orderDetails/{id}/invoice', 'DashboardController@createPdf')->name('pdf.create');
         Route::get('/dashboard/unverified-doctors', 'DashboardController@docNotify')->name('doc.notify');
         Route::get('/dashboard/{id}/unverified/doctors', 'DashboardController@NotifyDoctors')->name('unverified.notify');
+        Route::get('/dashboard/reports', 'ReportsController@sales')->name('sales');
 
         Route::resource('/dashboard/departments', 'departmentsController');
         Route::resource('/dashboard/orders', 'OrdersController');
@@ -120,5 +121,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/dashboard/products', 'ProductsController');
         Route::resource('/dashboard/doctors', 'adminDoctorsController');
         Route::resource('/dashboard/appointments', 'adminAppointmentsController');
+
     });
 });
