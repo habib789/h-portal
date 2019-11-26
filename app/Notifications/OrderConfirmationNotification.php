@@ -28,48 +28,50 @@ class OrderConfirmationNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
     {
-        return ['mail','nexmo'];
+        return ['mail', 'nexmo'];
     }
 
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Dear '. $this->order->user->patient->first_name)
-                    ->line('Your order has been placed')
-                    ->line('Your order id is #' .$this->order->id)
-                    ->action('See Details', route('orderDetails', $this->order->id))
-                    ->line('Thank you for using our application!');
+            ->line('Dear ' . $this->order->user->patient->first_name)
+            ->line('Your order has been placed')
+            ->line('Your order id is #' . $this->order->id)
+            ->action('See Details', route('orderDetails', $this->order->id))
+            ->line('Thank you for using our application!');
     }
 
     /**
      * Get the Nexmo / SMS representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return NexmoMessage
      */
     public function toNexmo($notifiable)
     {
         return (new NexmoMessage())
-            ->content('Dear '.$this->order->user->patient->first_name.'Your order has been placed. Your order id is ' .
-                $this->order->id.'Your payment transaction no:'. $this->order->transaction_code .'We will contact you as soon as possible.');
+            ->content('Dear ' . $this->order->user->patient->first_name . $this->order->user->patient->last_name .
+                '\n Your order has been placed. Your order id is ' . '#' . $this->order->id .
+                '\n Your payment transaction code: ' . $this->order->transaction_code .
+                '\n We will contact you as soon as possible.');
     }
 
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)

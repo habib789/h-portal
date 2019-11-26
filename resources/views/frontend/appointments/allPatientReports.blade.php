@@ -87,13 +87,13 @@
 
 
 
-                        <div class="row no-print">
-                            <div class="col-12">
-                                <a href="{{ route('prescription.show',$report->id) }}" class="button btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-download"></i> Update Prescription
-                                </a>
-                            </div>
-                        </div>
+{{--                        <div class="row no-print">--}}
+{{--                            <div class="col-12">--}}
+{{--                                <a href="{{ route('prescription.show',$report->id) }}" class="button btn btn-primary float-right" style="margin-right: 5px;">--}}
+{{--                                    <i class="fas fa-download"></i> Update Prescription--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

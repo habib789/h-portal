@@ -226,29 +226,29 @@ class AppointmentController extends Controller
         return $pdf->download('e-prescription.pdf');
     }
 
-    public function updatePrescriptionForm($id)
-    {
-        $data                  = [];
-        $data['sidebar']       = true;
-        $data['patientReport'] = Report::where('appointment_id', $id)->first();
-        return view('frontend.appointments.updatePrescription', $data);
-    }
+//    public function updatePrescriptionForm($id)
+//    {
+//        $data                  = [];
+//        $data['sidebar']       = true;
+//        $data['patientReport'] = Report::where('appointment_id', $id)->first();
+//        return view('frontend.appointments.updatePrescription', $data);
+//    }
 
-    public function updatePrescription(Request $request, $id)
-    {
-        $request->validate([
-            'test'       => 'string|max:255|nullable',
-            'medication' => 'string|max:255|nullable',
-            'notes'      => 'required|string|max:255',
-        ]);
-        $update_report = Report::where('appointment_id', $id)->first();
-        $update_report->update([
-            'test'       => trim($request->input('test')),
-            'medication' => trim($request->input('medication')),
-            'notes'      => trim($request->input('notes')),
-        ]);
-        return redirect()->back()->with('success', 'Prescription Updated');
-    }
+//    public function updatePrescription(Request $request, $id)
+//    {
+//        $request->validate([
+//            'test'       => 'string|max:255|nullable',
+//            'medication' => 'string|max:255|nullable',
+//            'notes'      => 'required|string|max:255',
+//        ]);
+//        $update_report = Report::where('appointment_id', $id)->first();
+//        $update_report->update([
+//            'test'       => trim($request->input('test')),
+//            'medication' => trim($request->input('medication')),
+//            'notes'      => trim($request->input('notes')),
+//        ]);
+//        return redirect()->back()->with('success', 'Prescription Updated');
+//    }
 
 
     public function ratings(Request $request)
