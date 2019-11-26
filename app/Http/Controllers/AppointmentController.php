@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\AppointmentConfirmed;
+use App\Events\PrescriptioncreatedEvent;
 use App\Models\Appointment;
 use App\Models\Days;
 use App\Models\Department;
@@ -11,6 +12,7 @@ use App\models\Patient;
 use App\Models\Rating;
 use App\Models\Report;
 use App\Models\TimeSlot;
+use App\Notifications\PrescriptionUpdate;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,8 +58,8 @@ class AppointmentController extends Controller
 
         if ($findAppointment == 0) {
             Stripe::setApiKey('sk_test_9yfUqjk39wVMpolDQ8fpk4GB003GyLgymJ');
-            $token  = $_POST['stripeToken'];
-            $charge = Charge::create([
+            $token       = $_POST['stripeToken'];
+            $charge      = Charge::create([
                 'amount'      => $request->input('appointment_fee') * 100,
                 'currency'    => 'usd',
                 'description' => 'Appointment fee Paid',
@@ -73,9 +75,9 @@ class AppointmentController extends Controller
                 'appointment_time' => strtotime(trim($request->input('appointment_time'))),
                 'health_issue'     => trim($request->input('health_issue')),
                 'appointment_fee'  => $request->input('appointment_fee'),
-                'transaction_code' =>$charge->id,
+                'transaction_code' => $charge->id,
             ]);
-            $apt = Appointment::with('patient','doctor')->find($appointment->id);
+            $apt         = Appointment::with('patient', 'doctor')->find($appointment->id);
             event(new AppointmentConfirmed($apt));
             return redirect()->route('myAppointments')->with('success', 'Appointment Created');
         } else {
@@ -159,8 +161,12 @@ class AppointmentController extends Controller
             ->where('id', $id)
             ->where('appointment_date', date('Y-m-d', strtotime(today())))
             ->first();
-//        dd($data['appointment']);
-        return view('frontend.appointments.prescription', $data);
+        if ($data['appointment']->appointment_status == 'prescribed') {
+            return redirect()->back()->with('info', 'You have already prescribed the patient');
+        } else {
+            return view('frontend.appointments.prescription', $data);
+        }
+
     }
 
     public function PrescriptionStore(Request $request)
@@ -175,7 +181,7 @@ class AppointmentController extends Controller
         ]);
 
         try {
-            $insertReport = Report::create([
+            $prescriptionStore = Report::create([
                 'appointment_id' => $request->input('appointment_id'),
                 'patient_id'     => $request->input('patient_id'),
                 'doctor_id'      => $request->input('doctor_id'),
@@ -183,9 +189,16 @@ class AppointmentController extends Controller
                 'medication'     => trim($request->input('medication')),
                 'notes'          => trim($request->input('notes')),
             ]);
-            $insertReport->appointment()->update([
+            $prescriptionStore->appointment()->update([
                 'appointment_status' => 'prescribed',
             ]);
+//            $report = Report::where('appointment_id', $request->input('appointment_id'))
+//                ->where('patient_id', $request->input('patient_id'))
+//                ->find($request->input('appointment_id'));
+////                ->get();
+////                ->find($request->input('appointment_id'));
+//
+//            event(new PrescriptioncreatedEvent($report));
             return redirect()->back()->with('success', 'Prescription created');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
