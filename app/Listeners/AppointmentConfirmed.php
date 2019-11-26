@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Notifications\LicenseVerificationReminder;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class sendEmailNotificationToUnverifiedDoctors
+class AppointmentConfirmed
 {
     /**
      * Create the event listener.
@@ -21,13 +20,13 @@ class sendEmailNotificationToUnverifiedDoctors
     /**
      * Handle the event.
      *
-     * @param object $event
+     * @param  object  $event
      * @return void
      */
     public function handle($event)
     {
-        $doctor = $event->doctor;
-        $user   = $event->doctor->user;
-        $user->notify(new LicenseVerificationReminder($doctor));
+        $appointment = $event->appointment;
+        $user = $event->appointment->patient->user;
+        $user->notify(new \App\Notifications\AppointmentConfirmed($appointment));
     }
 }

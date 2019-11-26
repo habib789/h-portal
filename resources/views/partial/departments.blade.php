@@ -1,4 +1,4 @@
-<div class="col-12 col-md-3 mt-5">
+<div class="col-lg-3 mt-5">
     <div class="text-left">
         <div class="section-title">
             <p class="text-capitalize head"><span class="head1 text-capitalize">Departments</span></p>

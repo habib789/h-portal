@@ -50,4 +50,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Order::class);
     }
+
+    public function routeNotificationForNexmo($notification)
+    {
+        return $this->patient->phone;
+    }
 }

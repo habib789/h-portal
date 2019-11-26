@@ -11,7 +11,7 @@
         @include('partial.departments')
 
         @foreach($doctors as $doctor)
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch mt-5">
+            <div class="col-md-4 align-items-stretch mt-5">
                 <div class="card bg-light">
                     <div class="card-header text-muted border-bottom-0">
                         Doctor Profile
@@ -46,6 +46,30 @@
                             </div>
                         </div>
                     </div>
+
+{{--                    @if($ratingCount !==0)--}}
+{{--                        <li class="list-group-item">--}}
+{{--                            @if($rate == 1)--}}
+{{--                                <b>Ratings</b> <h3 class="float-right">&#9733; &#9734; &#9734; &#9734;--}}
+{{--                                    &#9734;</h3>--}}
+{{--                            @elseif($rate == 2)--}}
+{{--                                <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9734; &#9734;--}}
+{{--                                    &#9734;</h3>--}}
+{{--                            @elseif($rate == 3)--}}
+{{--                                <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9733; &#9734;--}}
+{{--                                    &#9734;</h3>--}}
+{{--                            @elseif($rate == 4)--}}
+{{--                                <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9733; &#9733;--}}
+{{--                                    &#9734;</h3>--}}
+{{--                            @elseif($rate == 5)--}}
+{{--                                <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9733; &#9733;--}}
+{{--                                    &#9733;</h3>--}}
+{{--                            @elseif($rate == 0)--}}
+{{--                                <b>Ratings</b> <h3 class="float-right">Not rated yet</h3>--}}
+{{--                            @endif--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
+
                     <div class="card-footer">
                         <div class="text-right">
                             <a href="{{ route('DocProfile.show', $doctor->id) }}" class="button btn btn-sm btn-info">

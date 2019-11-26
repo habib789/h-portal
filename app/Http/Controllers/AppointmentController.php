@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AppointmentConfirmed;
 use App\Models\Appointment;
 use App\Models\Days;
 use App\Models\Department;
@@ -62,7 +63,7 @@ class AppointmentController extends Controller
                 'description' => 'Appointment fee Paid',
                 'source'      => $token,
             ]);
-            Appointment::create([
+            $appointment = Appointment::create([
                 'patient_id'       => $request->input('patient_id'),
                 'doctor_id'        => $request->input('doctor_id'),
                 'department_id'    => $request->input('department_id'),
@@ -72,7 +73,10 @@ class AppointmentController extends Controller
                 'appointment_time' => strtotime(trim($request->input('appointment_time'))),
                 'health_issue'     => trim($request->input('health_issue')),
                 'appointment_fee'  => $request->input('appointment_fee'),
+                'transaction_code' =>$charge->id,
             ]);
+            $apt = Appointment::with('patient','doctor')->find($appointment->id);
+            event(new AppointmentConfirmed($apt));
             return redirect()->route('myAppointments')->with('success', 'Appointment Created');
         } else {
             return redirect()->back()->with('toast_error', 'Sorry! You have already an appointment in this week. You can book appointment in other departments');

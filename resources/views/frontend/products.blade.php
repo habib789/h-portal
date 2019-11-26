@@ -1,7 +1,4 @@
 @extends('masterpage.frontend')
-{{--@section('css')--}}
-{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
-{{--@stop--}}
 @section('cover')
     <div class="context">
         <h1 class="font-weight-bold">Products</h1>
@@ -15,7 +12,8 @@
             <form action="{{ route('shop') }}" method="get" novalidate="novalidate">
                 <div class="form-inline">
                     <div class="form-group">
-                        <input type="text" name="search" class="form-control search-slt" placeholder="Enter medicine name">
+                        <input type="text" name="search" class="form-control search-slt"
+                               placeholder="Enter medicine name">
                     </div>
                     <div class="form-group">
                         <button class="button btn btn-info wrn-btn">Search</button>
@@ -41,9 +39,11 @@
                                         $name = str_replace($searchItem,'<span style="background-color:#0cb8b6;color:white;">'.$searchItem.'</span>', $product->name);
                                     @endphp
                                     <figcaption class="figure-caption text-capitalize font-weight-bold text-center">
+
                                         <a href="">
                                             {!! $name !!}
                                         </a>
+
                                         <small>{{ $product->type }}</small>
                                         <p> BDT {{ number_format($product->price,2) }}</p>
                                     </figcaption>

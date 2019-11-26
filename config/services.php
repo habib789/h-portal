@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'nexmo' => [
+//        'api_key' => env('NEXMO_KEY','ed395c08'),
+//        'api_secret' => env('NEXMO_SECRET','rLIH70sGEz06B5BV'),
+        'sms_from' => '15556666666',
+    ],
+
 ];

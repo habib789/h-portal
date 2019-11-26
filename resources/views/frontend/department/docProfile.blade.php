@@ -1,7 +1,7 @@
 @extends('masterpage.frontend')
 @section('css')
     <style>
-        ul li h3{
+        ul li h4{
             color: #0cb8b6;
         }
     </style>
@@ -41,28 +41,28 @@
                             </p>
 
                             <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item">
-                                    <b>Total visitor</b> <a class="float-right">1,322</a>
-                                </li>
                                 @if($ratingCount !==0)
                                     <li class="list-group-item">
                                         @if($rate == 1)
-                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9734; &#9734; &#9734;
-                                                &#9734;</h3>
+                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9734; &#9734; &#9734;
+                                                &#9734;</h4>
                                         @elseif($rate == 2)
-                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9734; &#9734;
-                                                &#9734;</h3>
+                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9733; &#9734; &#9734;
+                                                &#9734;</h4>
                                         @elseif($rate == 3)
-                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9733; &#9734;
-                                                &#9734;</h3>
+                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9733; &#9733; &#9734;
+                                                &#9734;</h4>
                                         @elseif($rate == 4)
-                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9733; &#9733;
-                                                &#9734;</h3>
+                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9733; &#9733; &#9733;
+                                                &#9734;
+                                                <p class="text-center"><small><strong>{{ $rate }}/5</strong></small></p>
+                                            </h4>
+
                                         @elseif($rate == 5)
-                                            <b>Ratings</b> <h3 class="float-right">&#9733; &#9733; &#9733; &#9733;
-                                                &#9733;</h3>
+                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9733; &#9733; &#9733;
+                                                &#9733;</h4>
                                         @elseif($rate == 0)
-                                            <b>Ratings</b> <h3 class="float-right">Not rated yet</h3>
+                                            <b>Ratings</b> <h4 class="float-right">Not rated yet</h4>
                                         @endif
                                     </li>
                                 @endif

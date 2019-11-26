@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
+
     protected $guarded = [];
     protected $dates=['date_of_birth',];
     public $timestamps = false;

@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -32,7 +33,7 @@ class OrderConfirmationNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','nexmo'];
     }
 
     /**
@@ -50,6 +51,20 @@ class OrderConfirmationNotification extends Notification
                     ->action('See Details', route('orderDetails', $this->order->id))
                     ->line('Thank you for using our application!');
     }
+
+    /**
+     * Get the Nexmo / SMS representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return NexmoMessage
+     */
+    public function toNexmo($notifiable)
+    {
+        return (new NexmoMessage())
+            ->content('Dear '.$this->order->user->patient->first_name.'Your order has been placed. Your order id is ' .
+                $this->order->id.'Your payment transaction no:'. $this->order->transaction_code .'We will contact you as soon as possible.');
+    }
+
 
     /**
      * Get the array representation of the notification.

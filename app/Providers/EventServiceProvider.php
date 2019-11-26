@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\AppointmentConfirmed;
 use App\Events\notifyUnverifiedDoctors;
 use App\Events\OrderCreate;
 use App\Listeners\OrderConfirmationNotification;
@@ -27,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         notifyUnverifiedDoctors::class=>[
           sendEmailNotificationToUnverifiedDoctors::class,
+        ],
+        AppointmentConfirmed::class=>[
+            \App\Listeners\AppointmentConfirmed::class,
         ],
     ];
 

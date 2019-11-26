@@ -24,6 +24,7 @@ class CreateAppointmentsTable extends Migration
             $table->date('appointment_date');
             $table->integer('appointment_time');
             $table->decimal('appointment_fee', 11);
+            $table->string('transaction_code', 191);
             $table->string('appointment_status', 22)->default('pending');
             $table->foreign('patient_id')->references('id')->on('patients')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('doctor_id')->references('id')->on('doctors')->onUpdate('cascade')->onDelete('cascade');
