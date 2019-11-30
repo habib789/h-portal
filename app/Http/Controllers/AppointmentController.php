@@ -76,6 +76,7 @@ class AppointmentController extends Controller
                 'health_issue'     => trim($request->input('health_issue')),
                 'appointment_fee'  => $request->input('appointment_fee'),
                 'transaction_code' => $charge->id,
+                //                'transaction_code' => 'ddfghgfds',
             ]);
             $apt         = Appointment::with('patient', 'doctor')->find($appointment->id);
             event(new AppointmentConfirmed($apt));
@@ -192,14 +193,13 @@ class AppointmentController extends Controller
             $prescriptionStore->appointment()->update([
                 'appointment_status' => 'prescribed',
             ]);
-//            $report = Report::where('appointment_id', $request->input('appointment_id'))
-//                ->where('patient_id', $request->input('patient_id'))
-//                ->find($request->input('appointment_id'));
-////                ->get();
-////                ->find($request->input('appointment_id'));
-//
-//            event(new PrescriptioncreatedEvent($report));
-            return redirect()->back()->with('success', 'Prescription created');
+            $report = Report::with(['appointment:id', 'patient'])
+                ->where('appointment_id', $request->input('appointment_id'))
+                ->where('patient_id', $request->input('patient_id'))
+                ->first();
+
+            event(new PrescriptioncreatedEvent($report));
+            return redirect()->route('today.Appointments')->with('success', 'Prescription created');
         } catch (\Exception $e) {
             session()->flash('type', 'danger');
             session()->flash('message', $e->getMessage());
@@ -238,30 +238,6 @@ class AppointmentController extends Controller
         $pdf = PDF::loadView('frontend.dashboard.pdf.myRec', $data);
         return $pdf->download('e-prescription.pdf');
     }
-
-//    public function updatePrescriptionForm($id)
-//    {
-//        $data                  = [];
-//        $data['sidebar']       = true;
-//        $data['patientReport'] = Report::where('appointment_id', $id)->first();
-//        return view('frontend.appointments.updatePrescription', $data);
-//    }
-
-//    public function updatePrescription(Request $request, $id)
-//    {
-//        $request->validate([
-//            'test'       => 'string|max:255|nullable',
-//            'medication' => 'string|max:255|nullable',
-//            'notes'      => 'required|string|max:255',
-//        ]);
-//        $update_report = Report::where('appointment_id', $id)->first();
-//        $update_report->update([
-//            'test'       => trim($request->input('test')),
-//            'medication' => trim($request->input('medication')),
-//            'notes'      => trim($request->input('notes')),
-//        ]);
-//        return redirect()->back()->with('success', 'Prescription Updated');
-//    }
 
 
     public function ratings(Request $request)

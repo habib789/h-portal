@@ -45,10 +45,10 @@ public  $report;
         return (new MailMessage)
                     ->line('Dear '. $this->report->patient->first_name)
                     ->line('Here is your prescription details')
-                    ->line('Tests '. $this->test )
-                    ->line('Medication '. $this->medication)
-                    ->line('Medication '. $this->notes)
-                    ->action('See details view', route('myMediRecords'))
+                    ->line('Tests: '. $this->report->test)
+                    ->line('Medication: '. $this->report->medication)
+                    ->line('Medication: '. $this->report->notes)
+                    ->action('See details view', route('myMediRecords', $this->report->appointment->id))
                     ->line('Thank you for using our application!');
     }
 

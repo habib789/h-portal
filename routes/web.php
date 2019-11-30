@@ -111,6 +111,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::get('/dashboard', 'DashboardController@showDashboard')->name('dashboard');
         Route::get('/dashboard/orderDetails/{id}/invoice', 'DashboardController@createPdf')->name('pdf.create');
+//        Route::get('/dashboard/doctor/cv', 'DashboardController@viewPdf')->name('stream.pdf');
         Route::get('/dashboard/unverified-doctors', 'DashboardController@docNotify')->name('doc.notify');
         Route::get('/dashboard/{id}/unverified/doctors', 'DashboardController@NotifyDoctors')->name('unverified.notify');
         Route::get('/dashboard/reports', 'ReportsController@sales')->name('sales');

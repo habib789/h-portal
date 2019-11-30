@@ -121,7 +121,7 @@
 
                     <div class="well well-sm">
                         <div class="text-right">
-                            <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Doctor
+                            <a class="button btn btn-info" href="#reviews-anchor" id="open-review-box">Doctor
                                 Review</a>
                         </div>
 

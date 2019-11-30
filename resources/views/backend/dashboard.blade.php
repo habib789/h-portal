@@ -10,14 +10,14 @@
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ['Date', 'Amount'],
-                <?php
+                @php
                 $orders = \App\Models\Order::get();
                 if (count($orders) > 0) {
                     foreach ($orders as $order) {
                         echo "['" . date('d-m-y',strtotime($order->created_at)) . "','" . $order->total_amount . "'],";
                     }
                 }
-                ?>
+                @endphp
             ]);
 
             var options = {

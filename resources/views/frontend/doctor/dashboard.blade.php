@@ -10,6 +10,9 @@
                 <div class="d-context ml-5 py-2">
                     <h3 class="font-weight-bold">Welcome</h3>
                     <span> Dr. {{ auth()->user()->doctor->first_name.' '.auth()->user()->doctor->last_name  }}</span>
+{{--                    <div class="ml-auto text-right" style="position: relative;">--}}
+{{--                        <h5 style="color: #8ac1ef; top: -30px; font-weight: 500;">Earnings <span style="font-size: 30px; color: whitesmoke;">BDT 500</span></h5>--}}
+{{--                    </div>--}}
                 </div>
             </div>
 

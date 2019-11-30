@@ -34,6 +34,11 @@ class DashboardController extends Controller
 //        return view('backend.orders.orDetails', $data);
     }
 
+//    public function viewPdf()
+//    {
+//
+//        return PDF::loadFile(public_path().'\uploads\docx\doc_5dbc7f4ac72ba4.77636935BKbccbaAAd.pdf')->stream('doc_5dbc7f4ac72ba4.77636935BKbccbaAAd.pdf'.'.pdf');
+//    }
     public function docNotify()
     {
         $data            = [];
@@ -53,5 +58,7 @@ class DashboardController extends Controller
             event(new notifyUnverifiedDoctors($doctor));
         return redirect()->back()->with('toast_success','License verification email sent successfully');
     }
+
+
 
 }
