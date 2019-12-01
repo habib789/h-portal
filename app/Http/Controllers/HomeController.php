@@ -85,6 +85,9 @@ class HomeController extends Controller
         $data['doctor'] = Doctor::with('department', 'timeSlots')->findOrFail($id);
         $data['days']   = Days::get();
         $data['slots']  = TimeSlot::with('day')->where('doctor_id', $id)->get();
+        $data['ratingReviews'] = Rating::select('review')
+            ->where('doctor_id', $id)
+            ->get();
         $data['ratingSum'] = Rating::select('rating_star')
             ->where('doctor_id', $id)
             ->sum('rating_star');

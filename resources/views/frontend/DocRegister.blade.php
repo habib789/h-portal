@@ -1,18 +1,5 @@
 @extends('masterpage.frontend')
 @section('content')
-    {{--    <div class="card col-md-4 my-5">--}}
-    {{--        <div class="card-header bg-info">--}}
-    {{--            <h4>Terms and Condition</h4>--}}
-    {{--        </div>--}}
-    {{--        <div class="card-body">--}}
-    {{--            <p>--}}
-    {{--                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus--}}
-    {{--                alias asperiores autem consequuntur deleniti dolor est illo labore--}}
-    {{--                laborum libero magni molestias placeat possimus quia quibusdam ratione--}}
-    {{--                recusandae unde, veniam!--}}
-    {{--            </p>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
 
     <div class="card col-lg-10 col-md-10 col-sm-12 mx-auto my-5">
         <div class="card-header text-right text-uppercase">
@@ -71,6 +58,7 @@
                                     class="text-danger">*</span></label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror"
                                    name="password" id="password"/>
+                            <small>Minimum 6 characters</small>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

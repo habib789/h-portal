@@ -12,11 +12,10 @@
 
 @section('content')
     <div class="row" id="app">
-        <div class="col-md-2 mt-5">
+        <div class="col-md-4 mt-5">
             @include('partial.category')
         </div>
-        <div class="col-md-7 col-sm-12">
-            <p class="text-muted mt-5">Showing 1-12 of 30 Products</p>
+        <div class="col-md-8 col-sm-12 mt-5">
             <div class="row">
                 @foreach($products as $product)
                     <div class="col-lg-3 col-md-6 mb-4">

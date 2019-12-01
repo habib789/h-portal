@@ -1,7 +1,8 @@
 @extends('masterpage.frontend')
 @section('css')
+
     <style>
-        ul li h4{
+        ul li h4 {
             color: #0cb8b6;
         }
     </style>
@@ -44,23 +45,40 @@
                                 @if($ratingCount !==0)
                                     <li class="list-group-item">
                                         @if($rate == 1)
-                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9734; &#9734; &#9734;
-                                                &#9734;</h4>
+                                            <b>Ratings</b>
+                                            <h4 class="float-right">&#9733; &#9734; &#9734; &#9734;
+                                                &#9734;
+                                                <p class="text-center"><small><strong>{{ $rate }}/5</strong></small></p>
+                                            </h4>
+
                                         @elseif($rate == 2)
-                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9733; &#9734; &#9734;
-                                                &#9734;</h4>
+                                            <b>Ratings</b>
+                                            <h4 class="float-right">&#9733; &#9733; &#9734; &#9734;
+                                                &#9734;
+                                                <p class="text-center"><small><strong>{{ $rate }}/5</strong></small></p>
+                                            </h4>
+
                                         @elseif($rate == 3)
-                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9733; &#9733; &#9734;
-                                                &#9734;</h4>
+                                            <b>Ratings</b>
+                                            <h4 class="float-right">&#9733; &#9733; &#9733; &#9734;
+                                                &#9734;
+                                                <p class="text-center"><small><strong>{{ $rate }}/5</strong></small></p>
+                                            </h4>
+
                                         @elseif($rate == 4)
-                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9733; &#9733; &#9733;
+                                            <b>Ratings</b>
+                                            <h4 class="float-right">&#9733; &#9733; &#9733; &#9733;
                                                 &#9734;
                                                 <p class="text-center"><small><strong>{{ $rate }}/5</strong></small></p>
                                             </h4>
 
                                         @elseif($rate == 5)
-                                            <b>Ratings</b> <h4 class="float-right">&#9733; &#9733; &#9733; &#9733;
-                                                &#9733;</h4>
+                                            <b>Ratings</b>
+                                            <h4 class="float-right">&#9733; &#9733; &#9733; &#9733;
+                                                &#9733;
+                                                <p class="text-center"><small><strong>{{ $rate }}/5</strong></small></p>
+                                            </h4>
+
                                         @elseif($rate == 0)
                                             <b>Ratings</b> <h4 class="float-right">Not rated yet</h4>
                                         @endif
@@ -127,12 +145,41 @@
                                 </div>
                             @endif
                         </div>
+                        <div class="container">
+                            <div class="col-md-9">
+                                <h5 class="info font-weight-bold">Patient Saying </h5>
+                            </div>
+                            <div class="my-3">
+                                <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+                                    <div class="carousel-inner border border-info text-center">
+
+                                            <div class="carousel-item active">
+                                                @foreach($ratingReviews as $ratingReview)
+                                                <p class="w-100">" {{ $ratingReview->review }} "</p>
+                                                @endforeach
+                                            </div>
+
+
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carousel-example-2" role="button"
+                                       data-slide="prev">
+                                        <span class="carousel-control-prev-icon text-info" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-example-2" role="button"
+                                       data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-@stop
 
+@stop
 

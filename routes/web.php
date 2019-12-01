@@ -114,7 +114,9 @@ Route::group(['middleware' => 'auth'], function () {
 //        Route::get('/dashboard/doctor/cv', 'DashboardController@viewPdf')->name('stream.pdf');
         Route::get('/dashboard/unverified-doctors', 'DashboardController@docNotify')->name('doc.notify');
         Route::get('/dashboard/{id}/unverified/doctors', 'DashboardController@NotifyDoctors')->name('unverified.notify');
-        Route::get('/dashboard/reports', 'ReportsController@sales')->name('sales');
+        Route::get('/dashboard/sales/reports', 'ReportsController@sales')->name('sales');
+        Route::get('/dashboard/appointment/reports', 'ReportsController@aptReports')->name('appointments.report');
+        Route::get('/dashboard/appointment/pending/reports', 'ReportsController@pendingaptReports')->name('pending.appointment');
 
         Route::resource('/dashboard/departments', 'departmentsController');
         Route::resource('/dashboard/orders', 'OrdersController');

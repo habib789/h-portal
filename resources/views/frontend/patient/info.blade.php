@@ -54,13 +54,13 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Change Password</h6>
-                    <button class="button btn btn-info">Change Password</button>
-                </div>
-            </div>
-        </div>
+{{--        <div class="col-md-4">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-body">--}}
+{{--                    <h6 class="card-title">Change Password</h6>--}}
+{{--                    <button class="button btn btn-info">Change Password</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 @stop

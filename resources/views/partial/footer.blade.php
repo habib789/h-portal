@@ -3,25 +3,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 mt-5">
-                    <p class="text-light">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo molestiae et eveniet quidem
-                        qui fuga esse, nobis quo necessitatibus itaque voluptatibus assumenda tempora cum molestias
-                        mollitia officiis pariatur cumque iste.
-                    </p>
+                    <h2 class="display-4 text-white">H-Care</h2>
                 </div>
 
                 <div class="col-md-6 mt-5">
-                    <h3 class="text-capitalize text-center text-light">Subscribe to our news letter</h3>
+                    <h3 class="text-capitalize text-light">Quick Links</h3>
                     <div class="form mx-auto">
-                        <div class="form-group">
-                            <input type="email" class="form-control" name="newslettter" id=""
-                                   placeholder="Your email address">
-                        </div>
-                        <div class="mx-auto">
-                            <button type="submit" class="btn btn-outline-success send px-5 my-3"><i
-                                    class="fas fa-envelope-open mr-2 fa-2x"></i>SUBSCRIBE
-                            </button>
-                        </div>
+                       <ul class="list-unstyled">
+                           <li>
+                               <a class="text-white" href="{{ route('shop') }}"> Pharmacy</a>
+                           </li>
+                           <li>
+                               <a class="text-white" href="{{ route('department') }}"> Department</a>
+                           </li>
+                       </ul>
                     </div>
                 </div>
 

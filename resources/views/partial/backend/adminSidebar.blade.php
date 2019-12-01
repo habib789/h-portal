@@ -1,14 +1,15 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('dashboard') }}" class="brand-link">
-        <span class="brand-text font-weight-light">Health Portal</span>
+        <span class="brand-text font-weight-light text-center">Health Care</span>
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="img/avatar04.png" class="img-circle elevation-2" alt="User Image">
+                <img src="{{ asset('img/maledoc.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">Super Admin</a>
+                <small class="text-white">{{ auth()->user()->email }}</small>
             </div>
         </div>
 
@@ -106,15 +107,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{ route('appointments.report') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Appointment fees</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Inline</p>
+                                    <p>Appointments</p>
                                 </a>
                             </li>
                         </ul>
